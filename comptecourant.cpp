@@ -19,34 +19,43 @@ comptecourant::~comptecourant()//destructeur par defaut
     }
 
 
-comptecourant::comptecourant(long numerodecompte,int solde=0,int decouvert=0,double taux=0.30);//constructeur par parametres par defaut
+comptecourant::comptecourant(int numerodecompte,double solde,double decouvert,double taux)//constructeur par parametres par defaut
     {
-        cout<<"saisir le numero de compte\n";
-        cin>>numerodecompte;
-
-
+      /*  cout<<"saisir le numero de compte\n";
+        cin>>numerodecompte;*/
+        cout<<"passage dans le constructeur par defaut\n";
+        cout<<"voici le numero de compte\t"<<numerodecompte<<endl;
+        cout<<"le solde de ce compte courant est de \t"<<solde<<"euros"<<endl;
+        cout<<"le decouvert autorise par la banque est de \t"<<decouvert<<"euros"<<endl;
+        cout<<"ce compte courant a un taux d'interêt de\t"<<taux<<"%"<<endl;
 
     }
 
-      /*  comptecourant(const comptecourant &C);//constructeur par copie
+      // comptecourant(const comptecourant &C);//constructeur par copie
 
-        void Retirer();//retrait d'argent sur le compte
-        void Ajouter();//ajout d'argent sur le compte
-        comptecourant operator+(int N)const;//on aura solde2=solde1.operator+(100)              (solde2=solde1+100)
-        comptecourant operator-(int N)const;//on aura solde2=solde1.operator-(100)              (solde2=solde1-100)
+void comptecourant ::Retirer()//retrait d'argent sur le compte
+    {
+        cout<<"le nouveau solde du compte est "<<solde<<endl;
 
-        void AfficherSolde(ostream & out);//affiche le solde du compte
-        void AffichageAlerte(ostream & out);//affichage d'un message d'alerte quand le solde =le decouvert autorise
+    }
 
-        int CalculAgios(int solde,bool debiteur,);//
+/*
+        void Ajouter()//ajout d'argent sur le compte
+        comptecourant operator+(int N)const//on aura solde2=solde1.operator+(100)              (solde2=solde1+100)
+        comptecourant operator-(int N)const//on aura solde2=solde1.operator-(100)              (solde2=solde1-100)
+
+        void AfficherSolde(ostream & out)//affiche le solde du compte
+        void AffichageAlerte(ostream & out)//affichage d'un message d'alerte quand le solde =le decouvert autorise
+
+        int CalculAgios(int solde,bool debiteur,)//
         {
             int nbjoursdebiteur,double txinteretdecouvert
         }
-        void AffichageAgios()const;//affichage des agios que le client doit payer
+        void AffichageAgios()const//affichage des agios que le client doit payer
 
-       void Afficher10Actions()const;//affichage des 10 dernieres actions faite sur le compte
+       void Afficher10Actions()const//affichage des 10 dernieres actions faite sur le compte
 
-        ~CompteCourant();// destructeur du compte courant
+
 
 
 comptecourant operator+(intN,const comptecourant &C);//pour l'ajout d'argent on aura solde3=operator+(100,solde2)  (solde3=100+solde2)
