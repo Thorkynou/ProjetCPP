@@ -39,6 +39,8 @@ public:
 	virtual void Afficher(ostream &out) const;
 
 	virtual void ModifierAdresse(string adresse);
+
+	Client &operator=(const Client &C);
 };
 
 
