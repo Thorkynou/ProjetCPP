@@ -16,8 +16,9 @@ private:
 
 public:
 
-    date();// constructeur par defaut
-    date (int jour, int mois, int an);//constructeur par parametres
+   date();// constructeur par defaut-->ok testé
+   //date (int j=18,int m=02,int an=2015);//constructeur par parametres par defaut-->ok testé
+   date(const date & acopier);//constructeur par copie
     void Saisir();//saisie de la date du jour
     void Afficher();//affiche la date du jour
 

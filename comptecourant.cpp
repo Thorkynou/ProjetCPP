@@ -3,65 +3,126 @@ fihcier realise par benedicte le */
 
 #include "comptecourant.h"
 
-
-       // int agios;//calcul des agios si on depasse le decouvert
-
-comptecourant::comptecourant()//constructeur par defaut
+/*comptecourant::comptecourant()//constructeur par defaut
     {
-        cout<<"voici le constructeur par defaut du compte courant\n ";
+        cout<<"+++++++++++++Voici le constructeur par defaut du compte courant\n ";
+        cout<<endl;
+    }
+*/
+comptecourant::~comptecourant()//destructeur par defaut-->teste ok
+    {
+        cout<<"--------------Destruction du compte courant\n ";
         cout<<endl;
     }
 
-comptecourant::~comptecourant()//destructeur par defaut
+
+comptecourant::comptecourant(int numerodecompte,double solde,double decouvert,double taux):evenement()//constructeur par parametres par defaut--> ok testé
     {
-        cout<<"destructeur du compte courant\n ";
+        evenement.Saisir();
+        evenement.Afficher();
+        cout<<"+++++++++++++Voici le constructeur par parametres du compte courant\n";
         cout<<endl;
+        cout<<"\nLe numero de compte courant est le\t"<<numerodecompte<<endl;
+        cout<<endl;
+        cout<<"\nLe solde de ce compte courant est de \t"<<solde<<" euros"<<endl;
+        cout<<endl;
+        cout<<"\nLe decouvert autorise par la banque est de \t"<<decouvert<<" euros"<<endl;
+        cout<<endl;
+        cout<<"\nCe compte courant a un taux d'interêt de\t"<<taux<<" %"<<endl;
+
     }
 
-
-comptecourant::comptecourant(int numerodecompte,double solde,double decouvert,double taux)//constructeur par parametres par defaut
+comptecourant::comptecourant(const comptecourant & CC):evenement(CC.evenement)//constructeur par copie
     {
-      /*  cout<<"saisir le numero de compte\n";
-        cin>>numerodecompte;*/
-        cout<<"passage dans le constructeur par defaut\n";
-        cout<<"voici le numero de compte\t"<<numerodecompte<<endl;
-        cout<<"le solde de ce compte courant est de \t"<<solde<<"euros"<<endl;
-        cout<<"le decouvert autorise par la banque est de \t"<<decouvert<<"euros"<<endl;
-        cout<<"ce compte courant a un taux d'interêt de\t"<<taux<<"%"<<endl;
+        cout<<"+++++++++++++Voici le constructeur par copie du compte courant\n";
+        cout<<endl;
+        evenement.Afficher();
+        //a verifier (je n'ai pas encore tester
+       /* numerodecompte=CC.numerodecompte;
+        cout<<numerodecompte;
+        cout<<endl;
+        solde=CC.solde;
+        cout<<solde;
+        cout<<endl;
+        decouvert=CC.decouvert;
+        taux=CC.taux;
+        debiteur=CC.debiteur;*/
 
     }
-
-      // comptecourant(const comptecourant &C);//constructeur par copie
-
+    /*
 void comptecourant ::Retirer()//retrait d'argent sur le compte
     {
+
         cout<<"le nouveau solde du compte est "<<solde<<endl;
 
     }
 
-/*
-        void Ajouter()//ajout d'argent sur le compte
-        comptecourant operator+(int N)const//on aura solde2=solde1.operator+(100)              (solde2=solde1+100)
-        comptecourant operator-(int N)const//on aura solde2=solde1.operator-(100)              (solde2=solde1-100)
 
-        void AfficherSolde(ostream & out)//affiche le solde du compte
-        void AffichageAlerte(ostream & out)//affichage d'un message d'alerte quand le solde =le decouvert autorise
+void comptecourant::Ajouter()//ajout d'argent sur le compte
+    {
+        cout<<"le nouveau solde du compte est "<<solde<<endl;
 
-        int CalculAgios(int solde,bool debiteur,)//
-        {
-            int nbjoursdebiteur,double txinteretdecouvert
-        }
-        void AffichageAgios()const//affichage des agios que le client doit payer
+    }*/
+    //testé -->ok
+comptecourant & comptecourant::operator+(int N)//on aura solde2=solde1.operator+(100)              (solde2=solde1+100)
+    {
+        comptecourant CC= *this;
+        CC.solde=CC.solde+N;
+        return CC;
+    }
 
-       void Afficher10Actions()const//affichage des 10 dernieres actions faite sur le compte
+    //testé -->ok
+comptecourant & comptecourant::operator-(int N)//on aura solde2=solde1.operator-(100)              (solde2=solde1-100)
+{
+        comptecourant CC= *this;
+        CC.solde=CC.solde-N;
+        return CC;
+    }
 
 
+void comptecourant::AfficherSolde(ostream & out)//affiche le solde du compte
+    {
+        out<<solde<<endl;
+    }
+//void comptecourant::AffichageAlerte(ostream & out)//affichage d'un message d'alerte quand le solde =le decouvert autorise
 
-
-comptecourant operator+(intN,const comptecourant &C);//pour l'ajout d'argent on aura solde3=operator+(100,solde2)  (solde3=100+solde2)
-comptecourant operator-(intN,const comptecourant &C);//pour le retrait d'argent on aura solde3=operator-(100,solde2)  (solde3=100-solde2)
-
-istream & operator >>(istream &in,const comptecourant &C);
-ostream & operator<<(ostream &out,const comptecourant &C);
+//int comptecourant::CalculAgios(int solde,bool debiteur)//
+   /* {
+        int nbjoursdebiteur=0;
+        double tauxinteretdecouvert=0.12;
+    }
 */
+//void comptecourant::AffichageAgios()const//affichage des agios que le client doit payer
+
+//void comptecourant::Afficher10Actions()const//affichage des 10 dernieres actions faite sur le compte
+
+
+
+// a l'exterieur de la classe
+/*comptecourant operator+(int N,const comptecourant & CC)//pour l'ajout d'argent on aura solde3=operator+(100,solde2)  (solde3=100+solde2)
+    {
+        return CC+N;
+    }
+
+
+comptecourant operator-(intN,const comptecourant &CC);//pour le retrait d'argent on aura solde3=operator-(100,solde2)  (solde3=100-solde2)
+    {
+        return CC-N;
+    }
+  */
+
+istream & operator >>(istream & in,const comptecourant & CC)
+    {
+        //C.Saisir(in);
+        return in;
+    }
+
+
+ostream & operator<<(ostream & out,comptecourant & CC)
+ {
+        CC.AfficherSolde(out);
+        return out;
+    }
+
+
 
