@@ -11,6 +11,7 @@ class Pel//: public GeneraliteCompte
 private:
     double versementMensuel;
     int tauxEmprunt;
+    double soldePel;
 
 public:
 
@@ -23,7 +24,7 @@ public:
 
     Pel CreerCompte();
 
-    void VersementExept();
+    void VersementExept(Pel & monPel);
     void ModifMontantMensuel();
     void TempsRestant();
     void MontantEmpruntable();

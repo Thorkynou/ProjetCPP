@@ -21,5 +21,15 @@ cin >>this->tauxEmprunt;
 return *this;
 }
 
+void Pel::VersementExept(Pel & monPel)
+{
+double mtt=0;
+
+cout<<"Quel montant voulez vous verser? ";
+cin >>mtt;
+
+monPel.soldePel=monPel.soldePel+mtt;
+/**** METTRE A JOUR LE SOLDE COMPTE COURANT!! ****/
+}
 
 
