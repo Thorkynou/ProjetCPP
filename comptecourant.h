@@ -24,8 +24,9 @@ public:
         double montantdebiteur;//calcule le montantdebietur a chaque fois que le bool debiteur est true on incremente apres a chaque passage
         double agios;//calcul des agios si on depasse le decouvert
 
-        //comptecourant();//constructeur par defaut
-        comptecourant(long numerodecompte,double solde=0,double decouvert=0,double taux=0.30);//constructeur par parametres par defaut
+        comptecourant();//constructeur par defaut
+
+      /*  comptecourant(long numerodecompte,double solde=0,double decouvert=0,double taux=0.30);//constructeur par parametres par defaut
         comptecourant(const comptecourant &CC);//constructeur par copie
 
         void Retirer();//retrait d'argent sur le compte
@@ -45,13 +46,13 @@ public:
         agios=(20200*12)/36500//tx d'interet de 12%
         agios=11.07euros +5.90€ de taxe de commissions
         */
-        void AffichageAgios(const double agios)const;//affichage des agios que le client doit payer
+      //  void AffichageAgios(const double agios)const;//affichage des agios que le client doit payer
 
-       void Afficher10Actions()const;//affichage des 10 dernieres actions faite sur le compte
+     //  void Afficher10Actions()const;//affichage des 10 dernieres actions faite sur le compte
        //ouvrir un fichier et le fermer apres;
        //recuperer avec un vector <comptecourant>les 10 dernieres lignes du fichiers , faire une boucle avec begin et end.
 
-        ~CompteCourant();// destructeur du compte courant
+        virtual ~ comptecourant();// destructeur du compte courant
 
 };
 
