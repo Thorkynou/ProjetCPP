@@ -17,7 +17,7 @@ private:
 public:
 
     date();// constructeur par defaut
-
+    date (int jour, int mois, int an);//constructeur par parametres
     void Saisir();//saisie de la date du jour
     void Afficher();//affiche la date du jour
 
