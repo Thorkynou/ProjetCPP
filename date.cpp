@@ -4,29 +4,29 @@
 #include "date.h"
 
 date::date()// constructeur par defaut
-    {
-        cout<<"+++++++++++++Voici le constructeur par defaut de la date\n";
-        jour=18;
-        mois=02;
-        an=2015;
-        cout<<endl;
-    }
-/*
+{
+    memset(&t, 0, sizeof(t));
+    cout<<"+++++++++++++Voici le constructeur par defaut de la date\n";
+    time_t now = time(NULL);
+    t=*localtime(&now);
+    jour = t.tm_mday;
+    mois = t.tm_mon+1;
+    an = t.tm_year+1900;
+    cout<<endl;
+}
+
 date::date(int j,int m,int an)
     {
-        cout<<"+++++++++++++Voici le constructeur par parametres de la date\n";
-       jour=j;
-        mois=m;
-       this->an=an;
-        cout<<endl;
+        this->jour = j;
+        this->mois = m;
+        this->an = an;
     }
-*/
-void date::Saisir()//saisie de la date du jour
-    {
-        cout<<"\nSaisir le jour, puis le mois et enfin l'annee\n";//saisie de la date d'operation
-        cin>>jour>>mois>>an;
-        cout<<endl;
-    }
+
+void date::Saisir()
+{
+    cout << "Entrez la date de création sous la forme: jj mm aaaa" << endl;
+    cin >> jour >> mois >> an;
+}
 
 void date::Afficher()//affiche la date du jour
     {

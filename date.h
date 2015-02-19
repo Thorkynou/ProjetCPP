@@ -2,6 +2,8 @@
 //realise par benedicte
 
 #include <iostream>
+#include <ctime>
+#include <cstring>
 using namespace std;
 
 #ifndef DATE_H
@@ -10,19 +12,22 @@ using namespace std;
 class date
 {
 private:
+	struct tm t;
     int jour;
     int mois;
     int an;
 
 public:
 
-   date();// constructeur par defaut-->ok testé
-   //date (int j=18,int m=02,int an=2015);//constructeur par parametres par defaut-->ok testé
-   date(const date & acopier);//constructeur par copie
+	date();// constructeur par defaut-->ok testé
+	date (int j,int m,int an);//constructeur par parametres par defaut-->ok testé
+	date(const date & acopier);//constructeur par copie
     void Saisir();//saisie de la date du jour
     void Afficher();//affiche la date du jour
 
     ~date();//detsructeur par defaut
 
 };
+
+
 #endif // DATE_H
