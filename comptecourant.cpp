@@ -9,29 +9,48 @@ fihcier realise par benedicte le */
         cout<<endl;
     }
 */
-comptecourant::~comptecourant()//destructeur par defaut-->teste ok
+//fonction ok testé
+comptecourant::~comptecourant()//destructeur par defaut
     {
         cout<<"--------------Destruction du compte courant\n ";
         cout<<endl;
     }
 
-
-comptecourant::comptecourant(int numerodecompte,double solde,double decouvert,double taux)//constructeur par parametres par defaut--> ok testé
+//fonction ok teste
+comptecourant::comptecourant(int numerodecompte,double solde,double decouvert,double taux,bool debiteur,
+double montantdebiteur,double agios,double sommeagios,double nbagios)//constructeur par parametres par defaut
     {
-       // evenement.Saisir();
-       // evenement.Afficher();
         cout<<"+++++++++++++Voici le constructeur par parametres du compte courant \n";
         cout<<endl;
-        cout<<"\nLe numero de compte courant est le \t"<<numerodecompte<<endl;
-        cout<<endl;
-        cout<<"\nLe solde de ce compte courant est de \t"<<solde<<" euros"<<endl;
-        cout<<endl;
-        cout<<"\nLe decouvert autorise par la banque est de \t"<<decouvert<<" euros"<<endl;
-        cout<<endl;
-        cout<<"\nCe compte courant a un taux d'interêt de \t"<<taux<<" %"<<endl;
 
+        this->numerodecompte=numerodecompte;
+        cout<<"Le numero de compte courant est le \t"<<numerodecompte<<"\n";
+
+        this->solde=solde;
+        cout<<"Le solde de ce compte courant est de \t"<<solde<<" euros\n";
+
+         this->decouvert=decouvert;
+        cout<<"Le decouvert autorise par la banque est de \t"<<decouvert<<" euros\n";
+
+         this->taux=taux;
+        cout<<"Ce compte courant a un taux d'interêt de \t"<<taux<<" % (c'est peu,mais c'est déjà ca)\n";
+
+        this->debiteur=debiteur;
+        cout<<"Ce compte peut etre debiteur mais crediteur c'est mieux\n";
+
+        this->montantdebiteur=montantdebiteur;
+        cout<<"Le montant debiteur de ce compte est de \t"<<montantdebiteur<<" euros\n";
+
+        this->agios=agios;
+        cout<<"Le montant des agios de ce compte est de \t"<<agios<<" euros\n";
+
+        this->sommeagios=sommeagios;
+        cout<<"Lasomme des agios pour plusieurs jour de ce compte est de \t"<<sommeagios<<" euros\n";
+
+        this->nbagios=nbagios;
+        cout<<"Le montant total des agios de ce compte est de \t"<<nbagios<<" euros\n";
     }
-
+//fonction ok teste
 comptecourant::comptecourant(const comptecourant & CC)//constructeur par copie
     {
         cout<<"+++++++++++++Voici le constructeur par copie du compte courant\n";
@@ -39,22 +58,37 @@ comptecourant::comptecourant(const comptecourant & CC)//constructeur par copie
         //evenement.Afficher();
         //a verifier (je n'ai pas encore tester
         this->numerodecompte=CC.numerodecompte;
-        cout<<"le numerodecompte par copie est \t"<<numerodecompte;
-        cout<<endl;
+        cout<<"le numerodecompte par copie est \t"<<numerodecompte<<endl;
+
         solde=CC.solde;
-        cout<<solde;
-        cout<<endl;
+        cout<<"le solde initial par copie est de \t"<<solde<<" euros"<<endl;
+
         decouvert=CC.decouvert;
+        cout<<"le decouvert autorise par copie est \t"<<decouvert<<" euros"<<endl;
+
         taux=CC.taux;
+        cout<<"le taux de ce compte par copie est \t"<<taux<<"%"<<endl;
+
         debiteur=CC.debiteur;
+        cout<<"ce compte est debiteur ou non par copie : \t"<<debiteur<<endl;
+
         montantdebiteur=CC.montantdebiteur;
+        cout<<"le montant debiteur est \t"<<montantdebiteur<<" euros"<<endl;
+
         agios=CC.agios;
+        cout<<"les agios sont de \t"<<agios<<" euros"<<endl;
+
+        sommeagios=CC.sommeagios;
+        cout<<"Le montant des agios de ce compte est de \t"<<sommeagios<<" euros\n";
+
         nbagios=CC.nbagios;
+        cout<<"la somme totale des agios est de  \t"<<nbagios<<" euros"<<endl;
     }
 
- comptecourant& comptecourant ::operator=(const comptecourant & CC)//--> je ne l'ai pas encore tester je le fais dans l'aprem, mais ca fonctionne
- //dans le fonction Calculer agios
- {  this->numerodecompte=CC.numerodecompte;
+    //fonction teste ok
+ comptecourant& comptecourant ::operator=(const comptecourant & CC)
+ {
+    this->numerodecompte=CC.numerodecompte;
     this->solde=CC.solde;
     this->decouvert=CC.decouvert;
     this->taux=CC.taux;
@@ -65,67 +99,68 @@ comptecourant::comptecourant(const comptecourant & CC)//constructeur par copie
 
     return *this;
  }
-
+//fonction teste ok
 void comptecourant ::Retirer()//retrait d'argent sur le compte -->ok testé
     {
         int N;
-        cout<<"saisir la somme a retirer sur le compte en banque\n";
+        cout<<"Saisir la somme a retirer sur le compte en banque\n";
         cin>>N;
 
         solde=solde-N;
-        cout<<"le nouveau solde du compte est \t"<<solde<<endl;
+        cout<<"Le nouveau solde du compte courant est de\t"<<solde<<"euros\n"<<endl;
 
     }
 
-//pb ca n'ajoute pas d'argent(je dois verifier quel solde il prend), il ne prend pas en compte mon solde par defaut de 1500.
-//je travaille dessus cet aprem
+//fonction ok -->testé
 comptecourant & comptecourant::Ajouter()//ajout d'argent sur le compte -->pb
     {
         int N;
-        cout<<"\nsaisir la somme a ajouter sur le compte en banque\n";
+        cout<<"\nSaisir la somme a ajouter sur le compte en banque\n";
         cin>>N;
 
        this->solde=this->solde+N;
-        cout<<"le nouveau solde du compte est \t"<<(this->solde)<<endl;
+        cout<<"le nouveau solde du compte courant est de \t"<<(this->solde)<<" euros\n"<<endl;
         return *this;
     }
 
-    //testé -->ok
+//fonction testé -->ok
 comptecourant & comptecourant::operator+(int N)//on aura solde2=solde1.operator+(100)              (solde2=solde1+100)
     {
         this->solde=this->solde+N;
         return *this;
     }
 
-    //testé -->ok
+//fonction testé -->ok
 comptecourant & comptecourant::operator-(int N)//on aura solde2=solde1.operator-(100)              (solde2=solde1-100)
     {
         this->solde=this->solde-N;
         return *this;
     }
 
-
+//fonction teste ok
 void comptecourant::AfficherSolde(ostream &out)//affiche le solde du compte  -->ok testé
     {
         out<<solde<<endl;
     }
 
-//
-/*pb dans l'eaglite je regarde ca
+
+//fonction teste ok
 void comptecourant::AffichageAlerte(ostream &out)//affichage d'un message d'alerte quand le solde =le decouvert autorise
     {
-        if((this->solde)==(this->decouvert))
+        if((this->solde)<(this->decouvert))
             {
-                cout<<"attention vous allez être à decouvert\n";
-                cout<<endl;
+                out<<"!!!!!!!!!!!!!!!!!!!!!!!!!!attention attention !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"<< "Vous êtes a DECOUVERT\n";
+                out<<"Vous devez absolument remettre de l'argent sur votre compte\n";
+                out<<"!!!!!!!!!!!!!!!!!!!!!!!!!!attention attention !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+                out<<endl;
             }
         else
             {
-                cout<<"tout va bien sur votre compte en banque\n";
+                out<<"tout va bien sur votre compte en banque\n";
             }
     }
-*/
-//pb à la fin du calcul pour ajouter la taxe sinon ca calcule le nombre d'agios au oins pour un jour
+
+//fonction teste ok (a voir avec plusieurs actions si ca marche. pour un jour ca donne le bon resultat
 double comptecourant::CalculAgios()
     {
         //int nbjoursdebiteur=0;
@@ -149,15 +184,20 @@ double comptecourant::CalculAgios()
 
         if (debiteur) //(this->debiteur)==true
             {
-                montantdebiteur=(this->solde)*1;
-                cout<<"le montantdebiteur est \t"<<montantdebiteur;
+                //faire la valeur absolue du solde
+                montantdebiteur=(this->solde)*(-1);
+                cout<<"le montant debiteur est de\t"<<montantdebiteur<<" euros\n";
+                cout<<endl;
                 sommedebiteur=somme+montantdebiteur;
-                cout<<"la somme debiteur est\t"<<sommedebiteur;
+                cout<<"la somme debiteur est de\t"<<sommedebiteur<<" euros\n";
+                cout<<endl;
             }
 
         (this->agios)=(sommedebiteur*tauxinteretdecouvert)/365;
-        cout<<"le nombre d'agios est\t"<<agios;//-->ok
-        (this->nbagios)=(this->agios)+5.90;//5.90€ de taxe de commissions-->ya un souci dans l'operation
+        cout<<"le nombre d'agios pour ce jour est de \t"<<agios<<" euros\n";//-->ok
+        cout<<endl;
+        (this->sommeagios)=(this->sommeagios)+(this->agios);
+        (this->nbagios)=(this->sommeagios)+5.90;//5.90€ de taxe de commissions
 
     return (this->nbagios);
 
@@ -167,36 +207,61 @@ double comptecourant::CalculAgios()
        // agios=11.07euros +5.90€ de taxe de commissions
 
     }
-
-void comptecourant::AffichageAgios(const double &nbagios)const//affichage des agios que le client doit payer
+//fonction teste ok
+void comptecourant::AffichageAgios(const double &nbagios)const//affichage des agios que le client doit payer-->testée ok
     {
-        cout<<"votre compte est a decouvert, vous devez payer\t"<<nbagios<<"euros\n"<<endl;
+        cout<<"votre compte est a decouvert, vous devez payer\t"<<(this->nbagios)<<" euros\n"<<endl;
     }
 
-//void comptecourant::Afficher10Actions()const//affichage des 10 dernieres actions faite sur le compte
-
-
-
-// a l'exterieur de la classe
-/*comptecourant operator+(int N,const comptecourant & CC)//pour l'ajout d'argent on aura solde3=operator+(100,solde2)  (solde3=100+solde2)
+    //fonction en cours
+    /*
+void comptecourant::Afficher10Actions()const//affichage des 10 dernieres actions faite sur le compte
+//ouvrir un fichier et le fermer apres;
+       //recuperer avec un vector <comptecourant>les 10 dernieres lignes du fichiers , faire une boucle avec begin et end.
     {
-        return CC+N;
+        vector<comptecourant> MesActions;//declarationsdu fichiers qui va repertorier les actions
+        vector<comptecourant> ::iterator it;
+        int idx;
+
+        for (it=MesActions.rbegin();it!=MesActions.rend();it++)
+            {
+                cout<<"action numero ["<<idx--<<"]"="<<(*it)"<<endl;
+            }
+
+        for (idx=0;idx<10;idx++)
+                {
+                    cout<<"le solde suite a cette action est de "<<solde<<" euros\n";
+                }
     }
+*/
+/*
+comptecourant& comptecourant ::operator!=(const comptecourant & CC)
+  {
+    return *this;
+        cout<<"surcharge de l'operateur != \n";
 
+        this->numerodecompte!=CC.numerodecompte;
+        this->solde!=CC.solde;
+        this->decouvert!=CC.decouvert;
+        this->taux!=CC.taux;
+        this->debiteur!=CC.debiteur;
+        this->montantdebiteur!=CC.montantdebiteur;
+        this->agios!=CC.agios;
+        this->sommeagios!=CC.sommeagios;
+        this->nbagios!=CC.nbagios;
 
-comptecourant operator-(int N,const comptecourant &CC);//pour le retrait d'argent on aura solde3=operator-(100,solde2)  (solde3=100-solde2)
-    {
-        return CC-N;
-    }
-  */
+        return *this;
+  }
+*/
 
+//fonction teste ok
 istream &operator>>(istream &in,const comptecourant & CC)
     {
 
         return in;
     }
 
-
+//fonction teste ok
 ostream &operator<<(ostream &out,comptecourant & CC)
  {
        // CC.AfficherSolde(out);
@@ -204,5 +269,30 @@ ostream &operator<<(ostream &out,comptecourant & CC)
         return out;
     }
 
+
+//creation d'un fichier
+//fonction en cours
+comptecourant & comptecourant::open()
+{
+    //creation du fichier
+    ofstream fichier_compte_courant("f_compte_courant.txt",ios_base::app);
+
+    //verification que le l'ouverture du fichier s'est bien passee
+    if(fichier_compte_courant.is_open())//si l'ouverture a reussi
+        {
+        //mettre les instructions
+        //fonction qui permet de remplirFichier();
+            fichier_compte_courant<<"test1\n"<<numerodecompte<<solde;
+            cout<<endl;
+            fichier_compte_courant<<"test2\n"<<decouvert<<debiteur;
+            cout<<endl;
+        }
+
+    else  // sinon
+                cerr << "Erreur à l'ouverture !" << endl;
+//fermeture du fichier
+//fichier_compte_courant.close();
+
+}
 
 
