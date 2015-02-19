@@ -1,12 +1,15 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using namespace std;
+
+#include "client.h"
 
 #ifndef PEL_H
 #define PEL_H
 
-class Pel//: public GeneraliteCompte
+class Pel: public Client
 {
 private:
     double versementMensuel;
@@ -18,9 +21,9 @@ public:
     Pel(double vm=0,int te=0);
     Pel(const Pel & monPel);
 
-    virtual ~Pel(){};
+    /*virtual*/ ~Pel(){};
 
-    virtual void Afficher();
+    /*virtual*/ void Afficher();
 
     Pel CreerCompte();
 
@@ -28,6 +31,7 @@ public:
     void ModifMontantMensuel();
     void TempsRestant();
     void MontantEmpruntable();
+    void EcritureFichier()const;
 
 };
 
