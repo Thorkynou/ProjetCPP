@@ -14,7 +14,7 @@ class comptecourant
 {
 
 private:
-        date  evenement;
+       date  evenement;
         int numerodecompte;//numero du compte courant
         double solde;//solde du compte
         double decouvert;//variable autorisant un decouvert au client
@@ -24,32 +24,34 @@ private:
 public:
         double montantdebiteur;//calcule le montantdebietur a chaque fois que le bool debiteur est true on incremente apres a chaque passage
         double agios;//calcul des agios si on depasse le decouvert
+        double nbagios;
 
-
+        /***********ok***********/
       // comptecourant();//constructeur par defaut--->ok testé
 
-        comptecourant(int numerodecompte=256352,double solde=0.0,double decouvert=0.0,double taux=0.30);//constructeur par parametres par defaut -->pb
+        comptecourant(int numerodecompte=256352,double solde=1500.0,double decouvert=-500.0,double taux=0.30);//constructeur par parametres par defaut -->pb
+        /***********ok***********/
 
         comptecourant(const comptecourant &CC);//constructeur par copie
 
+       comptecourant &operator=(const comptecourant & CC);
+
         void Retirer();//retrait d'argent sur le compte
-       // void Ajouter();//ajout d'argent sur le compte
+        /***********ok***********/
+
+        comptecourant& Ajouter();//ajout d'argent sur le compte-->pb
+
+        /***********ok***********/
         comptecourant & operator+(int N);//on aura solde2=solde1.operator+(100)              (solde2=solde1+100)
+        /***********ok***********/
         comptecourant & operator-(int N);//on aura solde2=solde1.operator-(100)              (solde2=solde1-100)
 
-      void AfficherSolde(ostream & out);//affiche le solde du compte
-       // void AffichageAlerte(ostream & out);//affichage d'un message d'alerte quand le solde =le decouvert autorise
+        void AfficherSolde(ostream & out);//affiche le solde du compte
+        void AffichageAlerte(ostream & out);//affichage d'un message d'alerte quand le solde =le decouvert autorise
 
-       // int CalculAgios(double solde,bool debiteur);//calcul des agios
-        //etape 1 : montantdebiteur=nbjdebiteur*debit //pour chaque montant faire le calcul
-        //etape2: agios=(montantdebiteur*txinteretdecouvert)/(365*100)
+        double CalculAgios();//calcul des agios
 
-        /*compte debiteur du 5 au 22 janvier de 500 euros et du 2 au 28 mars de 450.
-        montantdebiteur=(17*500)+(26*450)=20200
-        agios=(20200*12)/36500//tx d'interet de 12%
-        agios=11.07euros +5.90€ de taxe de commissions
-        */
-      //  void AffichageAgios(const double agios)const;//affichage des agios que le client doit payer
+       void AffichageAgios(const double &nbagios)const;//affichage des agios que le client doit payer
 
      //  void Afficher10Actions()const;//affichage des 10 dernieres actions faite sur le compte
        //ouvrir un fichier et le fermer apres;
@@ -60,9 +62,14 @@ public:
 };
 
 comptecourant operator+(int N,const comptecourant & CC);//pour l'ajout d'argent on aura solde3=operator+(100,solde2)  (solde3=100+solde2)
+/***********ok***********/
 comptecourant operator-(int N,const comptecourant & CC);//pour le retrait d'argent on aura solde3=operator-(100,solde2)  (solde3=100-solde2)
+/***********ok***********/
 
+/***********ok***********/
 istream & operator >>(istream &in,const comptecourant & CC);
+/***********ok***********/
 ostream & operator<<(ostream &out,comptecourant & CC);
+
 
 #endif
