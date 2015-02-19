@@ -17,6 +17,7 @@ ecompte::ecompte(const ecompte & E)
 	taux3Mois=E.taux3Mois;
 	taux=E.taux;
 }
+
 ecompte &ecompte::CreerCompte()
 {
 	cout<<endl<<"Saisir votre adresse email: ";
@@ -44,6 +45,24 @@ void ecompte::Retrait()
 	}
 	solde=solde-x;
 	AfficherSolde(cout);
-	//cout<<"le nouveau solde du compte est \t"<<solde<<endl;
 
-    }
+}
+
+void ecompte::Ajouter(ecompte & E)
+{
+	double x=0;
+	cout<<endl<<"Saisir somme a verser sur le compte : ";
+	cin >>x;
+	E.solde=E.solde+x;
+	AfficherSolde(cout);
+}
+
+void ecompte::AfficherCompte()
+{
+	cout<<endl<<"___________________________________________"<<endl;
+	cout<<"*********Récapitualatif du compte *********"<<endl;
+	cout<<"adresse email :"<<email<<endl;
+	cout<<"numéro de téléphone :"<<numTel;
+	AfficherSolde(cout);
+	cout<<"___________________________________________"<<endl;
+}

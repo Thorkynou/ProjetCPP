@@ -24,14 +24,15 @@ private:
 	double taux;//taux pour les mois suivant les 3 premiers mois
 
 public :
-	ecompte(string eml = "vide" ,string nt = "vide" ,double s=50, double tm =0,double t =0);//constructeur par parametre par defaut
+	ecompte(string eml = "vide" ,string nt = "vide" ,double s=50, double tm =4.5,double t =1.5);//constructeur par parametre par defaut
 	ecompte(const ecompte & E);//constructeur par copie
 
 
 	~ecompte();//destructeur
 	void AfficherSolde(ostream & out);
+	void AfficherCompte();
 	void Retrait();
-
+	void Ajouter(ecompte & E);
 	ecompte &CreerCompte();
 };
 
