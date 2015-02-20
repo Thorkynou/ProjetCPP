@@ -12,13 +12,12 @@
 #include "client.h"
 using namespace std;
 
-Client::Client(string nom, string prenom, string adresse, bool CC, bool LE, bool CB, bool PEL, bool EC): compteC(), D()
+Client::Client(string nom, string prenom, string adresse, bool LE, bool CB, bool PEL, bool EC): compteC(), D()
 {
-	cout << "constructeur par paramètres" << endl;
+	//cout << "constructeur par paramètres" << endl;
 	this->nom = nom; 
 	this->prenom = prenom;
 	this->adresse = adresse;
-	this->CC = CC;
 	this->LE = LE;
 	this->CB = CB;
 	this->PEL = PEL;
@@ -27,11 +26,10 @@ Client::Client(string nom, string prenom, string adresse, bool CC, bool LE, bool
 
 Client::Client(const Client &C)
 {
-	cout << "constructeur par copie" << endl;
+	//cout << "constructeur par copie" << endl;
 	nom = C.nom;
 	prenom = C.prenom;
 	adresse = C.adresse;
-	CC = C.CC;
 	LE = C.LE;
 	CB = C.CB;
 	PEL = C.PEL;
@@ -41,7 +39,7 @@ Client::Client(const Client &C)
 
 void Client::Saisir(istream &in)
 {
-    cout << "Entrez le nom du client" << endl;
+    cout << endl << "Entrez le nom du client" << endl;
     in >> nom;
     cout << "Son prenom" << endl;
     in >> prenom;
@@ -56,8 +54,6 @@ void Client::Afficher(ostream &out) const
 	out << "Prenom : " << prenom << endl;
 	out << "Adresse : " << adresse << endl;
 	out << endl;
-	if(CC)
-		out << "a un compte courant" << endl;
 	if(LE)
 		out << "a un livret d'epargne" << endl;
 	if(CB)
@@ -79,7 +75,6 @@ Client & Client::operator=(const Client &C)
 	nom = C.nom;
 	prenom = C.prenom;
 	adresse = C.adresse;
-	CC = C.CC;
 	LE = C.LE;
 	CB = C.CB;
 	PEL = C.PEL;
@@ -89,7 +84,7 @@ Client & Client::operator=(const Client &C)
 
 Client::~Client()
 {
-	cout<<"destructeur du client" << endl;
+	//cout<<"destructeur du client" << endl;
 }
 
 ostream & operator<<(ostream &out, const Client &C)
@@ -126,11 +121,11 @@ void Client::DestructionLE()
 	this->LE = false;
 }
 
-/*void Client::CreationCB()
+void Client::CreationCB()
 {
 	this->CB = true;
-	this->compteCB.Creer();
-}*/
+	this->compteCB.CreerCompte();
+}
 
 void Client::DestructionCB()
 {
@@ -160,11 +155,11 @@ void Client::AjoutLE(double N)
 	this->compteLE.Ajouter(N);
 }
 
-/*void Client::AjoutCB(double N)
+void Client::AjoutCB(double N)
 {
 	this->compteC.Retirer(N);
 	this->compteCB.Ajouter(N);
-}*/
+}
 
 void Client::AjoutEC(double N)
 {

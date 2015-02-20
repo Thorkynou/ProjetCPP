@@ -107,7 +107,6 @@ main()
 	C3.Afficher(cout);*/
 }
 
-
 void AjoutCompte(Client &C)
 {
 	int i = 0;
@@ -124,6 +123,8 @@ void AjoutCompte(Client &C)
 				break;
 		case 3: C.CreationLE();
 				break;
+		case 4: C.CreationCB();
+				break;
 		default:;
 	}
 }
@@ -136,11 +137,12 @@ int MenuChoixCompte()
 		cout << "1)  PEL" << endl;
 		cout << "2)  E-compte" << endl;
 		cout << "3)  Livret d'Epargne" << endl;
+		cout << "4)  Compte Bloque" << endl;
 		cin >> i;
-		if(i<1 && i>3)
+		if(i<1 && i>4)
 			cout << "Mauvais choix, recommencez" << endl;
 	}
-	while(i<1 && i<3);
+	while(i<1 && i>4);
 	return i;
 }
 
@@ -165,6 +167,11 @@ void AffichageComptes(Client &C)
 					C.compteLE.Afficher();
 				else
 					cout << "Ce client n'a pas encore de Livret d'Epargne" << endl;
+				break;
+		case 4: if(C.CB)
+					C.compteCB.Afficher();
+				else
+					cout << "Ce client n'a pas encore de Compte Bloque" << endl;
 				break;
 		default:;
 	}

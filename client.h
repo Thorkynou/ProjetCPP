@@ -13,6 +13,7 @@
 #include "pel.h"
 #include "ecompte.h"
 #include "livretepargne.h"
+#include "comptebloque.h"
 
 
 
@@ -23,23 +24,23 @@ using namespace std;
 class Client
 {
 private:
-	string nom;
 	string prenom;
 	string adresse;
 public:
+	string nom;
 	date D;
 	comptecourant compteC;
 	Pel comptePEL;
 	ecompte compteEC;
 	LivretEpargne compteLE;
-	bool CC;
+	CompteBloque compteCB;
 	bool LE;
 	bool CB;
 	bool PEL;
 	bool EC;
 public:
 	// Constructeur par paramètres
-	Client(string nom = "vide", string prenom = "vide", string adresse = "vide", bool CC = true, bool LE = false, bool CB = false, bool PEL = false, bool EC = false);
+	Client(string nom = "vide", string prenom = "vide", string adresse = "vide", bool LE = false, bool CB = false, bool PEL = false, bool EC = false);
 
 	// Constructeur par copie
 	Client(const Client &C);
@@ -79,7 +80,7 @@ public:
 
 	void AjoutLE(double N);
 
-	//void AjoutCB(double N);
+	void AjoutCB(double N);
 
 	void AjoutEC(double N);
 ;};
