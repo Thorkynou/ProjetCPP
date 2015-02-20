@@ -1,5 +1,5 @@
 /**************************************************
- *                  Projet C++                    *           
+ *                  Projet C++                    *
  * Bénédicte, Marc, Alain, Clément S et Clément L *
  *                                                *
  * Fichier: client.h                              *
@@ -8,7 +8,9 @@
 
 #include <iostream>
 #include <string>
-//#include "comptecourant.h"
+#include "comptecourant.h"
+#include "date.h"
+#include "pel.h"
 
 #ifndef CLIENT_H
 #define CLIENT_H
@@ -17,30 +19,55 @@ using namespace std;
 class Client
 {
 private:
-	//CompteCourant compteC;
 	string nom;
 	string prenom;
 	string adresse;
+public:
+	date D;
+	comptecourant compteC;
+	Pel comptePEL;
 	bool CC;
 	bool LE;
 	bool CB;
 	bool PEL;
 	bool EC;
-public: 
+public:
 	// Constructeur par paramètres
-	Client(string nom = "vide", string prenom = "vide", string adresse = "vide", bool CC = false, bool LE = false, bool CB = false, bool PEL = false, bool EC = false);
+	Client(string nom = "vide", string prenom = "vide", string adresse = "vide", bool CC = true, bool LE = false, bool CB = false, bool PEL = false, bool EC = false);
 
 	// Constructeur par copie
 	Client(const Client &C);
 
+	void Saisir(istream &in);
+
 	//Destructeur
-	virtual ~Client(){};
+	virtual ~Client();
 
 	virtual void Afficher(ostream &out) const;
 
 	virtual void ModifierAdresse(string adresse);
 
 	Client &operator=(const Client &C);
+
+	friend ostream &operator<<(ostream &out, const Client &C);
+
+	friend istream &operator>>(istream &in, Client &C);
+
+	void CreationPEL();
+
+	void DestructionPEL();
+
+	void CreationLE();
+
+	void DestructionLE();
+
+	void CreationCB();
+
+	void DestructionCB();
+
+	void CreationEC();
+
+	void DestructionEC();
 };
 
 
