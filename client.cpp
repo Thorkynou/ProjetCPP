@@ -12,7 +12,7 @@
 #include "client.h"
 using namespace std;
 
-Client::Client(string nom, string prenom, string adresse, bool CC, bool LE, bool CB, bool PEL, bool EC)
+Client::Client(string nom, string prenom, string adresse, bool CC, bool LE, bool CB, bool PEL, bool EC): compteC(), D()
 {
 	cout << "constructeur par paramètres" << endl;
 	this->nom = nom; 
@@ -36,6 +36,18 @@ Client::Client(const Client &C)
 	CB = C.CB;
 	PEL = C.PEL;
 	EC = C.EC;
+	compteC = C.compteC;
+}
+
+void Client::Saisir(istream &in)
+{
+    cout << "Entrez le nom du client" << endl;
+    in >> nom;
+    cout << "Son prenom" << endl;
+    in >> prenom;
+    cout << "Son adresse" << endl;
+    in.ignore();
+    getline(in, adresse);
 }
 
 void Client::Afficher(ostream &out) const
@@ -73,4 +85,61 @@ Client & Client::operator=(const Client &C)
 	PEL = C.PEL;
 	EC = C.EC;
 	return (*this);
+}
+
+Client::~Client()
+{
+	cout<<"destructeur du client" << endl;
+}
+
+ostream & operator<<(ostream &out, const Client &C)
+{
+	C.Afficher(out);
+	return out;
+}
+
+istream & operator>>(istream &in, Client &C)
+{
+	C.Saisir(in);
+	return in;
+}
+
+void Client::CreationPEL()
+{
+	this->PEL = true;
+}
+
+void Client::DestructionPEL()
+{
+	this->PEL = false;
+}
+
+void Client::CreationLE()
+{
+	this->LE = true;
+}
+
+void Client::DestructionLE()
+{
+	this->LE = false;
+}
+
+void Client::CreationCB()
+{
+	this->CB = true;
+}
+
+void Client::DestructionCB()
+{
+	this->CB = false;
+}
+
+void Client::CreationEC()
+{
+	this->EC = true;
+}
+
+void Client::DestructionEC()
+{
+	this->EC = false;
 }
