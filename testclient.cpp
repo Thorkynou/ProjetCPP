@@ -1,4 +1,10 @@
-
+/**************************************************
+ *                  Projet C++                    *
+ * Bénédicte, Marc, Alain, Clément S et Clément L *
+ *                                                *
+ * Fichier: main.cpp                              *
+ * @author: Clément L                             *
+ **************************************************/
 
 #include "date.h"
 #include "client.h"
@@ -7,7 +13,11 @@
 
 void AjoutCompte(Client &C);
 
-int MenuChoixCreationCompte();
+int MenuChoixCompte();
+
+void Affichagecomptes(Client &C);
+
+void RepetitionAffichageCompte(Client &C);
 
 main()
 {
@@ -43,7 +53,8 @@ main()
 	}
 	for(int i=0; i<2; i++)
 	{
-		cout << Banque[i];
+		cout << "Affichage des comptes du client " << Banque[i].nom << endl;
+		RepetitionAffichageCompte(Banque[i]);
 	}
 
 
@@ -104,7 +115,7 @@ void AjoutCompte(Client &C)
 	cout << "Voulez-vous lui ajouter un compte ? (0 pour non, 1 pour oui)" << endl;
 	cin >> valid;
 	if(valid)
-		i=MenuChoixCreationCompte();
+		i=MenuChoixCompte();
 	switch(i)
 	{
 		case 1: C.CreationPEL();
@@ -117,14 +128,14 @@ void AjoutCompte(Client &C)
 	}
 }
 
-int MenuChoixCreationCompte()
+int MenuChoixCompte()
 {
 	int i;
 	do
 	{
-		cout << "1)  Creation PEL" << endl;
-		cout << "2)  Creation E-compte" << endl;
-		cout << "3)  Creation Livret d'Epargne" << endl;
+		cout << "1)  PEL" << endl;
+		cout << "2)  E-compte" << endl;
+		cout << "3)  Livret d'Epargne" << endl;
 		cin >> i;
 		if(i<1 && i>3)
 			cout << "Mauvais choix, recommencez" << endl;
@@ -133,3 +144,39 @@ int MenuChoixCreationCompte()
 	return i;
 }
 
+void AffichageComptes(Client &C)
+{
+	int i;
+	cout << "Quel compte voulez-vous afficher ?" << endl;
+	i = MenuChoixCompte();
+	switch(i)
+	{
+		case 1: if(C.PEL)
+					C.comptePEL.AfficherPEL();
+				else
+					cout << "Ce client n'a pas encore de PEL" << endl;
+				break;
+		case 2: if(C.EC)
+					C.compteEC.AfficherCompte();
+				else
+					cout << "Ce client n'a pas encore d'e-compte" << endl;
+				break;
+		case 3: if(C.LE)
+					C.compteLE.Afficher();
+				else
+					cout << "Ce client n'a pas encore de Livret d'Epargne" << endl;
+				break;
+		default:;
+	}
+}
+
+void RepetitionAffichageCompte(Client &C)
+{
+	int valid;
+	do
+	{
+		AffichageComptes(C);
+		cout << "Voulez-vous afficher un autre compte de ce client ? (1 oui, 0 non)" << endl;
+		cin >> valid;
+	}while (valid == 1);
+}
