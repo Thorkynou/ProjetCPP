@@ -107,6 +107,7 @@ istream & operator>>(istream &in, Client &C)
 void Client::CreationPEL()
 {
 	this->PEL = true;
+	this->comptePEL.CreerPel();
 }
 
 void Client::DestructionPEL()
@@ -117,6 +118,7 @@ void Client::DestructionPEL()
 void Client::CreationLE()
 {
 	this->LE = true;
+	this->compteLE.CreerCompte();
 }
 
 void Client::DestructionLE()
@@ -124,10 +126,11 @@ void Client::DestructionLE()
 	this->LE = false;
 }
 
-void Client::CreationCB()
+/*void Client::CreationCB()
 {
 	this->CB = true;
-}
+	this->compteCB.Creer();
+}*/
 
 void Client::DestructionCB()
 {
@@ -137,9 +140,34 @@ void Client::DestructionCB()
 void Client::CreationEC()
 {
 	this->EC = true;
+	this->compteEC.CreerCompte();
 }
 
 void Client::DestructionEC()
 {
 	this->EC = false;
+}
+
+void Client::AjoutPEL(double N)
+{
+	this->compteC.Retirer(N);
+	this->comptePEL.Ajouter(N);
+}
+
+void Client::AjoutLE(double N)
+{
+	this->compteC.Retirer(N);
+	this->compteLE.Ajouter(N);
+}
+
+/*void Client::AjoutCB(double N)
+{
+	this->compteC.Retirer(N);
+	this->compteCB.Ajouter(N);
+}*/
+
+void Client::AjoutEC(double N)
+{
+	this->compteC.Retirer(N);
+	this->compteEC.Ajout(N);
 }

@@ -11,6 +11,10 @@
 #include "comptecourant.h"
 #include "date.h"
 #include "pel.h"
+#include "ecompte.h"
+#include "livretepargne.h"
+
+
 
 #ifndef CLIENT_H
 #define CLIENT_H
@@ -26,6 +30,8 @@ public:
 	date D;
 	comptecourant compteC;
 	Pel comptePEL;
+	ecompte compteEC;
+	LivretEpargne compteLE;
 	bool CC;
 	bool LE;
 	bool CB;
@@ -68,7 +74,15 @@ public:
 	void CreationEC();
 
 	void DestructionEC();
-};
+
+	void AjoutPEL(double N);
+
+	void AjoutLE(double N);
+
+	//void AjoutCB(double N);
+
+	void AjoutEC(double N);
+;};
 
 
 #endif

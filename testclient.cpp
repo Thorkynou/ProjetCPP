@@ -2,7 +2,6 @@
 
 #include "date.h"
 #include "client.h"
-#include "pel.h"
 #include <vector>
 #include <map>
 
@@ -14,7 +13,26 @@ main()
 	cin >> C;
 	cout << C;
     C.compteC.AfficherSolde(cout);
-    C.comptePEL.CreerPel();
+    cout << "coucou1" << endl;
+    //C.comptePEL.CreerPel();
+
+    C.CreationPEL();
+    C.AjoutPEL(100);
+    C.compteC.AfficherSolde(cout);
+    C.comptePEL.AfficherPEL();
+
+    C.CreationEC();
+    C.AjoutEC(150);
+    C.compteC.AfficherSolde(cout);
+    C.compteEC.AfficherCompte();
+
+    C.CreationLE();
+    C.AjoutLE(200);
+    C.compteC.AfficherSolde(cout);
+    C.compteLE.Afficher();
+
+    cout << "coucou2" << endl;
+    cout << C;
 
 
 
