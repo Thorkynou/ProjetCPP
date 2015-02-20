@@ -33,6 +33,7 @@ public:
 
     friend istream & operator>>(istream &in, date &D);
 
+    time_t Conversion();
 };
 
 

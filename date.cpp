@@ -69,3 +69,9 @@ istream & operator>>(istream &in, date &D)
     return in;
 }
 
+time_t date::Conversion()
+{
+    time_t dateD;
+    dateD = mktime(&this->t);
+    return dateD;
+}
