@@ -33,6 +33,7 @@ public :
 	void AfficherCompte();
 	void Retrait();
 	void Ajouter(ecompte & E);
+	void AjouterSA(ecompte & E,double n);//Ajout d'argent sans affichages
 	ecompte &CreerCompte();
 };
 

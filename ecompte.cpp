@@ -48,6 +48,7 @@ void ecompte::Retrait()
 
 }
 
+
 void ecompte::Ajouter(ecompte & E)
 {
 	double x=0;
@@ -55,6 +56,10 @@ void ecompte::Ajouter(ecompte & E)
 	cin >>x;
 	E.solde=E.solde+x;
 	AfficherSolde(cout);
+}
+void ecompte::AjouterSA(ecompte & E,double n)
+{
+	E.solde=E.solde+n;
 }
 
 void ecompte::AfficherCompte()
