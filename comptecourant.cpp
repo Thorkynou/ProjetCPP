@@ -32,13 +32,13 @@ double montantdebiteur,double agios,double sommeagios,double nbagios,int indice)
         cout<<"Ce compte peut etre debiteur mais crediteur c'est mieux\n";
 
         this->montantdebiteur=montantdebiteur;
-        cout<<"Le montant debiteur de ce compte est de \t"<<montantdebiteur<<" euros\n";
+       // cout<<"Le montant debiteur de ce compte est de \t"<<montantdebiteur<<" euros\n";
 
         this->agios=agios;
-        cout<<"Le montant des agios de ce compte est de \t"<<agios<<" euros\n";
+        //cout<<"Le montant des agios de ce compte est de \t"<<agios<<" euros\n";
 
         this->sommeagios=sommeagios;
-        cout<<"Lasomme des agios pour plusieurs jour de ce compte est de \t"<<sommeagios<<" euros\n";
+       // cout<<"Lasomme des agios pour plusieurs jour de ce compte est de \t"<<sommeagios<<" euros\n";
 
         this->nbagios=nbagios;
         cout<<"Le montant total des agios de ce compte est de \t"<<nbagios<<" euros\n";
