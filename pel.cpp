@@ -45,6 +45,7 @@ monFichier<<this->indice<<";"<<this->versementMensuel<<";"<<this->tauxEmprunt<<"
 monFichier.close();
 }
 
+/*Surcharge d'operateur Afficher*/
 void Pel::AfficherPEL(ostream & out)const
 {
 out<<"Solde du  PEL: "<<this->soldePel<<"  Montant versement mensuel: "<<this->versementMensuel<<"  Montant taux d'emprunt: "<<this->tauxEmprunt<<endl;
@@ -56,5 +57,9 @@ ostream & operator<<(ostream &out, const Pel &P)
 	return out;
 }
 
+void Pel::AfficherIndice()const
+{
+cout<<"L'indice PEL est: "<<this->indice<<endl;
+}
 
 

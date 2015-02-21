@@ -7,7 +7,7 @@ using namespace std;
 #ifndef PEL_H
 #define PEL_H
 
-class Pel//: public Client
+class Pel
 {
 private:
     double versementMensuel;
@@ -32,6 +32,7 @@ public:
     void TempsRestant();
     void MontantEmpruntable();
     void EcritureFichier()const;
+    void AfficherIndice()const;
 
     friend ostream &operator<<(ostream &out, const Pel &P);
 };
