@@ -16,7 +16,9 @@ private:
 
 public:
 
-    Pel(double vm=0,int te=0);
+    int indice;
+
+    Pel(double vm=0,int te=0, int indice=0);
     Pel(const Pel & monPel);
 
     ~Pel(){};

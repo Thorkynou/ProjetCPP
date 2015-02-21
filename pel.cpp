@@ -1,7 +1,7 @@
 #include "pel.h"
 
 /*Constructeur par paramètre*/
-Pel::Pel(double vm,int te)
+Pel::Pel(double vm,int te, int indice)
 {
 versementMensuel=vm;
 tauxEmprunt=te;
@@ -12,6 +12,7 @@ Pel::Pel(const Pel & monPel)
 {
 versementMensuel=monPel.versementMensuel;
 tauxEmprunt=monPel.tauxEmprunt;
+indice=monPel.indice;
 }
 
 /*Création Saisie du PEL*/
@@ -25,10 +26,8 @@ cin >>this->versementMensuel;
 cout<<"Saisir le taux d'emprunt initial: ";
 cin >>this->tauxEmprunt;
 this->soldePel=0;
-//this->Client::Afficher;//???
 
 this->EcritureFichier();
-
 }
 
 /*Versement Exceptionnel*/
@@ -42,7 +41,7 @@ void Pel::EcritureFichier()const
 {
 ofstream monFichier;
 monFichier.open("Pel.txt",ofstream::app);
-monFichier<<this->versementMensuel<<";"<<this->tauxEmprunt<<";"<<this->soldePel<<";"<<endl;
+monFichier<<this->indice<<";"<<this->versementMensuel<<";"<<this->tauxEmprunt<<";"<<this->soldePel<<";"<<endl;
 monFichier.close();
 }
 
