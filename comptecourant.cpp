@@ -1,59 +1,19 @@
 /*creation du fichier compte courant.h
-fihcier realise par benedicte le */
+fihcier realise par benedicte le 21 fevrier 2015*/
 
 #include "comptecourant.h"
 
 
-operationbancaire::operationbancaire()//constructeur par defaut
-    {//cout<<"+++++++++++++Voici le constructeur par defaut de la classe operation\n "<<endl;
-    }
-
-operationbancaire::operationbancaire(const operationbancaire& op)
-    {//cout<<"+++++++++++++Voici le constructeur par copie de la classe operation\n "<<endl;
-        this->operation=op.operation;
-        this->montant=op.montant;
-        this->description=op.description;
-    }
-
-operationbancaire::operationbancaire(string operation,double montant,string description)//constructeur par parametres
-    {//cout<<"+++++++++++++Voici le constructeur par defaut de la classe operation\n "<<endl;
-        this->operation=operation;
-        this->montant=montant;
-        this->description=description;
-    }
-
-void operationbancaire::AfficherO_B()//affichage de l'operation
-    {
-        cout<<"operation de "<<(this->operation)<<" d'un montant de "<<(this->montant)<<"euros"<<endl;
-        cout<<description<<endl;
-    }
-
-string operationbancaire::TypeO_B()//retourne le nom de l'action
-    {    return (this->operation);    }
-
-double operationbancaire::Montant_O_B()//retourne le montant de l'operation
-    {    return (this->montant);    }
-
-ostream &operator<<(ostream &out,operationbancaire & op)
-    {        return out;    }
-
-operationbancaire::~operationbancaire()//destruteur de la classe operationbancaire
-    {   //cout<<"--------------Destruction du compte courantde la classe operation\n "<<endl;
-    }
-
 /*comptecourant::comptecourant()//constructeur par defaut
     {
         cout<<"+++++++++++++Voici le constructeur par defaut du compte courant\n ";
-        cout<<endl;
-    }
-*/
+        cout<<endl;}*/
 
 comptecourant::~comptecourant()//destructeur par defaut
-    { //  cout<<"--------------Destruction du compte courant\n "<<endl;
-    }
+    { }//  cout<<"--------------Destruction du compte courant\n "<<endl;
 
 comptecourant::comptecourant(int numerodecompte,double solde,double decouvert,double taux,bool debiteur,
-double montantdebiteur,double agios,double sommeagios,double nbagios,int index)//constructeur par parametres par defaut
+double montantdebiteur,double agios,double sommeagios,double nbagios,int indice)//constructeur par parametres par defaut
     {
        // cout<<"+++++++++++++Voici le constructeur par parametres du compte courant"<<endl;
         this->numerodecompte=numerodecompte;
@@ -83,7 +43,7 @@ double montantdebiteur,double agios,double sommeagios,double nbagios,int index)/
         this->nbagios=nbagios;
         cout<<"Le montant total des agios de ce compte est de \t"<<nbagios<<" euros\n";
 
-        this->index=index;
+        this->indice=indice;
     }
 
 comptecourant::comptecourant(const comptecourant & CC)//constructeur par copie
@@ -116,11 +76,11 @@ comptecourant::comptecourant(const comptecourant & CC)//constructeur par copie
         nbagios=CC.nbagios;
         cout<<"la somme totale des agios est de  \t"<<nbagios<<" euros"<<endl;
 
-        index=CC.index;
+        indice=CC.indice;
     }
 
 
- comptecourant& comptecourant ::operator=(const comptecourant & CC)
+ comptecourant& comptecourant ::operator=(const comptecourant & CC)//operateur d'affectation
  {
     this->numerodecompte=CC.numerodecompte;
     this->solde=CC.solde;
@@ -131,15 +91,15 @@ comptecourant::comptecourant(const comptecourant & CC)//constructeur par copie
     this->agios=CC.agios;
     this->sommeagios=CC.sommeagios;
     this->nbagios=CC.nbagios;
-    this->index=CC.index;
+    this->indice=CC.indice;
 
     return *this;
  }
 
-double comptecourant ::Retirer(double N)//retrait d'argent sur le compte -->modification pour Clement L
+double comptecourant ::Retirer(double N)//retrait d'argent sur le compte
     {
         this->Tab_MesActions.push_back(operationbancaire("retrait",N,"vide (non utilisé par le programme)"));
-        EcritureFichier();
+        EcritureFichier();//ecriture dans le fichier apres chaque retrait
 
         solde=solde-N;
         return solde;
@@ -147,15 +107,14 @@ double comptecourant ::Retirer(double N)//retrait d'argent sur le compte -->modi
 
 double comptecourant ::Ajouter(double N)//ajout d'argent sur le compte
     {
-        //operationbancaire nouvelleoperation("Ajout",N,"vide (non utilisé par le programme)");
         this->Tab_MesActions.push_back(operationbancaire("ajout",N,"vide (non utilisé par le programme)"));
-        EcritureFichier();//ecriture dans le fichier
+        EcritureFichier();//ecriture dans le fichier apres chaque ajout
 
         solde=solde+N;
         return (solde);
     }
 
-void comptecourant ::AfficherOperation()//affichage de l'ajout ou du retrait d'argent sur le compte
+void comptecourant ::Afficher()//affichage de l'ajout ou du retrait d'argent sur le compte//void comptecourant ::AfficherOperation()
 {
     double paiement=0;
     //LectureFichier();//sert a rien
@@ -180,13 +139,9 @@ comptecourant & comptecourant::operator-(int N)//on aura solde2=solde1.operator-
 
 
 void comptecourant::AfficherSolde(ostream &out)//affiche le solde du compte  -->ok testé
-    {
-        out<<solde<<endl;
-    }
+    {        out<<solde<<endl;    }
 
-
-
-void comptecourant::AffichageAlerte(ostream &out)//affichage d'un message d'alerte quand le solde =le decouvert autorise
+void comptecourant::AffichageAlerte(ostream &out)//affichage d'un message d'alerte quand le solde  est egal au decouvert autorise
     {
         if((this->solde)<(this->decouvert))
             {
@@ -194,15 +149,13 @@ void comptecourant::AffichageAlerte(ostream &out)//affichage d'un message d'aler
                 out<< "Vous êtes a DECOUVERT\n";
                 out<<"Vous devez absolument remettre de l'argent sur votre compte\n";
                 out<<"!!!!!!!!!!!!!!!!!!!!!!!!!!attention attention !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
-                out<<endl;
-            }
+                out<<endl; }
         else
             {
-                out<<"tout va bien sur votre compte en banque\n";
-            }
+                out<<"tout va bien sur votre compte en banque\n";   }
     }
 
-double comptecourant::CalculAgiosJournaliers()
+double comptecourant::CalculAgiosJournaliers()//cacule des agios journaliers pour calculer la somme des agios au total
     {
         int nbjoursdebiteur=0;
         double tauxinteretdecouvert=0.12;
@@ -236,12 +189,14 @@ double comptecourant::CalculAgiosJournaliers()
                 sommedebiteur=somme+montantdebiteur;
                 cout<<"la somme debiteur est de\t"<<sommedebiteur<<" euros\n";
                 cout<<endl;
-            }
 
-        (this->agios)=(sommedebiteur*tauxinteretdecouvert)/365;
 
-        (this->sommeagios)=(this->sommeagios)+(this->agios);
-        cout<<"la somme de vos agios a paye sans les taxes est de \t"<<(this->sommeagios)<<" euros\n";
+            (this->agios)=(sommedebiteur*tauxinteretdecouvert)/365;
+
+            (this->sommeagios)=(this->sommeagios)+(this->agios);
+            cout<<"la somme de vos agios a paye sans les taxes est de \t"<<(this->sommeagios)<<" euros\n";
+
+        }
         return (this->sommeagios);//(this->nbagios)
 
        // compte debiteur du 5 au 22 janvier de 500 euros et du 2 au 28 mars de 450.
@@ -250,23 +205,21 @@ double comptecourant::CalculAgiosJournaliers()
        // agios=11.07euros +5.90€ de taxe de commissions
 
     }
-//fonction teste ok
+
 void comptecourant::AffichageAgios()//affichage des agios que le client doit payer-->testée ok//const double &agios
     {
+        if (debiteur)
+        {
             (this->nbagios)=(this->sommeagios)+5.90;//5.90€ de taxe de commissions
-        //  AffichageAgios(nbagios);
         cout<<"\nvotre compte est a decouvert, vous devez payer\t"<<(this->nbagios)<<" euros\n"<<endl;
+        }
     }
 
 istream &operator>>(istream &in,const comptecourant & CC)
-    {
-        return in;
-    }
+    {        return in;    }
 
 ostream &operator<<(ostream &out,comptecourant & CC)
-    {
-        return out;
-    }
+    {   return out;    }
 
 void comptecourant::EcritureFichier()
     {
@@ -282,8 +235,8 @@ void comptecourant::EcritureFichier()
         */
         //affichage dans le fichier txt
         operationbancaire nouvelleoperation(this->Tab_MesActions.back());//constructeur par copie appelé
-        fichier_compte_courant<<(this->index)+1<<"action"<<";"<<nouvelleoperation.TypeO_B()<<";"<<this->solde<<";"<<(this->nbagios)<<";"<<endl;
-        (this->index)++;
+        fichier_compte_courant<<(this->indice)+1<<"action"<<";"<<nouvelleoperation.TypeO_B()<<";"<<this->solde<<";"<<(this->nbagios)<<";"<<endl;
+        (this->indice)++;
 
         //fermeture du fichier
         fichier_compte_courant.close();
@@ -295,17 +248,15 @@ void comptecourant::Afficher10Actions()//affichage des 10 dernieres actions fait
     {
         int i=0;//compteur de boucles
         vector<operationbancaire> ::reverse_iterator it;
-        for (it=Tab_MesActions.rbegin();it!=Tab_MesActions.rend();it++)
+        for (it=Tab_MesActions.rbegin();it!=Tab_MesActions.rend();it++)// on part de la fin pour lire le fichier
             {
-                if(i<10)
+                if(i<10)//on veut afficher que les 10 dernieres operations
                     {
                         cout <<"L'action numero "<<10-i<<" est une action de \t"<<it->TypeO_B()<<"\td'un montant de \t"<<it->Montant_O_B()<<"euros"<<endl;
                     }
                 i++;
-
             }
     }
-
 
 void comptecourant::LectureFichier()//ne sert a rien
     {
@@ -319,11 +270,10 @@ void comptecourant::LectureFichier()//ne sert a rien
                 {   cerr << "Erreur à la lecture !" << endl;    }
         */
 
-          for(index=0;index<Tab_MesActions.size();index++)
+          for(indice=0;indice<Tab_MesActions.size();indice++)
             {   operationbancaire nouvelleoperation(this->Tab_MesActions.back());//appel du constructeur par copie
-                cout<<"action numero "<<(this->index)+1<<nouvelleoperation.TypeO_B()<<"\t"<<"nouveau solde\t"<<(this->solde)<<endl;
+                cout<<"action numero "<<(this->indice)+1<<nouvelleoperation.TypeO_B()<<"\t"<<"nouveau solde\t"<<(this->solde)<<endl;
             }
-
         fichier_compte_courant.close();//fermeture du fichier
 }
 
