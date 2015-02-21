@@ -9,30 +9,40 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
+#include "date.h"
+
+#ifndef COMPTEBLOQUE_H
+#define COMPTEBLOQUE_H
 
 using namespace std;
 
-class CompteBloque
+class CompteBloque: public date
 {
 private:
 	double taux;
-	double plafondDepot;
 	double solde;
 
 public:
-	CompteBloque(double taux = 0, double plafondDepot = 10000, double solde = 0);
+	int indice;
+
+	CompteBloque(time_t dateCB=time(NULL), int indice = 0, double taux = 0, double solde = 0);
 
 	CompteBloque(const CompteBloque &CB);
 
-	~CompteBloque(){};
+	~CompteBloque(){cout << "Destru Compte Bloque";};
 
-	CompteBloque &CreerCompte();
+	void CreerCompte();
 
-	void Ajouter(CompteBloque &CB);
-
-	void CalculInterets();
+	double CalculInterets();
 
 	void Afficher();
 
+	void AfficherIndice();
+
 	void Ajouter(double n);
+
+	void EcritureFichier();
 };
+
+#endif

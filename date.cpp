@@ -1,28 +1,50 @@
 //creation du fichier date.cpp
-//realise par benedicte
+//realise par benedicte, repris par Clement L.
 
 #include "date.h"
 
 date::date()// constructeur par defaut
 {
-    memset(&t, 0, sizeof(t));
+    /*memset(&t, 0, sizeof(t));
     cout<<"+++++++++++++Voici le constructeur par defaut de la date\n";
     time_t now = time(NULL);
     t=*localtime(&now);
     jour = t.tm_mday;
     mois = t.tm_mon+1;
     an = t.tm_year+1900;
-    cout<<endl;
+    cout<<endl;*/
+    cout << "----------------------------------" << endl;
+    cout << "    constructeur defaut date" << endl;
+    cout << "----------------------------------" << endl;
+    this->dateJ = time(NULL);
 }
 
-date::date(int j,int m,int an)
+/*date::date(int j,int m,int an)
 {
     this->jour = j;
     this->mois = m;
     this->an = an;
+}*/
+
+date::date(time_t date)
+{
+    cout << "----------------------------------" << endl;
+    cout << "    constructeur param date" << endl;
+    cout << "----------------------------------" << endl;
+    this->dateJ = date;
 }
 
-void date::Saisir(istream &in)
+date::date(const date & copie)
+{
+    dateJ = copie.dateJ;
+}
+
+void date::MiseAJour()
+{
+    dateJ = time(NULL);
+}
+
+/*void date::Saisir(istream &in)
 {
     cout << "Entrez la date de création sous la forme: jj mm aaaa" << endl;
     in >> jour >> mois >> an;
@@ -74,4 +96,4 @@ time_t date::Conversion()
     time_t dateD;
     dateD = mktime(&this->t);
     return dateD;
-}
+}*/

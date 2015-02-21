@@ -11,7 +11,7 @@
 #include <vector>
 #include <map>
 
-void AjoutCompte(Client &C);
+void AjoutCompte(Client &C, int indice);
 
 int MenuChoixCompte();
 
@@ -21,111 +21,40 @@ void RepetitionAffichageCompte(Client &C);
 
 main()
 {
-
-	/*Client C;
-	C.Afficher(cout);
-	cin >> C;
-	cout << C;
-    C.compteC.AfficherSolde(cout);
-
-    C.CreationPEL();
-    C.AjoutPEL(100);
-    C.compteC.AfficherSolde(cout);
-    C.comptePEL.AfficherPEL();
-
-    C.CreationEC();
-    C.AjoutEC(150);
-    C.compteC.AfficherSolde(cout);
-    C.compteEC.AfficherCompte();
-
-    C.CreationLE();
-    C.AjoutLE(200);
-    C.compteC.AfficherSolde(cout);
-    C.compteLE.Afficher();*/
-
-
-	vector <Client> Banque(5);
-	//vector <Client>::iterator it;
-	for(int i=0; i<2; i++)
-	{
-		Banque[i].Saisir(cin);
-		AjoutCompte(Banque[i]);
-	}
-	for(int i=0; i<2; i++)
-	{
-		cout << "Affichage des comptes du client " << Banque[i].nom << endl;
-		RepetitionAffichageCompte(Banque[i]);
-	}
-
-
-
-
-	/*date D;
-	D.Afficher();
-	date D2(8, 12, 2015);
-	D2.Afficher();
-	date D3;
-	D3.Saisir();
-	D3.Afficher();
-	date D4 = D3;
-	D4.Afficher();
-
-	cin.ignore();*/
-
-	/*Client C;
-	Client C1("machin", "bidule", "22 rue de marsoulas", true);
-	Client C2=C1;
-	cout << "*****************" << endl;
-	cout << "        C" << endl;
-	cout << "*****************" << endl;
-	C.Afficher(cout);
-	cout << "*****************" << endl;
-	cout << "        C1" << endl;
-	cout << "*****************" << endl;
-	C1.Afficher(cout);
-	cout << "*****************" << endl;
-	cout << "        C2" << endl;
-	cout << "*****************" << endl;
-	C2.Afficher(cout);
-	string S;
-	cout << "Entrez une nouvelle adresse" << endl;
-	getline(cin, S);
-	C.ModifierAdresse(S);
-	cout << "*****************" << endl;
-	cout << "        C" << endl;
-	cout << "*****************" << endl;
-	C.Afficher(cout);
-	C2 = C;
-	cout << "*****************" << endl;
-	cout << "        C2" << endl;
-	cout << "*****************" << endl;
-	C2.Afficher(cout);
-	Client C3("hello", "coucou", "truc bidule", true, false, true, false, true);
-	cout << "*****************" << endl;
-	cout << "        C3" << endl;
-	cout << "*****************" << endl;
-	C3.Afficher(cout);*/
+	int i=0;
+	
 }
 
-void AjoutCompte(Client &C)
+void AjoutCompte(Client &C, int indice)
 {
 	int i = 0;
 	int valid;
 	cout << "Voulez-vous lui ajouter un compte ? (0 pour non, 1 pour oui)" << endl;
 	cin >> valid;
 	if(valid)
-		i=MenuChoixCompte();
-	switch(i)
 	{
-		case 1: C.CreationPEL();
-				break;
-		case 2: C.CreationEC();
-				break;
-		case 3: C.CreationLE();
-				break;
-		case 4: C.CreationCB();
-				break;
-		default:;
+		do
+		{
+			i=MenuChoixCompte();
+			switch(i)
+			{
+				case 1: C.comptePEL.indice = indice;
+						C.CreationPEL();
+						break;
+				case 2: //C.compteEC.indice = indice;
+						C.CreationEC();
+						break;
+				case 3: //C.compteLE.indice = indice;
+						C.CreationLE();
+						break;
+				case 4: C.compteCB.indice = indice;
+						C.CreationCB();
+						break;
+				default:;
+			}
+			cout << "Voulez-vous lui ajouter un autre compte ? (0 pour non, 1 pour oui)" << endl;
+			cin >> valid;
+		}while(valid);
 	}
 }
 
@@ -154,25 +83,37 @@ void AffichageComptes(Client &C)
 	switch(i)
 	{
 		case 1: if(C.PEL)
-					C.comptePEL.AfficherPEL();
+				{
+					C.comptePEL.AfficherPEL(cout);
+					C.comptePEL.AfficherIndice();
+				}
 				else
 					cout << "Ce client n'a pas encore de PEL" << endl;
 				break;
 		case 2: if(C.EC)
+				{
 					C.compteEC.AfficherCompte();
+					//C.compteEC.AfficherIndice();
+				}
 				else
 					cout << "Ce client n'a pas encore d'e-compte" << endl;
 				break;
 		case 3: if(C.LE)
+				{
 					C.compteLE.Afficher();
+					//C.compteLE.AfficherIndice();
+				}
 				else
 					cout << "Ce client n'a pas encore de Livret d'Epargne" << endl;
 				break;
 		case 4: if(C.CB)
+				{
 					C.compteCB.Afficher();
+					C.compteCB.AfficherIndice();
+				}
 				else
 					cout << "Ce client n'a pas encore de Compte Bloque" << endl;
-				break;
+				
 		default:;
 	}
 }

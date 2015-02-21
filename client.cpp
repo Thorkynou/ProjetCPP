@@ -12,9 +12,9 @@
 #include "client.h"
 using namespace std;
 
-Client::Client(string nom, string prenom, string adresse, bool LE, bool CB, bool PEL, bool EC): compteC(), D()
+Client::Client(string nom, string prenom, string adresse, bool LE, bool CB, bool PEL, bool EC)
 {
-	//cout << "constructeur par paramètres" << endl;
+	cout << "constructeur par paramètres" << endl;
 	this->nom = nom;
 	this->prenom = prenom;
 	this->adresse = adresse;
@@ -84,7 +84,8 @@ Client & Client::operator=(const Client &C)
 
 Client::~Client()
 {
-	//cout<<"destructeur du client" << endl;
+	cout << *this;
+	cout<<"destructeur du client" << endl;
 }
 
 ostream & operator<<(ostream &out, const Client &C)
