@@ -4,12 +4,10 @@
 
 using namespace std;
 
-#include "client.h"
-
 #ifndef PEL_H
 #define PEL_H
 
-class Pel: public Client
+class Pel//: public Client
 {
 private:
     double versementMensuel;
@@ -21,19 +19,22 @@ public:
     Pel(double vm=0,int te=0);
     Pel(const Pel & monPel);
 
-    /*virtual*/ ~Pel(){};
+    ~Pel(){};
 
-    /*virtual*/ void Afficher();
+    void AfficherPEL(ostream & out)const;
 
-    Pel CreerCompte();
+    void CreerPel();
 
-    void VersementExept(Pel & monPel);
+    void Ajouter(double mtt);
     void ModifMontantMensuel();
     void TempsRestant();
     void MontantEmpruntable();
     void EcritureFichier()const;
 
+    friend ostream &operator<<(ostream &out, const Pel &P);
 };
+
+
 
 #endif
 

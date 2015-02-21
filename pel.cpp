@@ -1,18 +1,21 @@
 #include "pel.h"
 
+/*Constructeur par paramètre*/
 Pel::Pel(double vm,int te)
 {
 versementMensuel=vm;
 tauxEmprunt=te;
 }
 
+/*Constructeur par copie*/
 Pel::Pel(const Pel & monPel)
 {
 versementMensuel=monPel.versementMensuel;
 tauxEmprunt=monPel.tauxEmprunt;
 }
 
-Pel Pel::CreerCompte()
+/*Création Saisie du PEL*/
+void Pel::CreerPel()
 {
 int ouverture=0;
 int ecriture=0;
@@ -22,25 +25,19 @@ cin >>this->versementMensuel;
 cout<<"Saisir le taux d'emprunt initial: ";
 cin >>this->tauxEmprunt;
 this->soldePel=0;
-
-Client::PEL=true;//???
+//this->Client::Afficher;//???
 
 this->EcritureFichier();
-return *this;
+
 }
 
-void Pel::VersementExept(Pel & monPel)
+/*Versement Exceptionnel*/
+void Pel::Ajouter(double mtt)
 {
-double mtt=0;
-
-cout<<"Quel montant voulez vous verser? ";
-cin >>mtt;
-
-monPel.soldePel=monPel.soldePel+mtt;
-
+this->soldePel=this->soldePel+mtt;
 }
 
-
+/*Ecriture des données dans le fichier*/
 void Pel::EcritureFichier()const
 {
 ofstream monFichier;
@@ -49,6 +46,16 @@ monFichier<<this->versementMensuel<<";"<<this->tauxEmprunt<<";"<<this->soldePel<
 monFichier.close();
 }
 
+void Pel::AfficherPEL(ostream & out)const
+{
+out<<"Solde du  PEL: "<<this->soldePel<<"  Montant versement mensuel: "<<this->versementMensuel<<"  Montant taux d'emprunt: "<<this->tauxEmprunt<<endl;
+}
+
+ostream & operator<<(ostream &out, const Pel &P)
+{
+	P.AfficherPEL(out);
+	return out;
+}
 
 
 

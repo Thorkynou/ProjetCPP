@@ -1,5 +1,5 @@
 /**************************************************
- *                  Projet C++                    *           
+ *                  Projet C++                    *
  * Bénédicte, Marc, Alain, Clément S et Clément L *
  *                                                *
  * Fichier: client.cpp                            *
@@ -15,7 +15,7 @@ using namespace std;
 Client::Client(string nom, string prenom, string adresse, bool LE, bool CB, bool PEL, bool EC): compteC(), D()
 {
 	//cout << "constructeur par paramètres" << endl;
-	this->nom = nom; 
+	this->nom = nom;
 	this->prenom = prenom;
 	this->adresse = adresse;
 	this->LE = LE;
@@ -113,7 +113,7 @@ void Client::DestructionPEL()
 void Client::CreationLE()
 {
 	this->LE = true;
-	this->compteLE.CreerCompte();
+//	this->compteLE.CreerCompte();
 }
 
 void Client::DestructionLE()
@@ -152,7 +152,7 @@ void Client::AjoutPEL(double N)
 void Client::AjoutLE(double N)
 {
 	this->compteC.Retirer(N);
-	this->compteLE.Ajouter(N);
+//	this->compteLE.Ajouter(N);
 }
 
 void Client::AjoutCB(double N)
@@ -164,5 +164,5 @@ void Client::AjoutCB(double N)
 void Client::AjoutEC(double N)
 {
 	this->compteC.Retirer(N);
-	this->compteEC.Ajout(N);
+//	this->compteEC.Ajout(N);
 }

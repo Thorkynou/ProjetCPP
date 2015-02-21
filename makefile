@@ -31,3 +31,8 @@ ecompte.o: ecompte.cpp ecompte.h
 
 clean:
 	rm *.o
+
+#Mettre a jour
+touch:
+	#Met a jour les fichier
+	@touch *.cpp
