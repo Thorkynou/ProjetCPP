@@ -1,5 +1,5 @@
 //creation du fichier date.h
-//realise par benedicte
+//realise par benedicte, repris par Clement L
 
 #include <iostream>
 #include <ctime>
@@ -12,28 +12,36 @@ using namespace std;
 class date
 {
 private:
-	struct tm t;
+	/*struct tm t;
     int jour;
     int mois;
-    int an;
+    int an;*/
+
+protected:
+    time_t dateJ;
+
 
 public:
 
-	date();// constructeur par defaut-->ok testé
-	date (int j,int m,int an);//constructeur par parametres par defaut-->ok testé
+	date();
+    date(time_t date);
+    date(const date & copie);
+	/*date (int j,int m,int an);//constructeur par parametres par defaut-->ok testé
 	date(const date & acopier);//constructeur par copie
     void Saisir(istream &in);//saisie de la date du jour
-    void Afficher(ostream &out) const;//affiche la date du jour
+    void Afficher(ostream &out) const;//affiche la date du jour*/
 
-    ~date();//detsructeur par defaut
+    virtual ~date(){};//detsructeur par defaut
 
-    date &operator=(const date &D);
+    void MiseAJour();
+
+    /*date &operator=(const date &D);
 
     friend ostream & operator<<(ostream &out, const date &D);
 
     friend istream & operator>>(istream &in, date &D);
 
-    time_t Conversion();
+    time_t Conversion();*/
 };
 
 

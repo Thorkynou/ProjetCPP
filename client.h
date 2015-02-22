@@ -9,7 +9,7 @@
 #include <iostream>
 #include <string>
 #include "comptecourant.h"
-#include "date.h"
+//#include "date.h"
 #include "pel.h"
 #include "ecompte.h"
 #include "livretepargne.h"
@@ -28,7 +28,7 @@ private:
 	string adresse;
 public:
 	string nom;
-	date D;
+	//date D;
 	comptecourant compteC;
 	Pel comptePEL;
 	ecompte compteEC;
@@ -48,11 +48,11 @@ public:
 	void Saisir(istream &in);
 
 	//Destructeur
-	virtual ~Client();
+	~Client();
 
-	virtual void Afficher(ostream &out) const;
+	void Afficher(ostream &out) const;
 
-	virtual void ModifierAdresse(string adresse);
+	void ModifierAdresse(string adresse);
 
 	Client &operator=(const Client &C);
 

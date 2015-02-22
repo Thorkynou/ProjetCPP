@@ -8,39 +8,55 @@
 
 #include "comptebloque.h"
 
-CompteBloque::CompteBloque(double taux, double plafondDepot, double solde)
+CompteBloque::CompteBloque(time_t dateCB, int indice, double taux, double solde): date(dateCB)
 {
+	this->indice = indice;
 	this->taux = taux;
-	this->plafondDepot = plafondDepot;
 	this->solde = solde;
 }
 
 CompteBloque::CompteBloque(const CompteBloque &CB)
 {
+	indice = CB.indice;
 	taux = CB.taux;
-	plafondDepot = CB.plafondDepot;
 	solde = CB.solde;
 }
 
-CompteBloque &CompteBloque::CreerCompte()
+void CompteBloque::CreerCompte()
 {
 	cout << "Creation d'un compte bloque" << endl;
 	cout << "Saisir un taux: " << endl;
 	cin >> this->taux;
-	cout << "Saisir le plafond de depot: " << endl;
-	cin >> this->plafondDepot;
-	return (*this);
+	EcritureFichier();
+}
+
+double CompteBloque::CalculInterets()
+{
+	return(this->solde = (this->solde) * (this->taux) / 100);
 }
 
 void CompteBloque::Afficher()
 {
 	cout << endl << "Affichage du compte bloque" << endl;
 	cout << "Taux : " << taux << endl;
-	cout << "Plafond de depot :" << plafondDepot << endl;
 	cout << "Solde : " << solde << endl << endl;
+}
+
+void CompteBloque::AfficherIndice()
+{
+	cout<<"L'indice CB est: "<<this->indice<<endl;
 }
 
 void CompteBloque::Ajouter(double n)
 {
 	this->solde = this->solde + n;
+}
+
+void CompteBloque::EcritureFichier()
+{
+	ofstream monFichier;
+	monFichier.open("CB.txt",ofstream::app);
+	MiseAJour();
+	monFichier << this->indice << ";" << this->taux << ";" << this->solde << ";" << dateJ << endl;
+	monFichier.close();
 }
