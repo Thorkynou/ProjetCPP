@@ -17,7 +17,7 @@ taux =1.5;
 plafondDepot = 7700;
 }
 
-LivretEpargne::LivretEpargne(double solde ,double taux , double plafond )//constructeur par parametre
+LivretEpargne::LivretEpargne(time_t dateLE=time(NULL),double solde ,double taux , double plafond ):date(dateLE)//constructeur par parametre
 {
 cout<< "je suis dans le constructeur par parametres de livret epargne"<<endl;
 this -> solde = solde;
@@ -160,11 +160,108 @@ void LivretEpargne::EcritureFichier()const
 {
 ofstream monFichier;
 monFichier.open("EL.txt",ofstream::app);
-monFichier<<this->solde<<";"<<this->taux<<";"<<this->plafondDepot<<";"<<endl;
+monFichier<<this->solde<<";"<<this->taux<<";"<<this->plafondDepot<<";"<<this->indice<<";"<<dateJ<<";"<<endl;
 monFichier.close();
 }
 
 
+/*Affichage de l'indice*/
+void LivretEpargne::AfficherIndice()const
+{
+cout<<"L'indice LE est: "<<this->indice<<endl;
+}
+
+/*Conversion CSV en vector de class*/
+void ExtractionFichier(vector<LivretEpargne>&mesLE)
+{
+LivretEpargne monLE(0);
+int k=0;
+int j=0;
+int taille=0;
+
+vector <string> ligneFichier;
+string maLigne;
+string mot;
+string maLigneCSV;
+
+fstream monFichier;
+
+monFichier.open("LE.txt",ofstream::in);
+if (monFichier.fail())
+    cerr<<"Le fichier n'existe pas"<<endl;
+else
+    {
+    while (monFichier.eof()!=true)
+        {
+        monFichier>>maLigneCSV;
+        ligneFichier.push_back(maLigneCSV);
+        maLigneCSV.clear();
+        }
+    ligneFichier.pop_back();
+    taille=ligneFichier.size();
+    }
+monFichier.close();
+
+mesLE.resize(taille);
+
+for (k=0;k<taille;k++)
+    {
+    maLigne=ligneFichier[k];
+    istringstream iss(maLigne);
+
+    j=0;
+    while (getline(iss,mot,';'))
+        {
+        switch(j)
+            {
+                break;
+            case 1:mesLE[k].solde=atof(mot.c_str());
+                break;
+            case 2:mesLE[k].taux=atoi(mot.c_str());
+                break;
+            case 3:mesLE[k].plafondDepot=atof(mot.c_str());
+                break;
+            case 4:mesLE[k].dateJ=atoi(mot.c_str());
+                break;
+            }
+        j++;
+        }
+    }
+}
+
+/*Fonction de suppression et écriture d'un nouveau fichier apres modif de vector*/
+void ReecritureFichier(const vector<LivretEpargne>&mesLE)
+{
+ofstream monFichier;
+ofstream tempFichier;
+int taille=0;
+
+tempFichier.open("tempLE.txt",ofstream::app);
+taille=mesLE.size();
+
+for(int i=0;i<taille;i++)
+    {
+    tempFichier<<mesLE[i].indice<<";"<<mesLE[i].solde<<";"<<mesLE[i].taux<<";"<<mesLE[i].plafondDepot<<";"<<endl;
+    }
+tempFichier.close();
+
+remove("LE.txt");
+rename("tempLE.txt","LE.txt");
+}
+
+/*Fonction de recherche par indice dans un vector*/
+void Pel::RechercheParIndice(vector<LivretEpargne>&mesLE,int indice)
+{
+int taille=0;
+
+taille=mesLE.size();
+
+for (int i=0;i<taille;i++)
+    {
+    if (mesLE[i].indice==indice)
+        *this=mesLE[i];
+    }
+}
 /*
 void CalculInterets();
 void MiseAJour();//cad nouveau solde avec les interets rajoutes
