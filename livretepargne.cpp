@@ -49,12 +49,25 @@ return *this;
 
 }
 
-
-void LivretEpargne::Afficher()//affiche seulement les variables du livret epargne
+LivretEpargne &LivretEpargne::CreerCompte()
 {
-cout << "le sodle de ce livret epargne est de "<<solde<<endl;
+    cout<<endl<<"Saisir un taux: ";
+    cin >>this->taux;
+    cout<<endl<<"Saisir un plafond de depot: ";
+    cin >>this->plafondDepot;
+    return *this;
+}
+
+void LivretEpargne::Afficher()
+{
+cout<<endl;
+cout<<"---------AFFICHAGE DU LIVRET EPARGNE---------"<<endl;
+cout << "le sodle de ce livret epargne est de "<<solde<<"euros"<<endl;
 cout << "son taux d'interets est de "<< taux<<"%"<< endl;
 cout << "et son plafond de depot est de " << plafondDepot<< "euros"<<endl;
+cout<<"---------------------------------------------"<<endl;
+
+
 }
 
 
@@ -64,13 +77,41 @@ this->solde=this->solde+N;
 return *this;
 }
 
+void LivretEpargne::CalculInterets(double N)//calcule le montant des interets de l'année d'une somme donnée
+{
+//le calcule des interets d'un livret epargne se fait par rapport aux quinzaines
+//il y à donc 24 quinzaines dans un année
+
+int x;//va représenter le nombre de quinzaine pris en compte dans le mois en cours
+double y;//va representer le nombre de quinzaines dans l'année en cours
+double interets;//somme des interets
+
+if(date::jour==1)
+    x=2;//si un virement est effectué le 1er du mois, alors les 2 quinzaines de ce mois seront prises en compte
+else if(date::jour>1 && date::jour<16)
+    x=1;//si le virement est effectué pendant la premiere quinzaine du mois en cours (cad entre le 2 et le 15 inlus) alors seulement la 2eme quinzaines du mois sera prise en compte
+else
+    x=0;//si le virement est effectué pendant la deuxieme quinzaine du mois (cad apres le 15) alors celui ci ne sera pas pris en compte
+        //et on commencera a partir de la 1ere quinzaine du moi suivant
+
+y=(12-date::mois)*2+x;
+
+interets=N*taux/100*y/24;
+
+cout<< "le montant des interets de cette somme s'eleveront à "<<interets<<"euros"<<endl;
+
+
+
+}
+
+
 void LivretEpargne:: Ajouter()//ajouter de l'argent dans le livret épargne
 {
 
 //declaration
 double montant;//represente le montant que le client souhaite ajouter au livret epargne
 double montanttotal=0;//si le client ajoute plusieurs fois de l'argent d'affilé
-int rep;//savoir si le client souhaite continuer de rajouter de l'argent dans le livret
+int rep;
 
 //premiere partie, on demande au client combien il veut ajouter dans son livret
 cout << "BIENVENUE DANS LA FONCTION AJOUTER DE L'ARGENT DANS LE LIVRET EPARGNE"<<endl;
@@ -78,6 +119,8 @@ do
 {
     do
     {
+        date::Afficher();
+
         cout << "Votre solde actuel est de "<< solde<<"euros"<<endl;
         cout<<endl;
         cout << "Combien voulez-vous rajouter d'argent dans le livret sachant que le plafond est fixé à:  "<< plafondDepot<< "euros"<<endl;
@@ -97,19 +140,29 @@ do
     cout<<"........................."<<endl;
     cout<<endl;
     cout << "OPERATION EFFECTUEE AVEC SUCCES!!"<<endl;
-    cout<< "Voulez-vous ajouter de l'argent de nouveau dans votre livret?? 1-oui   0-non"<<endl;
+    cout<< "Voulez-vous encore ajouter de l'argent dans votre livret?? 1-oui   0-non"<<endl;
     cin>>rep;
 
 }
 while(rep==1);
-cout << "le montant total du virement s'élève à "<< montanttotal<<"euros"<<endl;//recapitulatif du montant total ajouté dans le livret
+cout << "le montant total du virement s'élève à "<< montanttotal<<"euros"<<endl;
 
 //deuxieme parties, on modifie le solde du compte courant puisque le montant vient de celui-ci
-//on va donc deduire le montanttotal de cette opreation du compte courant
 
+//troisieme ârties :calcul des interets perçus avec le rajout des cette somme
+
+CalculInterets(montanttotal);
 
 }
 
+
+void LivretEpargne::EcritureFichier()const
+{
+ofstream monFichier;
+monFichier.open("EL.txt",ofstream::app);
+monFichier<<this->solde<<";"<<this->taux<<";"<<this->plafondDepot<<";"<<endl;
+monFichier.close();
+}
 
 
 /*
