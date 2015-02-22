@@ -7,6 +7,11 @@
 #include <cstdlib>
 #include "date.h"
 
+/***************************************************/
+/****          Plan Epargne Logement            ****/
+/****              Marc Abeille                 ****/
+/***************************************************/
+
 using namespace std;
 
 #ifndef PEL_H
@@ -25,7 +30,7 @@ public:
 
     ~Pel(){};
 
-    void AfficherPEL(ostream & out)const;
+    void AfficherPEL(ostream & out);
 
     void CreerPel();
 
@@ -37,13 +42,13 @@ public:
     void AfficherIndice()const;
     void RechercheParIndice(vector<Pel>&mesPel,int indice);
 
-    friend ostream &operator<<(ostream &out, const Pel &P);
+    friend ostream &operator<<(ostream &out, Pel &P);
 
 };
 
 void ExtractionFichier(vector<Pel>&mesPel);
 void ReecritureFichier(const vector<Pel>&mesPel);
-
+void ConversionStoAJ(int nbSecondes,int &years,int &days);
 
 #endif
 
