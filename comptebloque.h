@@ -10,6 +10,10 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
+#include <sstream>
+#include <cstddef>
+#include <cstdlib>
 #include "date.h"
 
 #ifndef COMPTEBLOQUE_H
@@ -19,7 +23,7 @@ using namespace std;
 
 class CompteBloque: public date
 {
-private:
+public:
 	double taux;
 	double solde;
 
@@ -36,13 +40,29 @@ public:
 
 	double CalculInterets();
 
-	void Afficher();
-
-	void AfficherIndice();
+	void Afficher(ostream & out);
 
 	void Ajouter(double n);
 
+	void Retirer(double n);
+
 	void EcritureFichier();
+
+    void AfficherIndice()const;
+
+    void RechercheParIndice(vector<CompteBloque>&mesCB, int indice);
+
+    friend ostream &operator<<(ostream &out, CompteBloque &CB);
+
+    bool RetraitPossible();
+
+    void AffichageTempsRestant();
+
+    void ConversionStoAJ(int nbSecondes,int &years,int &days);
 };
+
+void ExtractionFichier(vector<CompteBloque>&mesCB);
+
+void ReecritureFichier(const vector<CompteBloque>&mesCB);
 
 #endif
