@@ -11,13 +11,10 @@ using namespace std;
 
 class date
 {
-private:
-	/*struct tm t;
+public:
     int jour;
     int mois;
-    int an;*/
-
-public:
+    int an;
     time_t dateJ;
 
 
@@ -36,6 +33,8 @@ public:
     void MiseAJour();
 
     void AfficherDate(const time_t &dateJ);
+
+    void Conversion(int &jour, int &mois, int &an);
 
     /*date &operator=(const date &D);
 

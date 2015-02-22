@@ -5,7 +5,8 @@
 
 date::date()// constructeur par defaut
 {
-    /*memset(&t, 0, sizeof(t));
+    /*struct tm t;
+    memset(&t, 0, sizeof(t));
     cout<<"+++++++++++++Voici le constructeur par defaut de la date\n";
     time_t now = time(NULL);
     t=*localtime(&now);
@@ -13,9 +14,6 @@ date::date()// constructeur par defaut
     mois = t.tm_mon+1;
     an = t.tm_year+1900;
     cout<<endl;*/
-    cout << "----------------------------------" << endl;
-    cout << "    constructeur defaut date" << endl;
-    cout << "----------------------------------" << endl;
     this->dateJ = time(NULL);
 }
 
@@ -50,6 +48,17 @@ void date::AfficherDate(const time_t &dateJ)
     memset(&t, 0, sizeof(&t));
     t = localtime(&dateJ);
     cout << t->tm_mday << "/" << (t->tm_mon)+1 << "/" << (t->tm_year)+1900 << endl;
+}
+
+void date::Conversion(int &jour, int &mois, int &an)
+{
+    struct tm t;
+    memset(&t, 0, sizeof(t));
+    MiseAJour();
+    t=*localtime(&dateJ);
+    jour = t.tm_mday;
+    mois = t.tm_mon+1;
+    an = t.tm_year+1900;
 }
 
 /*void date::Saisir(istream &in)
