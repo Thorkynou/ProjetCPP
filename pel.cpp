@@ -19,6 +19,8 @@ Pel::Pel(const Pel & monPel)
 versementMensuel=monPel.versementMensuel;
 tauxEmprunt=monPel.tauxEmprunt;
 indice=monPel.indice;
+soldePel=monPel.soldePel;
+dateJ=monPel.dateJ;
 }
 
 /*Création Saisie du PEL*/
@@ -39,7 +41,20 @@ this->EcritureFichier();
 /*Versement Exceptionnel*/
 void Pel::Ajouter(double mtt)
 {
-this->soldePel=this->soldePel+mtt;
+time_t nbAnneesMax=126227704;
+time_t dateDuJour=time(NULL);
+time_t dateVersementMax;
+
+dateVersementMax=this->dateJ+nbAnneesMax;
+
+if (dateDuJour>dateVersementMax)
+    {
+    cout<<"Vous ne pouvez plus effectuer de versement Exceptionnel"<<endl;
+    }
+else
+    {
+    this->soldePel=this->soldePel+mtt;
+    }
 }
 
 /*Ecriture des données dans le fichier*/
@@ -52,13 +67,21 @@ monFichier.close();
 }
 
 /*Surcharge d'operateur Afficher*/
-void Pel::AfficherPEL(ostream & out)const
+void Pel::AfficherPEL(ostream & out)
 {
-out<<"Indice: "<<this->indice<<" Solde du  PEL: "<<this->soldePel<<" Versement mensuel: "<<this->versementMensuel<<" Taux d'emprunt: "<<this->tauxEmprunt<<" Date: "<<this->dateJ<<endl;
+cout<<"___________________________________________________"<<endl;
+out<<"Client n°: "<<this->indice<<endl;
+out<<"Solde du  PEL: "<<this->soldePel<<endl;
+out<<"Versement mensuel: "<<this->versementMensuel<<endl;
+out<<"Taux d'emprunt: "<<this->tauxEmprunt<<endl;
+out<<"Date de Creation: ";
+date::AfficherDate(this->dateJ);
+this->TempsRestantEmprunt();
+cout<<"___________________________________________________"<<endl;
 }
 
 /*Operateur d'affichage << */
-ostream & operator<<(ostream &out, const Pel &P)
+ostream & operator<<(ostream &out, Pel &P)
 {
 P.AfficherPEL(out);
 return out;
@@ -79,10 +102,42 @@ cin >>this->versementMensuel;
 
 void Pel::TempsRestantEmprunt()
 {
+time_t dateDuJour=time(NULL);
 time_t tempsRestant;
+time_t dateDeblocageMin;
+time_t nbAnneesMin=126227704;
+int days;
+int years;
 
+dateDeblocageMin=this->dateJ+nbAnneesMin;
+tempsRestant=dateDeblocageMin-dateDuJour;
 
+ConversionStoAJ(tempsRestant,years,days);
 
+cout<<"Vous pourrez emprunter dans "<<years<<" annee(s) "<<days<<" jour(s)"<<endl<<"Date de deblocage ";
+date::AfficherDate(dateDeblocageMin);
+}
+
+/*Fonction de conversion des secondes en Jours/Annees*/
+void ConversionStoAJ(int nbSecondes,int &years,int &days)
+{
+int seconds;
+int total_minutes;
+int minutes;
+int total_hours;
+int hours;
+int total_days;
+int months;
+int total_months;
+
+seconds = nbSecondes % 60;
+total_minutes = nbSecondes / 60;
+minutes = total_minutes % 60;
+total_hours = total_minutes / 60;
+hours = total_hours % 24;
+total_days = total_hours / 24;
+days = total_days % 365;
+years = total_days / 365;
 }
 
 /***************************************************/
