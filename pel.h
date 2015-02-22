@@ -1,6 +1,10 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
+#include <sstream>
+#include <cstddef>
+#include <cstdlib>
 
 using namespace std;
 
@@ -9,16 +13,13 @@ using namespace std;
 
 class Pel
 {
-private:
+public:
     double versementMensuel;
     int tauxEmprunt;
     double soldePel;
-
-public:
-
     int indice;
 
-    Pel(double vm=0,int te=0, int indice=0);
+    Pel(double vm=0,int te=0, int i=0, double sp=0);
     Pel(const Pel & monPel);
 
     ~Pel(){};
@@ -33,10 +34,14 @@ public:
     void MontantEmpruntable();
     void EcritureFichier()const;
     void AfficherIndice()const;
+    void RechercheParIndice(vector<Pel>&mesPel);
 
     friend ostream &operator<<(ostream &out, const Pel &P);
+
 };
 
+void ExtractionFichier(vector<Pel>&mesPel);
+void ReecritureFichier(const vector<Pel>&mesPel);
 
 
 #endif
