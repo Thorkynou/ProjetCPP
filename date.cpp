@@ -44,6 +44,14 @@ void date::MiseAJour()
     dateJ = time(NULL);
 }
 
+void date::AfficherDate(const time_t &dateJ)
+{
+    struct tm *t;
+    memset(&t, 0, sizeof(&t));
+    t = localtime(&dateJ);
+    cout << t->tm_mday << "/" << (t->tm_mon)+1 << "/" << (t->tm_year)+1900 << endl;
+}
+
 /*void date::Saisir(istream &in)
 {
     cout << "Entrez la date de création sous la forme: jj mm aaaa" << endl;

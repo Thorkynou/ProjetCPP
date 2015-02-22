@@ -17,7 +17,7 @@ private:
     int mois;
     int an;*/
 
-protected:
+public:
     time_t dateJ;
 
 
@@ -34,6 +34,8 @@ public:
     virtual ~date(){};//detsructeur par defaut
 
     void MiseAJour();
+
+    void AfficherDate(const time_t &dateJ);
 
     /*date &operator=(const date &D);
 
