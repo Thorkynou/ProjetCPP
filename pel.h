@@ -5,13 +5,14 @@
 #include <sstream>
 #include <cstddef>
 #include <cstdlib>
+#include "date.h"
 
 using namespace std;
 
 #ifndef PEL_H
 #define PEL_H
 
-class Pel
+class Pel: public date
 {
 public:
     double versementMensuel;
@@ -19,7 +20,7 @@ public:
     double soldePel;
     int indice;
 
-    Pel(double vm=0,int te=0, int i=0, double sp=0);
+    Pel(double vm=0,int te=0, int i=0, double sp=0,time_t datePel=time(NULL));
     Pel(const Pel & monPel);
 
     ~Pel(){};
@@ -34,7 +35,7 @@ public:
     void MontantEmpruntable();
     void EcritureFichier()const;
     void AfficherIndice()const;
-    void RechercheParIndice(vector<Pel>&mesPel);
+    void RechercheParIndice(vector<Pel>&mesPel,int indice);
 
     friend ostream &operator<<(ostream &out, const Pel &P);
 

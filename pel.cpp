@@ -1,9 +1,7 @@
 #include "pel.h"
 
-
-
 /*Constructeur par paramètre*/
-Pel::Pel(double vm,int te, int i, double sp)
+Pel::Pel(double vm,int te, int i, double sp, time_t datePel): date(datePel)
 {
 versementMensuel=vm;
 tauxEmprunt=te;
@@ -45,14 +43,14 @@ void Pel::EcritureFichier()const
 {
 ofstream monFichier;
 monFichier.open("Pel.txt",ofstream::app);
-monFichier<<this->indice<<";"<<this->versementMensuel<<";"<<this->tauxEmprunt<<";"<<this->soldePel<<";"<<endl;
+monFichier<<this->indice<<";"<<this->versementMensuel<<";"<<this->tauxEmprunt<<";"<<this->soldePel<<";"<<dateJ<<";"<<endl;
 monFichier.close();
 }
 
 /*Surcharge d'operateur Afficher*/
 void Pel::AfficherPEL(ostream & out)const
 {
-out<<"Indice: "<<this->indice<<" Solde du  PEL: "<<this->soldePel<<" Versement mensuel: "<<this->versementMensuel<<" Taux d'emprunt: "<<this->tauxEmprunt<<endl;
+out<<"Indice: "<<this->indice<<" Solde du  PEL: "<<this->soldePel<<" Versement mensuel: "<<this->versementMensuel<<" Taux d'emprunt: "<<this->tauxEmprunt<<" Date: "<<this->dateJ<<endl;
 }
 
 ostream & operator<<(ostream &out, const Pel &P)
@@ -74,10 +72,7 @@ Pel monPel(0);
 int k=0;
 int j=0;
 int taille=0;
-int solde=0;
-int indice=0;
-int vers=0;
-int taux=0;
+
 vector <string> ligneFichier;
 string maLigne;
 string mot;
@@ -121,6 +116,8 @@ for (k=0;k<taille;k++)
                 break;
             case 3:mesPel[k].soldePel=atof(mot.c_str());
                 break;
+            case 4:mesPel[k].dateJ=atoi(mot.c_str());
+                break;
             }
         j++;
         }
@@ -148,13 +145,9 @@ rename("tempPel.txt","Pel.txt");
 }
 
 /*Fonction de recherche par indice dans un vector*/
-void Pel::RechercheParIndice(vector<Pel>&mesPel)
+void Pel::RechercheParIndice(vector<Pel>&mesPel,int indice)
 {
 int taille=0;
-int indice=0;
-
-cout<<"Quel indice rechercher?";
-cin >>indice;
 
 taille=mesPel.size();
 
