@@ -13,7 +13,7 @@ using namespace std;
 #ifndef COMPTECOURANT_H
 #define COMPTECOURANT_H
 
-class comptecourant
+class comptecourant:public date
     {
     private:
 
@@ -66,7 +66,7 @@ class comptecourant
 
         void LectureFichier();// lecture d'un fichier
         //comptecourant& operator!=(const comptecourant & CC);
-
+        void RechercheParIndice(vector<comptecourant>&moncomptecourant,int indice);
         virtual ~comptecourant();// destructeur du compte courant
 
     };
@@ -75,6 +75,8 @@ istream &operator>>(istream &in,const comptecourant & CC);
 
 ostream &operator<<(ostream &out,comptecourant & CC);
 
+void ExtractionFichier(vector<comptecourant>&moncomptecourant);
+void ReecritureFichier(const vector<comptecourant>&moncomptecourant);
 
 
 #endif //COMPTECOURANT

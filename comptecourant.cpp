@@ -258,7 +258,7 @@ void comptecourant::Afficher10Actions()//affichage des 10 dernieres actions fait
             }
     }
 
-void comptecourant::LectureFichier()//ne sert a rien
+void comptecourant::LectureFichier()
     {
         fstream fichier_compte_courant;
         fichier_compte_courant.open("comptecourant.txt",fstream::in);//ouverture du fichier en mode lecture avec in
@@ -278,4 +278,106 @@ void comptecourant::LectureFichier()//ne sert a rien
 }
 
 
+/***************************************************/
+/****      Gestion des fichiers / Vectors       ****/
+/****          Classe Comptecourant             ****/
+/***************************************************/
+
+/*Conversion CSV en vector de class*/
+void ExtractionFichier(vector<comptecourant>&moncomptecourant)
+{
+comptecourant monComptecourant(0);
+int k=0;
+int j=0;
+int taille=0;
+
+vector <string> ligneFichier;
+string maLigne;
+string mot;
+string maLigneCSV;
+
+fstream monFichier;
+
+monFichier.open("moncomptecourant.txt",ofstream::in);
+if (monFichier.fail())
+    cerr<<"Le fichier n'existe pas"<<endl;
+else
+    {
+    while (monFichier.eof()!=true)
+        {
+        monFichier>>maLigneCSV;
+        ligneFichier.push_back(maLigneCSV);
+        maLigneCSV.clear();
+        }
+    ligneFichier.pop_back();
+    taille=ligneFichier.size();
+    }
+monFichier.close();
+
+moncomptecourant.resize(taille);
+
+for (k=0;k<taille;k++)
+    {
+    maLigne=ligneFichier[k];
+    istringstream iss(maLigne);
+
+    j=0;
+    while (getline(iss,mot,';'))
+        {
+        switch(j)
+            {
+            case 0:moncomptecourant[k].indice=atoi(mot.c_str());
+                break;
+            case 1:moncomptecourant[k].numerodecompte=atof(mot.c_str());
+                break;
+            case 2:moncomptecourant[k].solde=atoi(mot.c_str());
+                break;
+            case 3:moncomptecourant[k].decouvert=atof(mot.c_str());
+                break;
+            case 4:moncomptecourant[k].taux=atof(mot.c_str());
+                break;
+            case 5:moncomptecourant[k].nbagios=atof(mot.c_str());
+                break;
+            case 6:moncomptecourant[k].dateJ=atoi(mot.c_str());
+                break;
+            }
+        j++;
+        }
+    }
+}
+
+/*Fonction de suppression et écriture d'un nouveau fichier apres modif de vector*/
+void ReecritureFichier(const vector<comptecourant>&moncomptecourant)
+{
+ofstream monFichier;
+ofstream tempFichier;
+int taille=0;
+
+tempFichier.open("tempmoncomptecourant.txt",ofstream::app);
+taille=moncomptecourant.size();
+
+for(int i=0;i<taille;i++)
+    {
+    tempFichier<<moncomptecourant[i].indice<<";"<<moncomptecourant[i].numerodecompte<<";"<<moncomptecourant[i].solde<<";"<<moncomptecourant[i].decouvert<<";"<<moncomptecourant[i].taux<<";"<<moncomptecourant[i].nbagios<<";"<<moncomptecourant[i].dateJ<<";"<<endl;
+    }
+tempFichier.close();
+
+remove("moncomptecourant.txt");
+rename("tempmoncomptecourant.txt","moncomptecourant.txt");
+}
+
+/*Fonction de recherche par indice dans un vector*/
+ //(fait par marc et modifie pour la classe compte courant par benedicte)
+void Pel::RechercheParIndice(vector<comptecourant>&moncomptecourant,int indice)
+{
+int taille=0;
+
+taille=moncomptecourant.size();
+
+for (int i=0;i<taille;i++)
+    {
+    if (moncomptecourant[i].indice==indice)
+        *this=moncomptecourant[i];
+    }
+}
 
