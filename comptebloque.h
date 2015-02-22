@@ -57,6 +57,8 @@ public:
     bool RetraitPossible();
 
     void AffichageTempsRestant();
+
+    void ConversionStoAJ(int nbSecondes,int &years,int &days);
 };
 
 void ExtractionFichier(vector<CompteBloque>&mesCB);

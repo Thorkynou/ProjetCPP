@@ -158,7 +158,7 @@ void CompteBloque::AffichageTempsRestant()
 	date::AfficherDate(dateDeblocageMin);
 }
 
-void ConversionStoAJ(int nbSecondes,int &years,int &days)
+void CompteBloque::ConversionStoAJ(int nbSecondes,int &years,int &days)
 {
 	int seconds;
 	int total_minutes;
