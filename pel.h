@@ -34,13 +34,14 @@ public:
 
     void CreerPel();
 
-    void Ajouter(double mtt);
+    bool Ajouter(double mtt);
     void ModifMontantMensuel();
     void TempsRestantEmprunt();
     void MontantEmpruntable();
     void EcritureFichier()const;
     void AfficherIndice()const;
     void RechercheParIndice(vector<Pel>&mesPel,int indice);
+    void CalculInteret();
 
     friend ostream &operator<<(ostream &out, Pel &P);
 

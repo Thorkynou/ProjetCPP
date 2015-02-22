@@ -2,6 +2,7 @@
 
 /***************************************************/
 /****          Plan Epargne Logement            ****/
+/****              Marc Abeille                 ****/
 /***************************************************/
 
 /*Constructeur par paramètre*/
@@ -39,7 +40,7 @@ this->EcritureFichier();
 }
 
 /*Versement Exceptionnel*/
-void Pel::Ajouter(double mtt)
+bool Pel::Ajouter(double mtt)
 {
 time_t nbAnneesMax=126227704;
 time_t dateDuJour=time(NULL);
@@ -50,10 +51,12 @@ dateVersementMax=this->dateJ+nbAnneesMax;
 if (dateDuJour>dateVersementMax)
     {
     cout<<"Vous ne pouvez plus effectuer de versement Exceptionnel"<<endl;
+    return false;
     }
 else
     {
     this->soldePel=this->soldePel+mtt;
+    return true;
     }
 }
 
