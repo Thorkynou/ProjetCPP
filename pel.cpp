@@ -1,5 +1,9 @@
 #include "pel.h"
 
+/***************************************************/
+/****          Plan Epargne Logement            ****/
+/***************************************************/
+
 /*Constructeur par paramètre*/
 Pel::Pel(double vm,int te, int i, double sp, time_t datePel): date(datePel)
 {
@@ -53,10 +57,11 @@ void Pel::AfficherPEL(ostream & out)const
 out<<"Indice: "<<this->indice<<" Solde du  PEL: "<<this->soldePel<<" Versement mensuel: "<<this->versementMensuel<<" Taux d'emprunt: "<<this->tauxEmprunt<<" Date: "<<this->dateJ<<endl;
 }
 
+/*Operateur d'affichage << */
 ostream & operator<<(ostream &out, const Pel &P)
 {
-	P.AfficherPEL(out);
-	return out;
+P.AfficherPEL(out);
+return out;
 }
 
 /*Affichage de l'indice*/
@@ -64,6 +69,26 @@ void Pel::AfficherIndice()const
 {
 cout<<"L'indice PEL est: "<<this->indice<<endl;
 }
+
+/*Modification du montant des versements*/
+void Pel::ModifMontantMensuel()
+{
+cout<<"Saisissez le nouveau montant de vos versements mensuels: ";
+cin >>this->versementMensuel;
+}
+
+void Pel::TempsRestantEmprunt()
+{
+time_t tempsRestant;
+
+
+
+}
+
+/***************************************************/
+/****      Gestion des fichiers / Vectors       ****/
+/****               Classe PEL                  ****/
+/***************************************************/
 
 /*Conversion CSV en vector de class*/
 void ExtractionFichier(vector<Pel>&mesPel)
@@ -136,7 +161,7 @@ taille=mesPel.size();
 
 for(int i=0;i<taille;i++)
     {
-    tempFichier<<mesPel[i].indice<<";"<<mesPel[i].versementMensuel<<";"<<mesPel[i].tauxEmprunt<<";"<<mesPel[i].soldePel<<";"<<endl;
+    tempFichier<<mesPel[i].indice<<";"<<mesPel[i].versementMensuel<<";"<<mesPel[i].tauxEmprunt<<";"<<mesPel[i].soldePel<<";"<<mesPel[i].dateJ<<";"<<endl;
     }
 tempFichier.close();
 

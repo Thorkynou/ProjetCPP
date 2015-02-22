@@ -31,7 +31,7 @@ public:
 
     void Ajouter(double mtt);
     void ModifMontantMensuel();
-    void TempsRestant();
+    void TempsRestantEmprunt();
     void MontantEmpruntable();
     void EcritureFichier()const;
     void AfficherIndice()const;
