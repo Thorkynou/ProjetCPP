@@ -22,13 +22,27 @@ int choix=0;
 int i=0;
 int sous_menu=0;
 double N;//montant a ajouter sur les comptes
-//affichage de la date du jour
-//cout<"Nous sommes aujourd'hui le"<<endl;
+
+
+time_t dateJour=time(NULL);
 date D;//date du jour
 Client C;//client lamba
 //comptecourant CC;
-//vector <Client> Banque(5);//vector de banque avec 5 comptes
+vector <Client> Banque(5);//vector de banque avec 5 comptes
 //vector <Client>::iterator it;
+
+cout<<"*****************************************************\n";
+cout<<"*                                                   *\n";
+cout<<"*                                                   *\n";
+cout<<"*     Bienvenue a la banque des petits heros        *\n";
+cout<<"*                                                   *\n";
+cout<<"*                                                   *\n";
+cout<<"*****************************************************\n";
+
+//affichage de la date du jour
+cout<<"Nous sommes aujourd'hui le\t";
+D.AfficherDate(dateJour);
+cout<<endl;
 
 cout<<"Bonjour , etes vous client dans notre banque?\n";
         cout<<"1- pour oui et 2 pour non\n";
@@ -38,10 +52,7 @@ cout<<"Bonjour , etes vous client dans notre banque?\n";
         {
             cout<<"quel est votre nom?\n";
             cin >> C;
-            //cout << C;
-            //recherche d'un nom --->C.RechercherNom;
-            //if(rechercheclient)
-            //si il existe afficher les informations du compte
+
             cout<<"Vous etes le client"<<C<<endl;
             C.Afficher(cout);//affichage des informations generales du client
             do
@@ -59,23 +70,30 @@ cout<<"Bonjour , etes vous client dans notre banque?\n";
             cout<<"0-\tQuitter"<<endl;
             cout<<"Saisissez le numero de l'operation que vous souhaitez faire"<<endl;
             cin>>sous_menu;
-            }while(i<0 && i>7);
 
                 switch(sous_menu)
                     {
                             case 0:
-                            { cout<<"Au revoir et au plaisir de vous revoir tres prochainement dans notre banque !!!!!"<<endl;
+                            {       cout<<"***********************************************"<<endl;
+                                    cout<<"Au revoir et au plaisir de vous revoir tres prochainement dans notre banque !!!!!"<<endl;
+                                    cout<<"***********************************************"<<endl;
                                     return 0;
                                     break;}
 
-                            case 1: {cout<<"voici la liste de vos donnees personnelles"<<endl;
+                            case 1: {cout<<"***********************************************"<<endl;
+                                    cout<<"voici la liste de vos donnees personnelles"<<endl;
+                                    cout<<"***********************************************"<<endl;
                                     cout<<endl;
                                     C.Afficher(cout);
                                     //C.compteC.AfficherSolde(cout);//afficher les donnees
-                                    break;}
+                                    return 0;}
+                                    break;
 
                             case 2: //compte courant
-                                      { cout<<"voici votre compte courant"<<endl;
+                                      {
+                                      cout<<"***********************************************"<<endl;
+                                      cout<<"voici votre compte courant"<<endl;
+                                      cout<<"***********************************************"<<endl;
                                         cout<<endl;
                                         comptecourant CC;
                                         cout<<endl;
@@ -85,87 +103,86 @@ cout<<"Bonjour , etes vous client dans notre banque?\n";
                                     break;}
 
                             case 3: //afficher les differents compte et leur solde
-                                    {
+                                    {cout<<"***********************************************"<<endl;
                                     cout<<"voici les informations de vos differents comptes"<<endl;
+                                    cout<<"***********************************************"<<endl;
                                    // cout<<endl;
                                     //GestionMenu::AffichageComptes(C);
                                     cout<<endl;
                                     GestionMenu::RepetitionAffichageCompte(C);
-                                   /* {
                                         for(int i=0; i<2; i++)
                                             {
                                                 Banque[i].Saisir(cin);
-                                                AjoutCompte(Banque[i]);
+                                                GestionMenu::AjoutCompte(Banque[i]);
                                             }
                                         for(int i=0; i<2; i++)
                                             {
                                                 cout << "Affichage des comptes du client " << Banque[i].nom << endl;
-                                                RepetitionAffichageCompte(Banque[i]);
+                                                GestionMenu::RepetitionAffichageCompte(Banque[i]);
                                                 }
-                                    }*/
+
                                     break;}
-                             case 4:{cout<<"vous pouvez modifier votre adresse"<<endl;
+                             case 4:{cout<<"***********************************************"<<endl;
+                                    cout<<"vous pouvez modifier votre adresse"<<endl;
+                                    cout<<"***********************************************"<<endl;
                                     C.ModifierAdresse("blabla");
                                     break; }
 
-                            case 5: {cout<<"consultation de vos comptes et des operations diverses"<<endl;
+                            case 5: {cout<<"***********************************************"<<endl;
+                                    cout<<"consultation de vos comptes et des operations diverses"<<endl;
+                                    cout<<"***********************************************"<<endl;
                                     //
                                     int i=0;
                                     cout << "Souhaitez vous consulter un compte et ses operations associees?"<<endl;
                                     cout<<"Quel compte voulez-vous consulter ?" << endl;
                                     i = GestionMenu::MenuChoixCompte();
-                                  /* switch(i)
-                                        {
-                                            case 0: return;
-                                            case 1: GestionMenu::OperationPEL();
-                                                    break;
-                                            case 2: GestionMenu::OperationEcompte(EC);
-                                                    break;
-                                            case 3: GestionMenu::OperationLivretEpargne(LE);
-                                                    break;
-                                            case 4: GestionMenu::OperationCompteBloque(CB);
-                                                    break;
-                                            default:
-                                                    break;
-                                        }*/
-                                            //GestionMenu::ConsulterComptes(C);
+                                        GestionMenu::ConsulterComptes(C);
                                     break; }
 
                             case 6: //ajouter un compter
-                                    {cout<<"vous pouvez ajouter un compte"<<endl;
+                                    {cout<<"***********************************************"<<endl;
+                                    cout<<"vous pouvez ajouter un compte a ceux deja existants"<<endl;
+                                    cout<<"***********************************************"<<endl;
                                     GestionMenu::AjoutCompte(C);
                                     break;}
 
                             case 7: //ajouter de l'argent sur un des comptes
-                                    {cout<<"vous pouvez ajouter de l'argent"<<endl;
+                                    {cout<<"***********************************************"<<endl;
+                                    cout<<"vous pouvez ajouter de l'argent"<<endl;
+                                    cout<<"***********************************************"<<endl;
                                     cout<<"Saisir le montant à ajouter"<<endl;
                                     cin>>N;
                                     i = GestionMenu::MenuChoixCompte();
                                     switch(i)
-                                        {case 0: {return;
+                                        {case 0: {return 0;
                                                     break;
                                                    }
-                                        case 1: {C.AjoutPEL(double N);
+                                        case 1: {C.AjoutPEL(N);
                                                 break;}
-                                        case 2: {C.AjoutEC(double N);
+                                        case 2: {C.AjoutEC(N);
                                                 break;}
-                                        case 3: {C.AjoutLE(double N);
+                                        case 3: {C.AjoutLE(N);
                                                 break;}
-                                        case 4: {C.AjoutCB(double N);
+                                        case 4: {C.AjoutCB(N);
                                                 break;}
+                                        default:
+                                                break;
                                         }
                                     }
 
                             case 8: //cloturer le compte
-                                    {
+                                    {cout<<"***********************************************"<<endl;
                                     cout<<"vous pouvez cloturer un compte"<<endl;
+                                    cout<<"***********************************************"<<endl;
                                     GestionMenu::SupprimerCompte(C);
                                     break;}
 
-                            default:
+                            default:cout<<"Entrez un chiffre entre 0 et 8"<<endl;
                                     break;
                     }
-         }
+            }while(sous_menu!=0);
+        }
+
         else
         {
             //creer un nouveau client
