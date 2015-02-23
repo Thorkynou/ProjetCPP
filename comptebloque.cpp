@@ -56,11 +56,11 @@ void CompteBloque::Ajouter(double n)
 
 void CompteBloque::Retirer(double n)
 {
-	if(RetraitPossible())
+	if(RetraitPossible() && (solde-n)>0)
 		this->solde = this->solde-n;
 		cout << "Virement effectue" << endl;
 	else
-		cout << "Impossible, ça ne fait pas encore 4 ans" << endl;
+		cout << "Impossible de retirer" << endl;
 }
 
 void CompteBloque::EcritureFichier()

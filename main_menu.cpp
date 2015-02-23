@@ -19,7 +19,9 @@ cout<<"*                                                   *\n";
 cout<<"*****************************************************\n";
 
 int choix=0;
+int i=0;
 int sous_menu=0;
+double N;//montant a ajouter sur les comptes
 //affichage de la date du jour
 //cout<"Nous sommes aujourd'hui le"<<endl;
 date D;//date du jour
@@ -42,6 +44,8 @@ cout<<"Bonjour , etes vous client dans notre banque?\n";
             //si il existe afficher les informations du compte
             cout<<"Vous etes le client"<<C<<endl;
             C.Afficher(cout);//affichage des informations generales du client
+            do
+            {
             cout<<"quelle operation souhaitez vous faire aujourd'hui?"<<endl;
             cout<<"                    ********                      "<<endl;
             cout<<"1)\tAfficher les donnees du client"<<endl;
@@ -50,11 +54,12 @@ cout<<"Bonjour , etes vous client dans notre banque?\n";
             cout<<"4)\tModifier les coordonnees du titulaire"<<endl;
             cout<<"5)\tConsulter le compte et les diverses operations possible"<<endl;
             cout<<"6)\tAjouter un compte"<<endl;
-           // cout<<"7)\tAjouter de l'argent sur le compte"<<endl;?? C.AjoutPEL???
-            cout<<"7)\tCloturer le compte"<<endl;
+            cout<<"7)\tAjouter de l'argent sur le compte"<<endl;
+            cout<<"8)\tCloturer le compte"<<endl;
             cout<<"0-\tQuitter"<<endl;
             cout<<"Saisissez le numero de l'operation que vous souhaitez faire"<<endl;
             cin>>sous_menu;
+            }while(i<0 && i>7);
 
                 switch(sous_menu)
                     {
@@ -131,7 +136,27 @@ cout<<"Bonjour , etes vous client dans notre banque?\n";
                                     GestionMenu::AjoutCompte(C);
                                     break;}
 
-                            case 7: //cloturer le compte
+                            case 7: //ajouter de l'argent sur un des comptes
+                                    {cout<<"vous pouvez ajouter de l'argent"<<endl;
+                                    cout<<"Saisir le montant à ajouter"<<endl;
+                                    cin>>N;
+                                    i = GestionMenu::MenuChoixCompte();
+                                    switch(i)
+                                        {case 0: {return;
+                                                    break;
+                                                   }
+                                        case 1: {C.AjoutPEL(double N);
+                                                break;}
+                                        case 2: {C.AjoutEC(double N);
+                                                break;}
+                                        case 3: {C.AjoutLE(double N);
+                                                break;}
+                                        case 4: {C.AjoutCB(double N);
+                                                break;}
+                                        }
+                                    }
+
+                            case 8: //cloturer le compte
                                     {
                                     cout<<"vous pouvez cloturer un compte"<<endl;
                                     GestionMenu::SupprimerCompte(C);

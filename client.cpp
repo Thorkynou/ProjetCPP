@@ -146,8 +146,8 @@ void Client::DestructionEC()
 
 void Client::AjoutPEL(double N)
 {
-	this->compteC.Retirer(N);
-	this->comptePEL.Ajouter(N);
+	if(comptePEL.Ajouter(N))
+		this->compteC.Retirer(N);
 }
 
 void Client::AjoutLE(double N)
