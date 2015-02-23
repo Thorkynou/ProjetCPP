@@ -8,7 +8,7 @@
 
 #include "comptebloque.h"
 
-CompteBloque::CompteBloque(time_t dateCB, int indice, double taux, double solde, int annees): date(dateCB)
+CompteBloque::CompteBloque(time_t dateCB, int indice, double taux, double solde, double annees): date(dateCB)
 {
 	this->indice = indice;
 	this->taux = taux;
