@@ -18,13 +18,14 @@ taux =1.5;
 plafondDepot = 7700;
 }*/
 
-LivretEpargne::LivretEpargne(time_t dateLE,int indice,double solde ,double taux , double plafond ):date(dateLE)//constructeur par parametre
+LivretEpargne::LivretEpargne(time_t dateLE,int indice,double solde ,double taux , double plafond, double interets):date(dateLE)//constructeur par parametre
 {
 cout<< "je suis dans le constructeur par parametres de livret epargne"<<endl;
 this -> indice=indice;
 this -> solde = solde;
 this -> taux =taux;
 plafondDepot=plafond;
+this ->interets=interets;
 }
 
 LivretEpargne::LivretEpargne(const LivretEpargne & LE)//constructeur par copie
@@ -34,6 +35,7 @@ indice = LE.indice;
 solde = LE.solde;
 taux = LE.taux;
 plafondDepot= LE.plafondDepot;
+interets=LE.interets;
 }
 
 
@@ -44,9 +46,11 @@ cout << "je suis dans le destructeur de livret epargne"<< endl;
 
 LivretEpargne &  LivretEpargne::operator=(const LivretEpargne & LE)//opérateur d'affectation
 {
+indice=LE.indice;
 solde=LE.solde;
 taux=LE.taux;
 plafondDepot=LE.plafondDepot;
+interets=LE.interets;
 return *this;
 
 
@@ -69,6 +73,7 @@ cout<<"---------AFFICHAGE DU LIVRET EPARGNE---------"<<endl;
 cout << "le sodle de ce livret epargne est de "<<solde<<"euros"<<endl;
 cout << "son taux d'interets est de "<< taux<<"%"<< endl;
 cout << "et son plafond de depot est de " << plafondDepot<< "euros"<<endl;
+cout << "ses interets actuels se levent a"<< interets << "euros"<<endl;
 cout<<"---------------------------------------------"<<endl;
 
 
@@ -81,14 +86,14 @@ this->solde=this->solde+N;
 return *this;
 }
 
-void LivretEpargne::CalculInterets(double N)//calcule le montant des interets de l'année d'une somme donnée
+double LivretEpargne::CalculInterets(double N)//calcule le montant des interets de l'année d'une somme donnée
 {
 //le calcule des interets d'un livret epargne se fait par rapport aux quinzaines
 //il y à donc 24 quinzaines dans un année
 
 int x;//va représenter le nombre de quinzaine pris en compte dans le mois en cours
 double y;//va representer le nombre de quinzaines dans l'année en cours
-double interets;//somme des interets
+double z;//somme des interets
 
 if(date::jour==1)
     x=2;//si un virement est effectué le 1er du mois, alors les 2 quinzaines de ce mois seront prises en compte
@@ -100,9 +105,10 @@ else
 
 y=(12-date::mois)*2+x;
 
-interets=N*taux/100*y/24;
+int=N*taux/100*y/24;
+return z;
 
-cout<< "le montant des interets de cette somme s'eleveront a "<<interets<<"euros"<<endl;
+//cout<< "le montant des interets de cette somme s'eleveront a "<<interets<<"euros"<<endl;
 
 
 
@@ -112,6 +118,7 @@ cout<< "le montant des interets de cette somme s'eleveront a "<<interets<<"euros
 bool LivretEpargne:: Ajouter(double montant)//ajouter de l'argent dans le livret épargne
 {
 
+double x;
 //declaration
         if(solde+montant>plafondDepot)
         {
@@ -122,6 +129,9 @@ bool LivretEpargne:: Ajouter(double montant)//ajouter de l'argent dans le livret
         else
         {
         this->solde=this->solde+montant;
+        x=CalculInterets(montant);
+        this -> interets=this -> interets + x;
+
 
             return true;
         }
@@ -133,7 +143,7 @@ void LivretEpargne::EcritureFichier()const
 {
 ofstream monFichier;
 monFichier.open("LE.txt",ofstream::app);
-monFichier<<this->solde<<";"<<this->taux<<";"<<this->plafondDepot<<";"<<this->indice<<";"<<dateJ<<";"<<endl;
+monFichier<<this->indice<<";"<<this->solde<<";"<<this->taux<<";"<<this->plafondDepot<<";"<<this->interets<<dateJ<<";"<<endl;
 monFichier.close();
 }
 
@@ -194,7 +204,9 @@ for (k=0;k<taille;k++)
                 break;
             case 3:mesLE[k].plafondDepot=atof(mot.c_str());
                 break;
-            case 4:mesLE[k].dateJ=atoi(mot.c_str());
+            case 4:mesLE[k].interets=atoi(mot.c_str());
+                break;
+            case 5:mesLE[k].dateJ=atoi(mot.c_str());
                 break;
             }
         j++;
@@ -214,7 +226,7 @@ taille=mesLE.size();
 
 for(int i=0;i<taille;i++)
     {
-    tempFichier<<mesLE[i].indice<<";"<<mesLE[i].solde<<";"<<mesLE[i].taux<<";"<<mesLE[i].plafondDepot<<";"<<endl;
+    tempFichier<<mesLE[i].indice<<";"<<mesLE[i].solde<<";"<<mesLE[i].taux<<";"<<mesLE[i].plafondDepot<<";"<<mesLE[i].interets<<";"<<endl;
     }
 tempFichier.close();
 
@@ -242,10 +254,15 @@ void MiseAJour();//cad nouveau solde avec les interets rajoutes
 
 void LivretEpargne::Retirer(double n)
 {
+double x;
+
     if((solde-n)>0)
     {
         this->solde = this->solde-n;
         cout << "Virement effectue" << endl;
+        x= CalculInterets(n);
+        this-> interets=this->interets-x;
+
     }
     else
         cout << "Impossible de retirer" << endl;
