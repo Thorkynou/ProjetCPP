@@ -1,7 +1,8 @@
 #include "ecompte.h"
 
-ecompte::ecompte(string eml ,string nt ,double s,double tm,double t)
+ecompte::ecompte(time_t dc=time(NULL),string eml ,string nt ,double s,double tm,double t):date (dc)
 {
+	dateCreation=dc;
 	email=eml;
 	numTel=nt;
 	solde=s;
@@ -11,6 +12,7 @@ ecompte::ecompte(string eml ,string nt ,double s,double tm,double t)
 }
 ecompte::ecompte(const ecompte & E)
 {
+	dateCreation=E.dateCreation;
 	email=E.email;
 	numTel=E.numTel;
 	solde=E.solde;
@@ -24,6 +26,8 @@ ecompte &ecompte::CreerCompte()
 	cin >>this->email;
 	cout<<endl<<"Saisir votre numero de telephone: ";
 	cin >>this->numTel;
+	dateCreation=time(NULL);
+	cout<<dateCreation;
 	return *this;
 }
 ecompte :: ~ecompte() {}
@@ -71,3 +75,27 @@ void ecompte::AfficherCompte()
 	AfficherSolde(cout);
 	cout<<"___________________________________________"<<endl;
 }
+/*
+void CalculInterets(double n)
+{
+	int x;//va représenter le nombre de quinzaine pris en compte dans le mois en cours
+	double y;//va representer le nombre de quinzaines dans l'année en cours
+	double interets;//somme des interets
+	if(date::jour==1)
+		x=2;
+	else if(date::jour>1 && date::jour<16)
+    		x=1;
+	else
+		x=0;
+	y=(12-date::mois)*2+x;
+	interets=n*taux/100*y/24;
+	cout<< "le montant des interets de cette somme s'eleveront à "<<interets<<"euros"<<endl;
+}
+
+*/
+
+
+
+
+
+

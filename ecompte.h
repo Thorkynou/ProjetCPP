@@ -5,16 +5,18 @@
 00800000080000008000000800080080000008000808000008000000000000800 
 00888880088888008888800800080088888008000088000008000008008888800 
 
-Ctrl+f , 8 , enter                 
+Ctrl+f , 8 , entree                 
 */
+
 #include <iostream>
 #include <string>
+#include "date.h"
 using namespace std;
 
 #ifndef ECOMPTE_H
 #define ECOMPTE_H
 
-class ecompte //, public GeneraliteCompte
+class ecompte: public date 
 {
 private:
 	string email; //si temps vérif @ présent et (dot) présent aussi
@@ -22,9 +24,11 @@ private:
 	double solde;
 	double taux3Mois;//taux pour les 3 premiers mois du compte
 	double taux;//taux pour les mois suivant les 3 premiers mois
+	time_t dateCreation;
 
 public :
-	ecompte(string eml = "vide" ,string nt = "vide" ,double s=50, double tm =4.5,double t =1.5);//constructeur par parametre par defaut
+	date d;
+	ecompte(time_t dc=(NULL),string eml = "vide" ,string nt = "vide" ,double s=50, double tm =4.5,double t =1.5);//constructeur par parametre par defaut
 	ecompte(const ecompte & E);//constructeur par copie
 
 
@@ -35,6 +39,8 @@ public :
 	void Ajouter(ecompte & E);
 	void AjouterSA(ecompte & E,double n);//Ajout d'argent sans affichages
 	ecompte &CreerCompte();
+	//void CalculInterets(double n);
+	//void CalculInteretsMois(double n);
 };
 
 #endif
