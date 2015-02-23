@@ -26,7 +26,7 @@ double plafondDepot;
 
 public:
 
-LivretEpargne(); //constructeur par defaut
+//LivretEpargne(); //constructeur par defaut
 LivretEpargne(time_t dateLE=time(NULL),int indice =0,double solde =0 ,double taux = 1.5, double plafond = 7700);//constructeur par parametre
 LivretEpargne(const LivretEpargne & LE);//constructeur par copie
 ~LivretEpargne();//destructeur
@@ -40,6 +40,7 @@ bool Ajouter(double montant);//ajouter de l'argent dans le livret épargne
 void CalculInterets(double N);
 void MiseAJour();//cad nouveau solde avec les interets rajoutes
 void Afficher();//affiche le livret epargne
+void Retirer(double n);
 
 };
 

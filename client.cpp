@@ -43,7 +43,7 @@ void Client::Saisir(istream &in)
     in >> nom;
     cout << "Son prenom" << endl;
     in >> prenom;
-    cout << "Son adresse" << endl;
+    cout << "Son adresse(pitie, sans espaces, underscore a la place)" << endl;
     in.ignore();
     getline(in, adresse); // Dans le cas d'une saisie avec espaces
     EcritureFichier();
@@ -162,18 +162,6 @@ void Client::AjoutCB(double N)
 	this->compteCB.Ajouter(N);
 }
 
-void Client::AjoutEC(double N)
-{
-	this->compteC.Retirer(N);
-//	this->compteEC.Ajout(N);
-}
-
-void Client::RetirerPEL(double N)
-{
-	this->comptePEL.Retirer(N);
-	this->compteC.Ajouter(N);
-}
-
 void Client::RetirerLE(double N)
 {
 	this->compteLE.Retirer(N);
@@ -184,12 +172,6 @@ void Client::RetirerCB(double N)
 {
 	this->compteCB.Retirer(N);
 	this->compteC.Ajouter(N);
-}
-
-void Client::RetirerEC(double N)
-{
-	this->compteEC.Retirer(N);
-	this->compteC.Ajout(N);
 }
 
 void Client::EcritureFichier()const

@@ -98,9 +98,8 @@ public:
 	// Fonction pour ajouter N au solde du CB
 	void AjoutCB(double N);
 
-	// Fonction pour ajouter N au solde du EC
-	void AjoutEC(double N);
-
+	void RetirerLE(double N);
+	void RetirerCB(double N);
 	// Fonction pour l'écriture dans un fichier
 	void EcritureFichier()const;
 
