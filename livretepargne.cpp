@@ -12,14 +12,16 @@ using namespace std;
 LivretEpargne::LivretEpargne() //constructeur par defaut
 {
 cout<<"je suis dans le constructeur par defaut de livret epargne"<<endl;
+indice =0;
 solde=0;
 taux =1.5;
 plafondDepot = 7700;
 }
 
-LivretEpargne::LivretEpargne(time_t dateLE=time(NULL),double solde ,double taux , double plafond ):date(dateLE)//constructeur par parametre
+LivretEpargne::LivretEpargne(time_t dateLE,int indice,double solde ,double taux , double plafond ):date(dateLE)//constructeur par parametre
 {
 cout<< "je suis dans le constructeur par parametres de livret epargne"<<endl;
+this -> indice=indice;
 this -> solde = solde;
 this -> taux =taux;
 plafondDepot=plafond;
@@ -28,6 +30,7 @@ plafondDepot=plafond;
 LivretEpargne::LivretEpargne(const LivretEpargne & LE)//constructeur par copie
 {
 cout<< "je suis dans le constructeur par copie de livret epargne"<< endl;
+indice = LE.indice;
 solde = LE.solde;
 taux = LE.taux;
 plafondDepot= LE.plafondDepot;
@@ -49,13 +52,14 @@ return *this;
 
 }
 
-LivretEpargne &LivretEpargne::CreerCompte()
+void LivretEpargne::CreerCompte()
 {
+    cout << "Creation d'un Livret Epargne" << endl;
     cout<<endl<<"Saisir un taux: ";
     cin >>this->taux;
     cout<<endl<<"Saisir un plafond de depot: ";
     cin >>this->plafondDepot;
-    return *this;
+    EcritureFichier();
 }
 
 void LivretEpargne::Afficher()
@@ -119,7 +123,7 @@ do
 {
     do
     {
-        date::Afficher();
+        //date::Afficher();
 
         cout << "Votre solde actuel est de "<< solde<<"euros"<<endl;
         cout<<endl;
@@ -159,7 +163,7 @@ CalculInterets(montanttotal);
 void LivretEpargne::EcritureFichier()const
 {
 ofstream monFichier;
-monFichier.open("EL.txt",ofstream::app);
+monFichier.open("LE.txt",ofstream::app);
 monFichier<<this->solde<<";"<<this->taux<<";"<<this->plafondDepot<<";"<<this->indice<<";"<<dateJ<<";"<<endl;
 monFichier.close();
 }
@@ -250,7 +254,7 @@ rename("tempLE.txt","LE.txt");
 }
 
 /*Fonction de recherche par indice dans un vector*/
-void Pel::RechercheParIndice(vector<LivretEpargne>&mesLE,int indice)
+void LivretEpargne::RechercheParIndice(vector<LivretEpargne>&mesLE,int indice)
 {
 int taille=0;
 
