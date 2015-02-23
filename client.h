@@ -45,7 +45,7 @@ public:
 	Client(const Client &C);
 
 	// Fonction de saisie
-	void Saisir(istream &in);
+	void Saisir(istream &in, int indice);
 
 	// Destructeur
 	~Client();

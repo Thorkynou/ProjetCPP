@@ -23,6 +23,7 @@ int indice;
 double solde;
 double taux;
 double plafondDepot;
+double interets;
 
 public:
 
@@ -34,14 +35,13 @@ LivretEpargne & operator=(const LivretEpargne & LE);
 LivretEpargne operator+(double N);
 void CreerCompte();
 void EcritureFichier()const;
-void AfficherIndice()const;
+void AfficherIndice();
 void RechercheParIndice(vector<LivretEpargne>&mesLE,int indice);
 bool Ajouter(double montant);//ajouter de l'argent dans le livret épargne
-void CalculInterets(double N);
+double CalculInterets(double N);
 void MiseAJour();//cad nouveau solde avec les interets rajoutes
 void Afficher();//affiche le livret epargne
 void Retirer(double n);
-
 };
 
 void ExtractionFichier(vector<LivretEpargne>&mesLE);

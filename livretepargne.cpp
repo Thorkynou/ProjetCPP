@@ -81,14 +81,14 @@ this->solde=this->solde+N;
 return *this;
 }
 
-void LivretEpargne::CalculInterets(double N)//calcule le montant des interets de l'année d'une somme donnée
+double LivretEpargne::CalculInterets(double N)//calcule le montant des interets de l'année d'une somme donnée
 {
 //le calcule des interets d'un livret epargne se fait par rapport aux quinzaines
 //il y à donc 24 quinzaines dans un année
 
 int x;//va représenter le nombre de quinzaine pris en compte dans le mois en cours
 double y;//va representer le nombre de quinzaines dans l'année en cours
-double interets;//somme des interets
+double z;//somme des interets
 
 if(date::jour==1)
     x=2;//si un virement est effectué le 1er du mois, alors les 2 quinzaines de ce mois seront prises en compte
@@ -100,18 +100,21 @@ else
 
 y=(12-date::mois)*2+x;
 
-interets=N*taux/100*y/24;
+z=N*taux/100*y/24;
+return z;
 
-cout<< "le montant des interets de cette somme s'eleveront a "<<interets<<"euros"<<endl;
+//cout<< "le montant des interets de cette somme s'eleveront a "<<interets<<"euros"<<endl;
 
 
 
 }
 
 
+
 bool LivretEpargne:: Ajouter(double montant)//ajouter de l'argent dans le livret épargne
 {
 
+double x;
 //declaration
         if(solde+montant>plafondDepot)
         {
@@ -122,11 +125,15 @@ bool LivretEpargne:: Ajouter(double montant)//ajouter de l'argent dans le livret
         else
         {
         this->solde=this->solde+montant;
+        x=CalculInterets(montant);
+        this -> interets=this -> interets + x;
+
 
             return true;
         }
 
 }
+
 
 
 void LivretEpargne::EcritureFichier()const
@@ -139,7 +146,7 @@ monFichier.close();
 
 
 /*Affichage de l'indice*/
-void LivretEpargne::AfficherIndice()const
+void LivretEpargne::AfficherIndice()
 {
 cout<<"L'indice LE est: "<<this->indice<<endl;
 }
@@ -242,12 +249,16 @@ void MiseAJour();//cad nouveau solde avec les interets rajoutes
 
 void LivretEpargne::Retirer(double n)
 {
+double x;
+
     if((solde-n)>0)
     {
         this->solde = this->solde-n;
         cout << "Virement effectue" << endl;
+        x= CalculInterets(n);
+        this-> interets=this->interets-x;
+
     }
     else
         cout << "Impossible de retirer" << endl;
 }
-

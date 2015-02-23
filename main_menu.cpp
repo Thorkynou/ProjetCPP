@@ -1,3 +1,4 @@
+/*creation du fichier main_menu.cpp fichier realise par benedicte le 21 fevrier 2015*/
 
 #include"gestion_menu.h"
 
@@ -8,7 +9,7 @@ using namespace std;
 
 int main()
 {
-
+int indice;
 
 cout<<"*****************************************************\n";
 cout<<"*                                                   *\n";
@@ -159,7 +160,7 @@ cout<<"Bonjour , etes vous client dans notre banque?\n";
                                                    }
                                         case 1: {C.AjoutPEL(N);
                                                 break;}
-                                        case 2: {C.AjoutEC(N);
+                                        case 2: {cout << "Impossible de transférer d'un compte courant a une autre forme de compte courant" << endl;
                                                 break;}
                                         case 3: {C.AjoutLE(N);
                                                 break;}

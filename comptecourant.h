@@ -16,7 +16,7 @@ using namespace std;
 #ifndef COMPTECOURANT_H
 #define COMPTECOURANT_H
 
-class comptecourant:public date
+class comptecourant
     {
     public:
         int numerodecompte;//numero du compte courant

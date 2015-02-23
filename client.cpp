@@ -37,8 +37,9 @@ Client::Client(const Client &C)
 	compteC = C.compteC;
 }
 
-void Client::Saisir(istream &in)
+void Client::Saisir(istream &in, int indice)
 {
+	this->indice = indice;
     cout << endl << "Entrez le nom du client" << endl;
     in >> nom;
     cout << "Son prenom" << endl;
