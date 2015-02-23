@@ -105,6 +105,7 @@ else
 
 y=(12-date::mois)*2+x;
 
+
 z=N*taux/100*y/24;
 return z;
 
