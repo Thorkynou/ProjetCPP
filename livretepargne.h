@@ -27,8 +27,8 @@ double interets;
 
 public:
 
-//LivretEpargne(); //constructeur par defaut
-LivretEpargne(time_t dateLE=time(NULL),int indice =0,double solde =0 ,double taux = 1.5, double plafond = 7700);//constructeur par parametre
+LivretEpargne(); //constructeur par defaut
+LivretEpargne(time_t dateLE=time(NULL),int indice =0,double solde =0 ,double taux = 1.5, double plafond = 7700,double interets=0);//constructeur par parametre
 LivretEpargne(const LivretEpargne & LE);//constructeur par copie
 ~LivretEpargne();//destructeur
 LivretEpargne & operator=(const LivretEpargne & LE);
@@ -41,7 +41,11 @@ bool Ajouter(double montant);//ajouter de l'argent dans le livret épargne
 double CalculInterets(double N);
 void MiseAJour();//cad nouveau solde avec les interets rajoutes
 void Afficher();//affiche le livret epargne
+<<<<<<< HEAD
 void Retirer(double n);
+=======
+
+>>>>>>> d450075b6b81c383b68c12fb37d8581638e34045
 };
 
 void ExtractionFichier(vector<LivretEpargne>&mesLE);

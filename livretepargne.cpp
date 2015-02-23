@@ -18,13 +18,14 @@ taux =1.5;
 plafondDepot = 7700;
 }*/
 
-LivretEpargne::LivretEpargne(time_t dateLE,int indice,double solde ,double taux , double plafond ):date(dateLE)//constructeur par parametre
+LivretEpargne::LivretEpargne(time_t dateLE,int indice,double solde ,double taux , double plafond, double interets):date(dateLE)//constructeur par parametre
 {
 cout<< "je suis dans le constructeur par parametres de livret epargne"<<endl;
 this -> indice=indice;
 this -> solde = solde;
 this -> taux =taux;
 plafondDepot=plafond;
+this ->interets=interets;
 }
 
 LivretEpargne::LivretEpargne(const LivretEpargne & LE)//constructeur par copie
@@ -34,6 +35,7 @@ indice = LE.indice;
 solde = LE.solde;
 taux = LE.taux;
 plafondDepot= LE.plafondDepot;
+interets=LE.interets;
 }
 
 
@@ -44,9 +46,11 @@ cout << "je suis dans le destructeur de livret epargne"<< endl;
 
 LivretEpargne &  LivretEpargne::operator=(const LivretEpargne & LE)//opérateur d'affectation
 {
+indice=LE.indice;
 solde=LE.solde;
 taux=LE.taux;
 plafondDepot=LE.plafondDepot;
+interets=LE.interets;
 return *this;
 
 
@@ -69,6 +73,7 @@ cout<<"---------AFFICHAGE DU LIVRET EPARGNE---------"<<endl;
 cout << "le sodle de ce livret epargne est de "<<solde<<"euros"<<endl;
 cout << "son taux d'interets est de "<< taux<<"%"<< endl;
 cout << "et son plafond de depot est de " << plafondDepot<< "euros"<<endl;
+cout << "ses interets actuels se levent a"<< interets << "euros"<<endl;
 cout<<"---------------------------------------------"<<endl;
 
 
@@ -100,7 +105,11 @@ else
 
 y=(12-date::mois)*2+x;
 
+<<<<<<< HEAD
 z=N*taux/100*y/24;
+=======
+int=N*taux/100*y/24;
+>>>>>>> d450075b6b81c383b68c12fb37d8581638e34045
 return z;
 
 //cout<< "le montant des interets de cette somme s'eleveront a "<<interets<<"euros"<<endl;
@@ -140,7 +149,7 @@ void LivretEpargne::EcritureFichier()const
 {
 ofstream monFichier;
 monFichier.open("LE.txt",ofstream::app);
-monFichier<<this->solde<<";"<<this->taux<<";"<<this->plafondDepot<<";"<<this->indice<<";"<<dateJ<<";"<<endl;
+monFichier<<this->indice<<";"<<this->solde<<";"<<this->taux<<";"<<this->plafondDepot<<";"<<this->interets<<dateJ<<";"<<endl;
 monFichier.close();
 }
 
@@ -201,7 +210,9 @@ for (k=0;k<taille;k++)
                 break;
             case 3:mesLE[k].plafondDepot=atof(mot.c_str());
                 break;
-            case 4:mesLE[k].dateJ=atoi(mot.c_str());
+            case 4:mesLE[k].interets=atoi(mot.c_str());
+                break;
+            case 5:mesLE[k].dateJ=atoi(mot.c_str());
                 break;
             }
         j++;
@@ -221,7 +232,7 @@ taille=mesLE.size();
 
 for(int i=0;i<taille;i++)
     {
-    tempFichier<<mesLE[i].indice<<";"<<mesLE[i].solde<<";"<<mesLE[i].taux<<";"<<mesLE[i].plafondDepot<<";"<<endl;
+    tempFichier<<mesLE[i].indice<<";"<<mesLE[i].solde<<";"<<mesLE[i].taux<<";"<<mesLE[i].plafondDepot<<";"<<mesLE[i].interets<<";"<<endl;
     }
 tempFichier.close();
 

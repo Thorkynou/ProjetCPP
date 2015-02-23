@@ -1,6 +1,6 @@
 #include "ecompte.h"
-
-ecompte::ecompte(time_t dc,string eml ,string nt ,double s,double tm,double t):date (dc)
+#include "date.h"
+ecompte::ecompte(time_t dc,string eml ,string nt ,double s,double tm,double t): date(dc)
 {
 	dateCreation=dc;
 	email=eml;
@@ -75,25 +75,28 @@ void ecompte::AfficherCompte()
 	AfficherSolde(cout);
 	cout<<"___________________________________________"<<endl;
 }
-/*
-void CalculInterets(double n)
+
+void ecompte::CalculInterets(double n)
 {
-	int x;//va représenter le nombre de quinzaine pris en compte dans le mois en cours
-	double y;//va representer le nombre de quinzaines dans l'année en cours
+	int x;//nombre de quinzaine pris en compte dans le mois en cours
+	double y;//nombre de quinzaines dans l'année en cours
 	double interets;//somme des interets
-	if(date::jour==1)
+	int jour;
+
+
+	if(this->jour==1)
 		x=2;
-	else if(date::jour>1 && date::jour<16)
+	else if(jour>1 && jour<16)
     		x=1;
 	else
 		x=0;
-	y=(12-date::mois)*2+x;
+	y=(12-mois)*2+x;
 	interets=n*taux/100*y/24;
 	cout<< "le montant des interets de cette somme s'eleveront à "<<interets<<"euros"<<endl;
 }
 
-*/
 
+/*
 void ecompte::EcritureFichier()const
 {
 ofstream monFichier;
@@ -102,7 +105,7 @@ monFichier<<this->indice<<";"<<this->solde<<";"<<this->taux<<";"<<this->email<<"
 monFichier.close();
 }
 
-
+*/
 
 
 

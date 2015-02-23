@@ -26,7 +26,7 @@ dateJ=monPel.dateJ;
 }
 
 /*Création Saisie du PEL*/
-void Pel::CreerPel()
+void Pel::CreerPel(int indice)
 {
 int ouverture=0;
 int ecriture=0;
@@ -36,6 +36,7 @@ cin >>this->versementMensuel;
 cout<<"Saisir le taux d'emprunt initial: ";
 cin >>this->tauxEmprunt;
 this->soldePel=0;
+this->indice=indice;
 
 this->EcritureFichier();
 }
