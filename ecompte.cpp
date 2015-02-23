@@ -94,6 +94,13 @@ void CalculInterets(double n)
 
 */
 
+void ecompte::EcritureFichier()const
+{
+ofstream monFichier;
+monFichier.open("ecompte.txt",ofstream::app);
+monFichier<<this->indice<<";"<<this->solde<<";"<<this->taux<<";"<<this->email<<";"<<this->numTel<<";"<<dateJ<<";"<<endl;
+monFichier.close();
+}
 
 
 

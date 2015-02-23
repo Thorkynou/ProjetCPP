@@ -22,17 +22,16 @@ private:
 double solde;
 double taux;
 double plafondDepot;
-int indice;
 
 public:
-
+int indice;
 LivretEpargne(); //constructeur par defaut
-LivretEpargne(time_t dateLE=time(NULL),double solde ,double taux = 1.5, double plafond = 25000);//constructeur par parametre
+LivretEpargne(time_t dateLE=time(NULL),int indice =0,double solde =0 ,double taux = 1.5, double plafond = 7700);//constructeur par parametre
 LivretEpargne(const LivretEpargne & LE);//constructeur par copie
 ~LivretEpargne();//destructeur
 LivretEpargne & operator=(const LivretEpargne & LE);
 LivretEpargne operator+(double N);
-LivretEpargne &CreerCompte();
+void CreerCompte();
 void EcritureFichier()const;
 void AfficherIndice()const;
 void RechercheParIndice(vector<LivretEpargne>&mesLE,int indice);
@@ -48,3 +47,4 @@ void ReecritureFichier(const vector<LivretEpargne>&mesLE);
 
 
 #endif
+
