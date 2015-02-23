@@ -8,11 +8,12 @@
 
 #include "comptebloque.h"
 
-CompteBloque::CompteBloque(time_t dateCB, int indice, double taux, double solde): date(dateCB)
+CompteBloque::CompteBloque(time_t dateCB, int indice, double taux, double solde, int annees): date(dateCB)
 {
 	this->indice = indice;
 	this->taux = taux;
 	this->solde = solde;
+	this->annees = annees;
 }
 
 CompteBloque::CompteBloque(const CompteBloque &CB)
@@ -20,6 +21,7 @@ CompteBloque::CompteBloque(const CompteBloque &CB)
 	indice = CB.indice;
 	taux = CB.taux;
 	solde = CB.solde;
+	annees = CB.annees;
 }
 
 void CompteBloque::CreerCompte()
@@ -43,7 +45,7 @@ void CompteBloque::Afficher(ostream & out)
 	out << "Solde: " << this->solde << endl;
 	out << "Date de Creation: ";
 	date::AfficherDate(this->dateJ);
-	//this->TempsRestantEmprunt();
+	this->TempsRestant();
 	cout<<"___________________________________________________"<<endl;
 }
 
@@ -57,7 +59,7 @@ void CompteBloque::EcritureFichier()
 	ofstream monFichier;
 	monFichier.open("CB.txt",ofstream::app);
 	MiseAJour();
-	monFichier << this->indice << ";" << this->taux << ";" << this->solde << ";" << dateJ << ";" << endl;
+	monFichier << this->indice << ";" << this->taux << ";" << this->solde << ";" << this->dateJ << ";" << this->annees << ";" << endl;
 	monFichier.close();
 }
 
@@ -191,7 +193,7 @@ void ReecritureFichier(const vector<CompteBloque>&mesCB)
 
 	for(int i=0;i<taille;i++)
    	{
-    	tempFichier << mesCB[i].indice << ";" << ";" << mesCB[i].taux << ";" << mesCB[i].solde << ";" << mesCB[i].dateJ << ";" << endl;
+    	tempFichier << mesCB[i].indice << ";" << mesCB[i].taux << ";" << mesCB[i].solde << ";" << mesCB[i].dateJ << ";" << MesCB[i].annees << ";" << endl;
     }
 	tempFichier.close();
 
@@ -211,4 +213,41 @@ void CompteBloque::RechercheParIndice(vector<CompteBloque>&mesCB,int indice)
     	if (mesCB[i].indice==indice)
         	*this=mesCB[i];
     }
+}
+
+void CompteBloque::TempsRestant()
+{
+	time_t dateDuJour=time(NULL);
+	time_t tempsRestantMin;
+	time_t dateDeblocageMin;
+	time_t nbAnneesMin=126227704;
+	int days;
+	int years;
+
+	dateDeblocageMin=this->dateJ+nbAnneesMin;
+	tempsRestantMin=dateDeblocageMin-dateDuJour;
+	ConversionStoAJ(tempsRestantMin,years,days);
+
+	cout<<"----------------------------------------------------"<<endl;
+	if (dateDeblocageMin<dateDuJour)
+    	cout<<"Vous pouvez retirer des aujourd'hui"<<endl;
+	else
+    	cout<<"Vous pourrez retirer dans "<<years<<" annee(s) "<<days<<" jour(s)"<<endl;
+	cout<<"----------------------------------------------------"<<endl;
+	cout<<"Date Minimum: ";
+	date::AfficherDate(dateDeblocageMin);
+}
+
+double CompteBloque::CalculTaux()
+{
+	return((this->solde) * (this->taux)/100); 
+}
+
+void CompteBloque::AppliquerTaux()
+{
+	time_t now = time(NULL);
+	double diff;
+	diff = difftime(now - dateJ);
+	if((diff%365) >= (annees+1)
+		solde = solde + CalculTaux();
 }

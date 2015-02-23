@@ -25,12 +25,16 @@ class CompteBloque: public date
 {
 public:
 	double taux;
+
 	double solde;
 
-public:
 	int indice;
 
-	CompteBloque(time_t dateCB=time(NULL), int indice = 0, double taux = 0, double solde = 0);
+	int annees;
+
+
+
+	CompteBloque(time_t dateCB=time(NULL), int indice = 0, double taux = 0, double solde = 0, int annees = 0);
 
 	CompteBloque(const CompteBloque &CB);
 
@@ -59,6 +63,12 @@ public:
     void AffichageTempsRestant();
 
     void ConversionStoAJ(int nbSecondes,int &years,int &days);
+
+    void TempsRestant();
+
+    double CalculTaux();
+
+    void AppliquerTaux();
 };
 
 void ExtractionFichier(vector<CompteBloque>&mesCB);
