@@ -79,7 +79,7 @@ cout<<"Bonjour , etes vous client dans notre banque?\n";
                                     break;
                             case 3: //modifier les donnees
                                     break;
-                            case 4: //consulter le compte
+                            case 4: GestionMenu::ConsulterComptes(C);
                                     break;
                             case 5: //cloturer le compte
                                     break;

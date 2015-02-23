@@ -13,7 +13,7 @@ public:
     static void AffichageComptes(Client &C);
 
     static void RepetitionAffichageCompte(Client &C);
-    static void ConsulterComptes();
+    static void ConsulterComptes(Client &C);
 
     static void OperationCompteCourant(comptecourant &CC);
     static void OperationCompteBloque(CompteBloque &CB);

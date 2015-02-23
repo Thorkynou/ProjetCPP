@@ -99,7 +99,7 @@ void GestionMenu::AffichageComptes(Client &C)//affiche les generalites de chaque
                 return;
 	}
 }
-/*void GestionMenu::ConsulterComptes()
+void GestionMenu::ConsulterComptes(Client &C)
 {
 	int i=0;
 	cout << "Souhaitez vous consulter un compte et ses operations associees?"<<endl;
@@ -108,18 +108,18 @@ void GestionMenu::AffichageComptes(Client &C)//affiche les generalites de chaque
        switch(i)
         {
             case 0: break;
-            case 1: {GestionMenu::OperationPEL(PEL);
-                    break;}
-            case 2: {GestionMenu::OperationEcompte(EC);
-                    break;}
-            case 3: {GestionMenu::OperationLivretEpargne(LE);
-                    break;}
-            case 4: {GestionMenu::OperationCompteBloque(CB);
-                    break;}
+            case 1: GestionMenu::OperationPEL(PEL);
+                    break;
+            case 2: GestionMenu::OperationEcompte(EC);
+                    break;
+            case 3: GestionMenu::OperationLivretEpargne(LE);
+                    break;
+            case 4: GestionMenu::OperationCompteBloque(CB);
+                    break;
             default:
                     return;
         }
-}*/
+}
 
 void GestionMenu::RepetitionAffichageCompte(Client &C)
 {
