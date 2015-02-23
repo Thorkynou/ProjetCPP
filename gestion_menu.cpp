@@ -241,7 +241,7 @@ void GestionMenu::OperationCompteCourant(comptecourant &CC)
                     cin>>ajout;
                     CB.Ajouter(ajout);
                     break;}
-             case 3: {interets=CB.CalculInterets();
+             case 3: {interets=CB.CalculTaux();
                     cout<<"vos interets annuels sont de "<<interets<<endl;
                     break;}
 
