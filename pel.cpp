@@ -1,9 +1,10 @@
-#include "pel.h"
 
 /***************************************************/
 /****          Plan Epargne Logement            ****/
 /****              Marc Abeille                 ****/
 /***************************************************/
+
+#include "pel.h"
 
 /*Constructeur par paramètre*/
 Pel::Pel(double vm,int te, int i, double sp, time_t datePel): date(datePel)
@@ -72,15 +73,23 @@ monFichier.close();
 /*Surcharge d'operateur Afficher*/
 void Pel::AfficherPEL(ostream & out)
 {
-cout<<"___________________________________________________"<<endl;
-out<<"Client n°: "<<this->indice<<endl;
-out<<"Solde du  PEL: "<<this->soldePel<<endl;
-out<<"Versement mensuel: "<<this->versementMensuel<<endl;
-out<<"Taux d'emprunt: "<<this->tauxEmprunt<<endl;
-out<<"Date de Creation: ";
+time_t Ouverture=0;
+int years=0;
+int days=0;
+
+Ouverture=time(NULL)-this->dateJ;
+cout<<"____________________________________________________________"<<endl;
+ConversionStoAJ(Ouverture,years,days);
+out<<"Client n°: "<<this->indice<<" Compte ouvert depuis "<<years<<" an(s)"<<" et "<<days<<" jour(s)"<<endl<<endl;
+out<<"Solde du  PEL _ _ _ _ _: "<<this->soldePel<<endl;
+out<<"Versement mensuel _ _ _: "<<this->versementMensuel<<endl;
+out<<"Taux d'interet Annuel _: "<<this->tauxEmprunt<<endl;
+out<<"Coeff d'emprunt fixé à : 2,5"<<endl;
+out<<"Date de Creation_ _ _ _: ";
 date::AfficherDate(this->dateJ);
 this->TempsRestantEmprunt();
-cout<<"___________________________________________________"<<endl;
+this->MontantEmpruntable();
+cout<<"____________________________________________________________"<<endl;
 }
 
 /*Operateur d'affichage << */
@@ -99,26 +108,57 @@ cout<<"L'indice PEL est: "<<this->indice<<endl;
 /*Modification du montant des versements*/
 void Pel::ModifMontantMensuel()
 {
-cout<<"Saisissez le nouveau montant de vos versements mensuels: ";
-cin >>this->versementMensuel;
+time_t tempsRestantMin;
+time_t dateDuJour=time(NULL);
+time_t dateDeblocageMin;
+time_t nbAnneesMin=126227704;
+
+dateDeblocageMin=this->dateJ+nbAnneesMin;
+tempsRestantMin=dateDeblocageMin-dateDuJour;
+
+do
+    {
+    cout<<"Saisissez le nouveau montant de vos versements mensuels: ";
+    cin >>this->versementMensuel;
+    if (versementMensuel==0&&tempsRestantMin>0)
+        {
+        cout<<"Vous ne pouvez pas passer le montant des versements à 0 avant le ";
+        date::AfficherDate(dateDeblocageMin);
+        }
+    }
+while (versementMensuel==0&&tempsRestantMin>0);
+
 }
 
 void Pel::TempsRestantEmprunt()
 {
 time_t dateDuJour=time(NULL);
-time_t tempsRestant;
+time_t tempsRestantMin;
+time_t tempsRestantMax;
 time_t dateDeblocageMin;
+time_t dateDeblocageMax;
 time_t nbAnneesMin=126227704;
+time_t nbAnneesMax=220898482;
 int days;
 int years;
 
 dateDeblocageMin=this->dateJ+nbAnneesMin;
-tempsRestant=dateDeblocageMin-dateDuJour;
+dateDeblocageMax=this->dateJ+nbAnneesMax;
+tempsRestantMin=dateDeblocageMin-dateDuJour;
+tempsRestantMax=dateDeblocageMax-dateDuJour;
 
-ConversionStoAJ(tempsRestant,years,days);
+ConversionStoAJ(tempsRestantMin,years,days);
 
-cout<<"Vous pourrez emprunter dans "<<years<<" annee(s) "<<days<<" jour(s)"<<endl<<"Date de deblocage ";
+cout<<"----------------------------------------------------"<<endl;
+if (dateDeblocageMin<dateDuJour)
+    cout<<"Vous pouvez emprunter dès aujourd'hui"<<endl;
+else
+    cout<<"Vous pourrez emprunter dans "<<years<<" annee(s) "<<days<<" jour(s)"<<endl;
+cout<<"----------------------------------------------------"<<endl;
+cout<<"Date Minimum: ";
 date::AfficherDate(dateDeblocageMin);
+cout<<"Date Cloture: ";
+date::AfficherDate(dateDeblocageMax);
 }
 
 /*Fonction de conversion des secondes en Jours/Annees*/
@@ -141,6 +181,63 @@ hours = total_hours % 24;
 total_days = total_hours / 24;
 days = total_days % 365;
 years = total_days / 365;
+}
+
+/*Fonction de calcul du montant empruntable a terme min et max*/
+void Pel::MontantEmpruntable()
+{
+double coeff=2.5;
+double montantEmpruntable=0;
+time_t dateDeblocageMin;
+time_t nbAnneesMin=126227704;
+time_t tempsRestantMin;
+time_t tempsRestantMax;
+time_t dateDeblocageMax;
+time_t nbAnneesMax=220898482;
+time_t dateDuJour=time(NULL);
+double soldeADate=0;
+double interets=0;
+int years;
+int days;
+
+dateDeblocageMin=this->dateJ+nbAnneesMin;
+dateDeblocageMax=this->dateJ+nbAnneesMax;
+tempsRestantMin=dateDeblocageMin-dateDuJour;
+tempsRestantMax=dateDeblocageMax-dateDuJour;
+cout<<"--------------------------------------------------------"<<endl;
+cout<<"Calcul du montant empruntable (interets annuels inclus):"<<endl;
+cout<<"--------------------------------------------------------"<<endl;
+if (this->dateJ>=dateDeblocageMin)
+    {
+    montantEmpruntable=this->soldePel*coeff;
+    cout<<"Vous pouvez emprunter des maintenant la somme de "<<(double)montantEmpruntable<<" euros"<<endl;
+
+    ConversionStoAJ(tempsRestantMax,years,days);
+    soldeADate=(soldePel+(years*12+(days/30.4167))*this->versementMensuel);
+    this->CalculInteret(soldeADate,interets,years);
+    montantEmpruntable=(soldeADate+interets)*coeff;
+    cout<<"A date de cloture: "<<montantEmpruntable<<" euros";
+    }
+else
+    {
+    ConversionStoAJ(tempsRestantMin,years,days);
+    soldeADate=(soldePel+(years*12+(days/30.4167))*this->versementMensuel);
+    this->CalculInteret(soldeADate,interets,years);
+    montantEmpruntable=(soldeADate+interets)*coeff;
+    cout<<"A date de déblocage min: "<<montantEmpruntable<<" euros"<<endl;
+
+    ConversionStoAJ(tempsRestantMax,years,days);
+    soldeADate=(soldePel+(years*12+(days/30.4167))*this->versementMensuel);
+    this->CalculInteret(soldeADate,interets,years);
+    montantEmpruntable=(soldeADate+interets)*coeff;
+    cout<<"A la date de cloture_ _: "<<montantEmpruntable<<" euros"<<endl;
+    }
+}
+
+/*Fonction de calcul du montant des interets*/
+void Pel::CalculInteret(double mttTotal, double &mttInterets,int nbAnnees)
+{
+mttInterets=mttTotal*(((double)this->tauxEmprunt/100)*(double)nbAnnees);
 }
 
 /***************************************************/
