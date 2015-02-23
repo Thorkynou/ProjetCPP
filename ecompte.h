@@ -10,6 +10,7 @@ Ctrl+f , 8 , entree
 
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "date.h"
 using namespace std;
 
@@ -25,6 +26,7 @@ private:
 	double taux3Mois;//taux pour les 3 premiers mois du compte
 	double taux;//taux pour les mois suivant les 3 premiers mois
 	time_t dateCreation;
+	int indice;
 
 public :
 	date d;
@@ -41,6 +43,11 @@ public :
 	ecompte &CreerCompte();
 	//void CalculInterets(double n);
 	//void CalculInteretsMois(double n);
+	void EcritureFichier()const;
 };
+
+//void ExtractionFichier(vector<ecompte>&mesecomptes);
+//void ReecritureFichier(const vector<ecompte>&mesecomptes);
+
 
 #endif
