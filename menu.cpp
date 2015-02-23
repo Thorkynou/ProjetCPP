@@ -6,6 +6,7 @@
 #include "pel.h"
 #include "ecompte.h"
 #include"livretepargne.h"
+#include "gestion_menu.h"
 
 #include <vector>
 #include <map>
@@ -16,7 +17,8 @@ int main()
 {
 int choix=0;
 int sous_menu=0;
-Date D;//client du jour
+time_t dateJour=time(NULL);
+date D;//client du jour
 Client C;//client lamba
 vector <Client> Banque(5);//vector de banque avec 5 comptes
 //vector <Client>::iterator it;
@@ -30,7 +32,7 @@ cout<<"*                                                   *\n";
 cout<<"*****************************************************\n";
 
 //affichage de la date du jour
-cout<<D.Afficher(cout);
+D.AfficherDate(dateJour);
 cout<<"Bonjour , etes vous client dans notre banque?\n";
         cout<<"1- pour oui et 2 pour non\n";
         cin>>choix;
@@ -47,7 +49,7 @@ cout<<"Bonjour , etes vous client dans notre banque?\n";
             C.Afficher(cout);//affichage des informations generales du client
             cout<<"quelle operation souhaitez vous faire aujourd'hui?\n";
             cout<<"1-\tAfficher le solde de vos comptes\n";
-            cout<<"2-\tAfficher les donnees \n";"
+            cout<<"2-\tAfficher les donnees \n";
             cout<<"3-\tModifier les coordonnees du titulaire\n";
             cout<<"4-\tConsulter le compte\n";
             cout<<"5-\tCloturer le compte\n";
@@ -66,12 +68,12 @@ cout<<"Bonjour , etes vous client dans notre banque?\n";
                                         for(int i=0; i<2; i++)
                                             {
                                                 Banque[i].Saisir(cin);
-                                                AjoutCompte(Banque[i]);
+                                                GestionMenu::AjoutCompte(Banque[i]);
                                             }
                                         for(int i=0; i<2; i++)
                                             {
                                                 cout << "Affichage des comptes du client " << Banque[i].nom << endl;
-                                                RepetitionAffichageCompte(Banque[i]);
+                                                GestionMenu::RepetitionAffichageCompte(Banque[i]);
                                                 }
                                     }
                                     break;
@@ -102,9 +104,9 @@ cout<<"Bonjour , etes vous client dans notre banque?\n";
             cout<<"Saisissez votre choix\n";
             cin>>choix;
 
-            Switch(choix)
+            switch(choix)
             {
-                case 0; return 0;
+                case 0: return 0;
                         break;
                 case 1://compte courant
                         break;
