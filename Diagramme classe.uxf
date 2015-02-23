@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="11.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>720</x>
+      <y>10</y>
+      <w>240</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>ECompte
+(à 50€ lors de la création)
+--
+-email
+-numTel
+-taux3Mois
+-taux
+-solde
+--
+Ajouter()
+Retirer()(10€mini sur le compte)
+ModifInfo()
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>720</x>
+      <y>220</y>
+      <w>240</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>PEL
+--
+-taux
+-versementMensuel
+-tauxEmprunt
+-solde
+--
+ModifMontantMensuel()
+VersementExept()
+TempsRestant()
+MontantEmpruntable()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>720</x>
+      <y>450</y>
+      <w>240</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>CompteBloque
+--
+-taux
+-solde
+--
+AfficherDuree()
+DureeRestante()
+CalculInterets()
+AfficherOuverture()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>390</x>
+      <y>450</y>
+      <w>240</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>LivretEpargne
+--
+-taux
+-plafondDepot
+-solde
+--
+Ajouter()
+CalculInterets()
+MiseAJour()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>70</x>
+      <y>60</y>
+      <w>240</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>CompteCourant
+--
+-numeroCompte
+-solde
+-decouvert
+-taux
+-AGIOS
+--
+Affichage10Actions()
+AfficherSolde
+Retirer()
+Ajouter()
+AffichageAlerte()
+CalculAgio()
+AffichageAgio()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>580</x>
+      <y>70</y>
+      <w>160</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;80;140;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>580</x>
+      <y>220</y>
+      <w>160</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;30;140;90</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>400</x>
+      <y>50</y>
+      <w>210</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>Client
+--
+-nomTitulaire
+-prenomTitulaire
+-adresse
+-nbrCompte
+-CC
+-LE
+-CB
+-PEL
+-Ecompte
+--
+AfficherDonnees()
+ModifCoordonnees()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>280</x>
+      <y>140</y>
+      <w>140</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>120;30;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>20</x>
+      <y>340</y>
+      <w>350</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>Fonctions externes:
+-RechercheClient()
+-AjouterClient()
+-SupprimerClient()
+Création de fichiers (1 par comptes + 1 clients)
++ fichier répertoriant les actions CC
+Identification par iterator</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>470</x>
+      <y>250</y>
+      <w>50</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;200</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>540</x>
+      <y>250</y>
+      <w>200</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;30;180;200</additional_attributes>
+  </element>
+</diagram>
