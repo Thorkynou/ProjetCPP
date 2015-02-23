@@ -274,3 +274,17 @@ void Client::RechercheParIndice(vector<Client>&mesClients,int indice)
         	*this=mesClients[i];
     }
 }
+
+/*Fonction de recherche par indice dans un vector*/
+int Client::RechercheParNom(vector<Client>&mesClients,string nom)
+{
+	int taille=0;
+
+	taille=mesClients.size();
+
+	for (int i=0;i<taille;i++)
+    {
+   		if (mesClients[i].nom.compare(nom) != 0)
+        	return mesClients[i].indice;
+    }
+}

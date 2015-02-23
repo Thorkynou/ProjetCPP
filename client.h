@@ -102,6 +102,7 @@ public:
 
 	// Fonction pour rechercher un client par son indice
 	void RechercheParIndice(vector<Client>&mesClients,int indice);
+	int RechercheParNom(vector<Client>&mesClients,string nom);
 };
 
 // Fonction qui récupère les données dans le fichier pour les mettre dans une classe
