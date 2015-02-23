@@ -8,13 +8,7 @@ using namespace std;
 
 int main()
 {
-int choix=0;
-int sous_menu=0;
-date D;//client du jour
-Client C;//client lamba
-comptecourant CC;
-vector <Client> Banque(5);//vector de banque avec 5 comptes
-//vector <Client>::iterator it;
+
 
 cout<<"*****************************************************\n";
 cout<<"*                                                   *\n";
@@ -24,8 +18,16 @@ cout<<"*                                                   *\n";
 cout<<"*                                                   *\n";
 cout<<"*****************************************************\n";
 
+int choix=0;
+int sous_menu=0;
 //affichage de la date du jour
-D.Afficher(cout);
+//cout<"Nous sommes aujourd'hui le"<<endl;
+date D;//date du jour
+Client C;//client lamba
+//comptecourant CC;
+//vector <Client> Banque(5);//vector de banque avec 5 comptes
+//vector <Client>::iterator it;
+
 cout<<"Bonjour , etes vous client dans notre banque?\n";
         cout<<"1- pour oui et 2 pour non\n";
         cin>>choix;
@@ -56,28 +58,29 @@ cout<<"Bonjour , etes vous client dans notre banque?\n";
 
                 switch(sous_menu)
                     {
-                            case 0: cout<<"Au revoir et au plaisir de vous revoir tres prochainement dans notre banque !!!!!"<<endl;
+                            case 0:
+                            { cout<<"Au revoir et au plaisir de vous revoir tres prochainement dans notre banque !!!!!"<<endl;
                                     return 0;
-                                    break;
+                                    break;}
 
-                            case 1: cout<<"voici la liste de vos donnees"<<endl;
+                            case 1: {cout<<"voici la liste de vos donnees personnelles"<<endl;
                                     cout<<endl;
                                     C.Afficher(cout);
-                                    C.compteC.AfficherSolde(cout);//afficher les donnees
-                                    break;
+                                    //C.compteC.AfficherSolde(cout);//afficher les donnees
+                                    break;}
 
                             case 2: //compte courant
-                                        int choix=0;
-                                        cout<<"voici votre compte courant"<<endl;
+                                      { cout<<"voici votre compte courant"<<endl;
                                         cout<<endl;
                                         comptecourant CC;
                                         cout<<endl;
                                         GestionMenu::OperationCompteCourant(CC);
                                      //a supprimer   // comptecourant::comptecourant(int numerodecompte,double solde,double decouvert,double taux,bool debiteur,
                                             //double montantdebiteur,double agios,double sommeagios,double nbagios,int indice)
-                                    break;
+                                    break;}
 
                             case 3: //afficher les differents compte et leur solde
+                                    {
                                     cout<<"voici les informations de vos differents comptes"<<endl;
                                    // cout<<endl;
                                     //GestionMenu::AffichageComptes(C);
@@ -95,24 +98,44 @@ cout<<"Bonjour , etes vous client dans notre banque?\n";
                                                 RepetitionAffichageCompte(Banque[i]);
                                                 }
                                     }*/
-                                    break;
-                             case 4:cout<<"vous pouvez modifier votre adresse"<<endl;
+                                    break;}
+                             case 4:{cout<<"vous pouvez modifier votre adresse"<<endl;
                                     C.ModifierAdresse("blabla");
-                                    break;
+                                    break; }
 
-                            case 5: cout<<"consultation de vos comptes et des operations diverses"<<endl;
-                                    GestionMenu::ConsulterComptes(C);
-                                    break;
+                            case 5: {cout<<"consultation de vos comptes et des operations diverses"<<endl;
+                                    //
+                                    int i=0;
+                                    cout << "Souhaitez vous consulter un compte et ses operations associees?"<<endl;
+                                    cout<<"Quel compte voulez-vous consulter ?" << endl;
+                                    i = GestionMenu::MenuChoixCompte();
+                                  /* switch(i)
+                                        {
+                                            case 0: return;
+                                            case 1: GestionMenu::OperationPEL();
+                                                    break;
+                                            case 2: GestionMenu::OperationEcompte(EC);
+                                                    break;
+                                            case 3: GestionMenu::OperationLivretEpargne(LE);
+                                                    break;
+                                            case 4: GestionMenu::OperationCompteBloque(CB);
+                                                    break;
+                                            default:
+                                                    break;
+                                        }*/
+                                            //GestionMenu::ConsulterComptes(C);
+                                    break; }
 
                             case 6: //ajouter un compter
-                                    cout<<"vous pouvez ajouter un compte"<<endl;
+                                    {cout<<"vous pouvez ajouter un compte"<<endl;
                                     GestionMenu::AjoutCompte(C);
-                                    break;
+                                    break;}
 
                             case 7: //cloturer le compte
+                                    {
                                     cout<<"vous pouvez cloturer un compte"<<endl;
                                     GestionMenu::SupprimerCompte(C);
-                                    break;
+                                    break;}
 
                             default:
                                     break;

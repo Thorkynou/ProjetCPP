@@ -10,15 +10,15 @@ void GestionMenu::AjoutCompte(Client &C)
 	if(valid)
 		i=MenuChoixCompte();
 	switch(i)
-	{   case 0: break;
-		case 1: C.CreationPEL();
-				break;
-		case 2: C.CreationEC();
-				break;
-		case 3: C.CreationLE();
-				break;
-		case 4: C.CreationCB();
-				break;
+	{   case 0: return;
+		case 1: {C.CreationPEL();
+				break;}
+		case 2: {C.CreationEC();
+				break;}
+		case 3: {C.CreationLE();
+				break;}
+		case 4: {C.CreationCB();
+				break;}
 		default:
                 break;
 	}
@@ -34,15 +34,15 @@ void GestionMenu::SupprimerCompte(Client &C)
 		i=MenuChoixCompte();
 	switch(i)
 	{
-        case 0: break;
-		case 1: C.DestructionPEL();
-				break;
-		case 2: C.DestructionEC();
-				break;
-		case 3: C.DestructionLE();
-				break;
-		case 4: C.DestructionCB();
-				break;
+        case 0: return;
+		case 1: {C.DestructionPEL();
+				break;}
+		case 2: {C.DestructionEC();
+				break;}
+		case 3: {C.DestructionLE();
+				break;}
+		case 4: {C.DestructionCB();
+				break;}
 		default:
                 break;
 	}
@@ -74,52 +74,52 @@ void GestionMenu::AffichageComptes(Client &C)//affiche les generalites de chaque
 	switch(i)
     {
         case 0: break;
-		case 1: if(C.PEL)
+		case 1: {if(C.PEL)
 					C.comptePEL.AfficherPEL(cout);
 					//Pel.AfficherPEL(cout);
 				else
 					cout << "Ce client n'a pas encore de PEL" << endl;
-				break;
-		case 2: if(C.EC)
+				break;}
+		case 2: {if(C.EC)
 					C.compteEC.AfficherCompte();// ecompte.AfficherCompte()
 				else
 					cout << "Ce client n'a pas encore d'e-compte" << endl;
-				break;
-		case 3: if(C.LE)
+				break;}
+		case 3: {if(C.LE)
 					C.compteLE.Afficher();//LivretEpargne.Afficher();
 				else
 					cout << "Ce client n'a pas encore de Livret d'Epargne" << endl;
-				break;
-		case 4: if(C.CB)
+				break;}
+		case 4: {if(C.CB)
 					C.compteCB.Afficher(cout);//CompteBloque.Afficher();
 				else
 					cout << "Ce client n'a pas encore de Compte Bloque" << endl;
-				break;
+				break;}
 		default:
-                break;
+                return;
 	}
 }
-void GestionMenu::ConsulterComptes(Client &C)
+/*void GestionMenu::ConsulterComptes()
 {
 	int i=0;
 	cout << "Souhaitez vous consulter un compte et ses operations associees?"<<endl;
 	cout<<"Quel compte voulez-vous consulter ?" << endl;
 	i = MenuChoixCompte();
-        switch(i)
+       switch(i)
         {
             case 0: break;
-            case 1: GestionMenu::OperationPEL(PEL);
-                    break;
-            case 2: GestionMenu::OperationEcompte(EC);
-                    break;
-            case 3: GestionMenu::OperationLivretEpargne(LE);
-                    break;
-            case 4: GestionMenu::OperationCompteBloque(CB);
-                    break;
+            case 1: {GestionMenu::OperationPEL(PEL);
+                    break;}
+            case 2: {GestionMenu::OperationEcompte(EC);
+                    break;}
+            case 3: {GestionMenu::OperationLivretEpargne(LE);
+                    break;}
+            case 4: {GestionMenu::OperationCompteBloque(CB);
+                    break;}
             default:
-                    break;
+                    return;
         }
-}
+}*/
 
 void GestionMenu::RepetitionAffichageCompte(Client &C)
 {
@@ -163,26 +163,26 @@ void GestionMenu::OperationCompteCourant(comptecourant &CC)
         {
             case 0: break;
 
-            case 1: cout<<"vous souhaitez ajouter de l'argent sur votre compte courant"<<endl;
+            case 1: {cout<<"vous souhaitez ajouter de l'argent sur votre compte courant"<<endl;
                     cout<<"quelle somme souhaitez-vous ajouter"<<endl;
                     cin>>ajout;
                     solde_ajout=CC.Ajouter(ajout);
                     //CC.AfficherSolde(cout);
                     CC.Afficher();
-                    break;
+                    break;}
 
-            case 2: cout<<"vous souhaitez retirer de l'argent sur votre compte courant"<<endl;
+            case 2: {cout<<"vous souhaitez retirer de l'argent sur votre compte courant"<<endl;
                     cout<<"quelle somme souhaitez-vous retirer"<<endl;
                     cin>>retrait;
                     solde_retrait=CC.Retirer(retrait);
                    // CC.AfficherSolde(cout);
                     CC.Afficher();
-                    break;
+                    break;}
 
-            case 3: cout<<"voici les 10 dernière operations faite sur le compte\n";
+            case 3: {cout<<"voici les 10 dernière operations faite sur le compte\n";
                     CC.Afficher10Actions();
-                    break;
-            case 4: cout<<"souhaitez vous exportez vos donnees ou supprimer le fichier?\n";
+                    break;}
+            case 4: {cout<<"souhaitez vous exportez vos donnees ou supprimer le fichier?\n";
                     cout<<"1 pour exportez ou 2 pour supprimer le fichier\n";
                     cin>>sousmenu;
                         if (sousmenu==1)
@@ -195,9 +195,9 @@ void GestionMenu::OperationCompteCourant(comptecourant &CC)
                             cout<<"fonction en cours de test"<<endl;
                             //ReecritureFichier(const vector<comptecourant>&moncomptecourant)
                         }
-                    break;
+                    break;}
             default:
-                    break;
+                    return;
             }
 }
 
@@ -231,29 +231,29 @@ void GestionMenu::OperationCompteCourant(comptecourant &CC)
         {
             case 0: break;
 
-            case 1: cout<<"voici les donnees associees a votre compte bloque"<<endl;//donnees, solde et date ouverture
+            case 1: {cout<<"voici les donnees associees a votre compte bloque"<<endl;//donnees, solde et date ouverture
                     CB.Afficher(cout);
                     CB.AfficherIndice();
-                    break;
+                    break;}
 
-            case 2: cout<<"vous souhaitez ajouter de l'argent sur votre compte courant"<<endl;
+            case 2: {cout<<"vous souhaitez ajouter de l'argent sur votre compte courant"<<endl;
                     cout<<"quelle somme souhaitez-vous ajouter"<<endl;
                     cin>>ajout;
                     CB.Ajouter(ajout);
-                    break;
-             case 3: interets=CB.CalculInterets();
+                    break;}
+             case 3: {interets=CB.CalculInterets();
                     cout<<"vos interets annuels sont de "<<interets<<endl;
-                    break;
+                    break;}
 
-            case 4: cout<<"fonction en cours de test"<<endl;
+            case 4: {cout<<"fonction en cours de test"<<endl;
                    // cout<<"la duree restante pour utiliser le compte est de "<<endl;
-                    break;
+                    break;}
 
-            case 5: cout<<"fonction en cours de test"<<endl;
+            case 5: {cout<<"fonction en cours de test"<<endl;
                    // cout<<"le compte est bloque pendant "<<endl;
-                    break;
+                    break;}
 
-            case 6: cout<<"souhaitez vous exportez vos donnees ou supprimer le fichier?\n";
+            case 6: {cout<<"souhaitez vous exportez vos donnees ou supprimer le fichier?\n";
                     cout<<"1 pour exportez ou 2 pour supprimer le fichier\n";
                     cin>>sousmenu;
                         if (sousmenu==1)
@@ -261,9 +261,9 @@ void GestionMenu::OperationCompteCourant(comptecourant &CC)
                         else
                         { //ReecritureFichier(const vector<comptecourant>&moncomptecourant)
                         }
-                    break;
+                    break;}
             default:
-                    break;
+                    return;
             }
 }
 
@@ -299,38 +299,39 @@ void GestionMenu::OperationCompteCourant(comptecourant &CC)
     switch(choix)
         {
             case 0: break;
-            case 1: cout<<"voici les donnees associees a votre PEL"<<endl;//donnees, solde et date ouverture
+            case 1:{ cout<<"voici les donnees associees a votre PEL"<<endl;//donnees, solde et date ouverture
                     PEL.AfficherPEL(cout);
                     PEL.AfficherIndice();
-                    break;
+                    break;}
 
-            case 2: cout<<"vous souhaitez faire un versement exceptionnel sur votre PEL"<<endl;
+            case 2: {cout<<"vous souhaitez faire un versement exceptionnel sur votre PEL"<<endl;
                     cout<<"quelle somme souhaitez-vous ajouter"<<endl;
                     cin>>ajout;
                     PEL.Ajouter(ajout);
-                    break;
-             case 3: PEL.ModifMontantMensuel();
-                    break;
+                    break;}
 
-            case 4: PEL.TempsRestantEmprunt();
+             case 3: {PEL.ModifMontantMensuel();
+                    break;}
+
+            case 4: {PEL.TempsRestantEmprunt();
                     PEL.MontantEmpruntable();
-                    break;
+                    break;}
 
-            case 5: cout<<"fonction en cours de test"<<endl;
+            case 5: {cout<<"fonction en cours de test"<<endl;
                     //PEL.ExtractionFichier(vector<Pel>&mesPel);
-                    break;
+                    break;}
 
-            case 6:cout<<"fonction en cours de test"<<endl;
+            case 6:{cout<<"fonction en cours de test"<<endl;
                     //Pel.ReecritureFichier(const vector<Pel>&mesPel);
-                    break;
+                    break;}
 
-            case 7: cout<<"fonction en cours de test"<<endl;
+            case 7: {cout<<"fonction en cours de test"<<endl;
                     //Pel.RechercheParIndice(vector<Pel>&mesPel,int indice);
-                    break;
-            case 8: PEL.EcritureFichier();
-                    break;
+                    break;}
+            case 8: {PEL.EcritureFichier();
+                    break;}
             default:
-                    break;
+                    return;
             }
 
  }
@@ -361,19 +362,19 @@ void GestionMenu::OperationCompteCourant(comptecourant &CC)
     switch(choix)
         {
             case 0: break;
-            case 1: cout<<"voici les donnees associees a votre ecompte"<<endl;//donnees, solde et date ouverture
+            case 1: {cout<<"voici les donnees associees a votre ecompte"<<endl;//donnees, solde et date ouverture
                     EC.AfficherCompte();
                     EC.AfficherSolde(cout);
-                    break;
+                    break;}
 
-            case 2: cout<<"vous souhaitez retirer de l'argent de votre ecompte"<<endl;
+            case 2: {cout<<"vous souhaitez retirer de l'argent de votre ecompte"<<endl;
                     EC.Retrait();
-                    break;
-             case 3:cout<<"vous souhaitez ajouter de l'argent de votre ecompte"<<endl;
-                    EC.Ajouter();
-                    break;
+                    break;}
+             case 3:{cout<<"vous souhaitez ajouter de l'argent de votre ecompte"<<endl;
+                    EC.Ajouter(EC);
+                    break;}
             default:
-                    break;
+                    return;
             }
   }
    void GestionMenu::OperationLivretEpargne(LivretEpargne & LE)
@@ -405,30 +406,30 @@ void GestionMenu::OperationCompteCourant(comptecourant &CC)
     switch(choix)
         {
             case 0: break;
-            case 1: cout<<"voici les donnees associees a votre Livret d'Epargne"<<endl;//donnees, solde et date ouverture
+            case 1: {cout<<"voici les donnees associees a votre Livret d'Epargne"<<endl;//donnees, solde et date ouverture
                     LE.Afficher();
                     LE.AfficherIndice();
-                    break;
+                    break;}
 
-            case 2: LE.Ajouter();
+            case 2: {LE.Ajouter();
                     LE.EcritureFichier();
-                    break;
+                    break;}
 
-            case 3: cout<<"fonction en cours de test"<<endl;
+            case 3: {cout<<"fonction en cours de test"<<endl;
                     //LE.ExtractionFichier(vector<LivretEpargne>&mesLE);
-                    break;
+                    break;}
 
-            case 4:cout<<"fonction en cours de test"<<endl;
+            case 4:{cout<<"fonction en cours de test"<<endl;
                     //LE.ReecritureFichier(const vector<LivretEpargne>&mesLE);
-                    break;
+                    break;}
 
-            case 5: cout<<"fonction en cours de test"<<endl;
+            case 5: {cout<<"fonction en cours de test"<<endl;
                    // LE.RechercheParIndice(vector<LivretEpargne>&mesLE,int indice);
-                    break;
-            case 6: LE.EcritureFichier();
-                    break;
+                    break;}
+            case 6: {LE.EcritureFichier();
+                    break;}
             default:
-                    break;
+                    return;
             }
 
    }
