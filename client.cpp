@@ -12,9 +12,9 @@
 #include "client.h"
 using namespace std;
 
-Client::Client(string nom, string prenom, string adresse, bool LE, bool CB, bool PEL, bool EC)
+Client::Client(int indice, string nom, string prenom, string adresse, bool LE, bool CB, bool PEL, bool EC)
 {
-	cout << "constructeur par paramètres" << endl;
+	this->indice = indice;
 	this->nom = nom;
 	this->prenom = prenom;
 	this->adresse = adresse;
@@ -26,7 +26,7 @@ Client::Client(string nom, string prenom, string adresse, bool LE, bool CB, bool
 
 Client::Client(const Client &C)
 {
-	//cout << "constructeur par copie" << endl;
+	indice = C.indice;
 	nom = C.nom;
 	prenom = C.prenom;
 	adresse = C.adresse;
@@ -45,7 +45,8 @@ void Client::Saisir(istream &in)
     in >> prenom;
     cout << "Son adresse" << endl;
     in.ignore();
-    getline(in, adresse);
+    getline(in, adresse); // Dans le cas d'une saisie avec espaces
+    EcritureFichier();
 }
 
 void Client::Afficher(ostream &out) const
@@ -84,7 +85,6 @@ Client & Client::operator=(const Client &C)
 
 Client::~Client()
 {
-	cout << *this;
 	cout<<"destructeur du client" << endl;
 }
 
@@ -114,7 +114,7 @@ void Client::DestructionPEL()
 void Client::CreationLE()
 {
 	this->LE = true;
-//	this->compteLE.CreerCompte();
+	this->compteLE.CreerCompte();
 }
 
 void Client::DestructionLE()
@@ -166,4 +166,134 @@ void Client::AjoutEC(double N)
 {
 	this->compteC.Retirer(N);
 //	this->compteEC.Ajout(N);
+}
+
+void Client::RetirerPEL(double N)
+{
+	this->comptePEL.Retirer(N);
+	this->compteC.Ajouter(N);
+}
+
+void Client::RetirerLE(double N)
+{
+	this->compteLE.Retirer(N);
+	this->compteC.Ajouter(N);
+}
+
+void Client::RetirerCB(double N)
+{
+	this->compteCB.Retirer(N);
+	this->compteC.Ajouter(N);
+}
+
+void Client::RetirerEC(double N)
+{
+	this->compteEC.Retirer(N);
+	this->compteC.Ajout(N);
+}
+
+void Client::EcritureFichier()const
+{
+	ofstream monFichier;
+	monFichier.open("clients.txt",ofstream::app);
+	monFichier << this->indice << ";" << this->nom << ";" << this->prenom << ";" << this->adresse << ";" << this->LE << ";" << this->CB << ";" << this->PEL << ";" << this->EC << ";" << endl;
+	monFichier.close();
+}
+
+void ExtractionFichier(vector<Client>&mesClients)
+{
+	Client monClient(0);
+	int k=0;
+	int j=0;
+	int taille=0;
+
+	vector <string> ligneFichier;
+	string maLigne;
+	string mot;
+	string maLigneCSV;
+
+	fstream monFichier;
+
+	monFichier.open("clients.txt",ofstream::in);
+	if (monFichier.fail())
+    	cerr<<"Le fichier n'existe pas"<<endl;
+	else
+    {
+    	while (monFichier.eof()!=true)
+        {
+        	monFichier >> maLigneCSV;
+        	ligneFichier.push_back(maLigneCSV);
+        	maLigneCSV.clear();
+        }
+    	ligneFichier.pop_back();
+    	taille=ligneFichier.size();
+    }
+	monFichier.close();
+
+	mesClients.resize(taille);
+
+	for (k=0;k<taille;k++)
+    {
+    	maLigne=ligneFichier[k];
+    	istringstream iss(maLigne);
+
+    	j=0;
+    	while (getline(iss,mot,';'))
+        {
+        	switch(j)
+            {
+            	case 0:mesClients[k].indice=atoi(mot.c_str());
+                	break;
+            	case 1:mesClients[k].nom=mot.c_str();
+                	break;
+            	case 2:mesClients[k].prenom=mot.c_str();
+                	break;
+            	case 3:mesClients[k].adresse=mot.c_str();
+                	break;
+            	case 4:mesClients[k].LE=atoi(mot.c_str());
+                	break;
+            	case 5:mesClients[k].CB=atoi(mot.c_str());
+                	break;
+            	case 6:mesClients[k].PEL=atoi(mot.c_str());
+                	break;
+            	case 7:mesClients[k].EC=atoi(mot.c_str());
+                	break;
+            }
+        	j++;
+        }
+    }
+}
+
+/*Fonction de suppression et écriture d'un nouveau fichier apres modif de vector*/
+void ReecritureFichier(const vector<Client>&mesClients)
+{
+	ofstream monFichier;
+	ofstream tempFichier;
+	int taille=0;
+
+	tempFichier.open("tempClients.txt",ofstream::app);
+	taille=mesClients.size();
+
+	for(int i=0;i<taille;i++)
+	{
+   		tempFichier << mesClients[i].nom << ";" << mesClients[i].prenom << ";" << mesClients[i].adresse << ";" << mesClients[i].LE << ";" << mesClients[i].CB << ";" << mesClients[i].PEL << ";" << mesClients[i].EC << ";" << endl;
+	}
+	tempFichier.close();
+
+	remove("clients.txt");
+	rename("tempClients.txt","clients.txt");
+}
+
+/*Fonction de recherche par indice dans un vector*/
+void Client::RechercheParIndice(vector<Client>&mesClients,int indice)
+{
+	int taille=0;
+
+	taille=mesClients.size();
+
+	for (int i=0;i<taille;i++)
+    {
+   		if (mesClients[i].indice==indice)
+        	*this=mesClients[i];
+    }
 }
