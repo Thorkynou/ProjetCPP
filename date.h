@@ -1,5 +1,10 @@
-//creation du fichier date.h
-//realise par benedicte, repris par Clement L
+/**************************************************
+ *                  Projet C++                    *
+ * Bénédicte, Marc, Alain, Clément S et Clément L *
+ *                                                *
+ * Fichier: client.h                              *
+ * @author: Benedicte, reprit par Clément L       *
+ **************************************************/
 
 #include <iostream>
 #include <ctime>
@@ -18,16 +23,12 @@ public:
     time_t dateJ;
 
 
-public:
-
 	date();
-    date(time_t date);
-    date(const date & copie);
-	/*date (int j,int m,int an);//constructeur par parametres par defaut-->ok testé
-	date(const date & acopier);//constructeur par copie
-    void Saisir(istream &in);//saisie de la date du jour
-    void Afficher(ostream &out) const;//affiche la date du jour*/
 
+    date(time_t date);
+
+    date(const date & copie);
+	
     virtual ~date(){};//detsructeur par defaut
 
     void MiseAJour();
@@ -35,14 +36,6 @@ public:
     void AfficherDate(const time_t &dateJ);
 
     void Conversion(int &jour, int &mois, int &an);
-
-    /*date &operator=(const date &D);
-
-    friend ostream & operator<<(ostream &out, const date &D);
-
-    friend istream & operator>>(istream &in, date &D);
-
-    time_t Conversion();*/
 };
 
 
