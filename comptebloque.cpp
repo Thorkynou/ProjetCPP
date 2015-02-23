@@ -32,11 +32,6 @@ void CompteBloque::CreerCompte()
 	EcritureFichier();
 }
 
-double CompteBloque::CalculInterets()
-{
-	return(this->solde = (this->solde) * (this->taux) / 100);
-}
-
 void CompteBloque::Afficher(ostream & out)
 {
 	cout << "___________________________________________________"<<endl;
@@ -57,8 +52,10 @@ void CompteBloque::Ajouter(double n)
 void CompteBloque::Retirer(double n)
 {
 	if(RetraitPossible() && (solde-n)>0)
+	{
 		this->solde = this->solde-n;
 		cout << "Virement effectue" << endl;
+	}
 	else
 		cout << "Impossible de retirer" << endl;
 }
@@ -238,7 +235,7 @@ void CompteBloque::AppliquerTaux()
 {
 	time_t now = time(NULL);
 	double diff;
-	diff = difftime(now - dateJ);
-	if((diff%365) >= (annees+1))
+	diff = difftime(now, dateJ);
+	if((diff/365) >= (annees+1))
 		solde = solde + CalculTaux();
 }

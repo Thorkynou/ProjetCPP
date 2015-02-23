@@ -9,14 +9,14 @@ using namespace std;
 
 #include "livretepargne.h"
 
-LivretEpargne::LivretEpargne() //constructeur par defaut
+/*LivretEpargne::LivretEpargne() //constructeur par defaut
 {
 cout<<"je suis dans le constructeur par defaut de livret epargne"<<endl;
 indice =0;
 solde=0;
 taux =1.5;
 plafondDepot = 7700;
-}
+}*/
 
 LivretEpargne::LivretEpargne(time_t dateLE,int indice,double solde ,double taux , double plafond ):date(dateLE)//constructeur par parametre
 {
@@ -121,7 +121,7 @@ bool LivretEpargne:: Ajouter(double montant)//ajouter de l'argent dans le livret
         }
         else
         {
-        this->solde=this->solde+mtontant;
+        this->solde=this->solde+montant;
 
             return true;
         }
@@ -240,5 +240,14 @@ void CalculInterets();
 void MiseAJour();//cad nouveau solde avec les interets rajoutes
 */
 
-
+void LivretEpargne::Retirer(double n)
+{
+    if((solde-n)>0)
+    {
+        this->solde = this->solde-n;
+        cout << "Virement effectue" << endl;
+    }
+    else
+        cout << "Impossible de retirer" << endl;
+}
 

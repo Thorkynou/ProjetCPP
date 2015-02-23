@@ -2,11 +2,8 @@
 CPP = g++
 FLAG = -Wall -Wextra -c
 
-banque.out: livretepargne.o comptebloque.o pel.o ecompte.o client.o comptecourant.o date.o testclient.cpp
-	$(CPP) livretepargne.o comptebloque.o pel.o ecompte.o client.o comptecourant.o date.o testclient.cpp -o banque.out
-
-#testclient.out: testclient.cpp date.o client.o comptecourant.o pel.o livretepargne.o ecompte.o
-#	$(CPP) testclient.cpp date.o client.o comptecourant.o pel.o livretepargne.o ecompte.o -o testclient.out
+banque.out: livretepargne.o comptebloque.o pel.o ecompte.o client.o comptecourant.o date.o main_menu.cpp
+	$(CPP) livretepargne.o comptebloque.o pel.o ecompte.o client.o comptecourant.o date.o main_menu.cpp -o banque.out
 
 client.o: client.cpp client.h
 	$(CPP) $(FLAG) client.cpp
