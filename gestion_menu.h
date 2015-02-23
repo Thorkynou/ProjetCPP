@@ -13,12 +13,11 @@ public:
     static void AffichageComptes(Client &C);
 
     static void RepetitionAffichageCompte(Client &C);
-    static void ConsulterComptes(Client &C);
+    static void ConsulterComptes();
 
     static void OperationCompteCourant(comptecourant &CC);
-
     static void OperationCompteBloque(CompteBloque &CB);
-    static void OperationPEL(Pel &PE);
+    static void OperationPEL(Pel &PEL);
     static void OperationEcompte(ecompte &EC);
     static void OperationLivretEpargne(LivretEpargne &LE);
 };
