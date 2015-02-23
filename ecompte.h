@@ -1,11 +1,11 @@
 /*
-00888880080000008888800880880088888008800008008888888000008888800 
-00800000080000008000000808080080000008080008000008000000008000000 
-00800000080000008880000800080088880008008008000008000000008888800 
-00800000080000008000000800080080000008000808000008000000000000800 
-00888880088888008888800800080088888008000088000008000008008888800 
+00888880080000008888800880880088888008800008008888888000008888800
+00800000080000008000000808080080000008080008000008000000008000000
+00800000080000008880000800080088880008008008000008000000008888800
+00800000080000008000000800080080000008000808000008000000000000800
+00888880088888008888800800080088888008000088000008000008008888800
 
-Ctrl+f , 8 , entree                 
+Ctrl+f , 8 , entree
 */
 
 #include <iostream>
@@ -17,7 +17,7 @@ using namespace std;
 #ifndef ECOMPTE_H
 #define ECOMPTE_H
 
-class ecompte: public date 
+class ecompte: public date
 {
 private:
 	string email; //si temps vérif @ présent et (dot) présent aussi
@@ -29,7 +29,7 @@ private:
 	int indice;
 
 public :
-	date d;
+	//date d;
 	ecompte(time_t dc=time(NULL),string eml = "vide" ,string nt = "vide" ,double s=50, double tm =4.5,double t =1.5);//constructeur par parametre par defaut
 	ecompte(const ecompte & E);//constructeur par copie
 
@@ -41,13 +41,13 @@ public :
 	void Ajouter(ecompte & E);
 	void AjouterSA(ecompte & E,double n);//Ajout d'argent sans affichages
 	ecompte &CreerCompte();
-	//void CalculInterets(double n);
+	void CalculInterets(double n);
 	//void CalculInteretsMois(double n);
-	void EcritureFichier()const;
+	//void EcritureFichier()const;
 };
 
-//void ExtractionFichier(vector<ecompte>&mesecomptes);
-//void ReecritureFichier(const vector<ecompte>&mesecomptes);
+//void ExtractionFichier(vector<ecompte>&mesecomptes);//via prog PEL
+//void ReecritureFichier(const vector<ecompte>&mesecomptes);//idem
 
 
 #endif
