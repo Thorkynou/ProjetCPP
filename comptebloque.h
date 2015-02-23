@@ -30,11 +30,11 @@ public:
 
 	int indice;
 
-	int annees;
+	double annees;
 
 
 
-	CompteBloque(time_t dateCB=time(NULL), int indice = 0, double taux = 0, double solde = 0, int annees = 0);
+	CompteBloque(time_t dateCB=time(NULL), int indice = 0, double taux = 0, double solde = 0, double annees = 0);
 
 	CompteBloque(const CompteBloque &CB);
 
