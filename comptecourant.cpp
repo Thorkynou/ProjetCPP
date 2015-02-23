@@ -339,8 +339,6 @@ for (k=0;k<taille;k++)
                 break;
             case 5:moncomptecourant[k].nbagios=atof(mot.c_str());
                 break;
-            case 6:moncomptecourant[k].dateJ=atoi(mot.c_str());
-                break;
             }
         j++;
         }
@@ -360,7 +358,7 @@ taille=moncomptecourant.size();
 
 for(int i=0;i<taille;i++)
     {
-    tempFichier<<moncomptecourant[i].indice<<";"<<moncomptecourant[i].numerodecompte<<";"<<moncomptecourant[i].solde<<";"<<moncomptecourant[i].decouvert<<";"<<moncomptecourant[i].taux<<";"<<moncomptecourant[i].nbagios<<";"<<moncomptecourant[i].dateJ<<";"<<endl;
+    tempFichier<<moncomptecourant[i].indice<<";"<<moncomptecourant[i].numerodecompte<<";"<<moncomptecourant[i].solde<<";"<<moncomptecourant[i].decouvert<<";"<<moncomptecourant[i].taux<<";"<<moncomptecourant[i].nbagios<<";"<<endl;
     }
 tempFichier.close();
 

@@ -41,8 +41,8 @@ interets=LE.interets;
 
 LivretEpargne::~LivretEpargne()//destructeur
 {
-cout << "je suis dans le destructeur de livret epargne"<< endl;
-};//destructeur
+//cout << "je suis dans le destructeur de livret epargne"<< endl;
+}//destructeur
 
 LivretEpargne &  LivretEpargne::operator=(const LivretEpargne & LE)//opérateur d'affectation
 {
@@ -105,7 +105,7 @@ else
 
 y=(12-date::mois)*2+x;
 
-int=N*taux/100*y/24;
+z=N*taux/100*y/24;
 return z;
 
 //cout<< "le montant des interets de cette somme s'eleveront a "<<interets<<"euros"<<endl;
@@ -113,6 +113,7 @@ return z;
 
 
 }
+
 
 
 bool LivretEpargne:: Ajouter(double montant)//ajouter de l'argent dans le livret épargne
@@ -139,6 +140,7 @@ double x;
 }
 
 
+
 void LivretEpargne::EcritureFichier()const
 {
 ofstream monFichier;
@@ -149,7 +151,7 @@ monFichier.close();
 
 
 /*Affichage de l'indice*/
-void LivretEpargne::AfficherIndice()const
+void LivretEpargne::AfficherIndice()
 {
 cout<<"L'indice LE est: "<<this->indice<<endl;
 }
@@ -267,4 +269,3 @@ double x;
     else
         cout << "Impossible de retirer" << endl;
 }
-

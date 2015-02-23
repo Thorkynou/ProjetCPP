@@ -45,7 +45,7 @@ public:
 	Client(const Client &C);
 
 	// Fonction de saisie
-	void Saisir(istream &in);
+	void Saisir(istream &in, int indice);
 
 	// Destructeur
 	~Client();
@@ -62,11 +62,8 @@ public:
 	// Surcharge de l'operator '<<'
 	friend ostream &operator<<(ostream &out, const Client &C);
 
-	// Surcharge de l'operator '>>'
-	friend istream &operator>>(istream &in, Client &C);
-
 	// Fonction pour la création de PEL
-	void CreationPEL();
+	void CreationPEL(int indice);
 
 	// Fonction pour la destruction de PEL
 	void DestructionPEL();

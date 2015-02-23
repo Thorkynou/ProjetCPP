@@ -37,8 +37,9 @@ Client::Client(const Client &C)
 	compteC = C.compteC;
 }
 
-void Client::Saisir(istream &in)
+void Client::Saisir(istream &in, int indice)
 {
+	this->indice = indice;
     cout << endl << "Entrez le nom du client" << endl;
     in >> nom;
     cout << "Son prenom" << endl;
@@ -94,16 +95,10 @@ ostream & operator<<(ostream &out, const Client &C)
 	return out;
 }
 
-istream & operator>>(istream &in, Client &C)
-{
-	C.Saisir(in);
-	return in;
-}
-
-void Client::CreationPEL()
+void Client::CreationPEL(int indice)
 {
 	this->PEL = true;
-	this->comptePEL.CreerPel();
+	this->comptePEL.CreerPel(indice);
 }
 
 void Client::DestructionPEL()

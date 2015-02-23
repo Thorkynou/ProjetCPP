@@ -1,3 +1,4 @@
+/*creation du fichier oprations.h fichier realise par benedicte le 01 fevrier 2015*/
 
 #include <iostream>
 #include <string>
@@ -6,7 +7,6 @@
 #include <map>
 using namespace std;
 
-#include "date.h"
 
 #ifndef OPERATION_H
 #define OPERATION_H
@@ -21,9 +21,7 @@ class operationbancaire//est un objet operation bancaire
     public:
         int indice;//indice de la classe
 
-        operationbancaire();//constructeur par defaut
-
-        operationbancaire(string operation,double montant,string description);//constructeur par parametres
+        operationbancaire(string operation=" ",double montant=0,string description= " ");//constructeur par parametres
 
         operationbancaire(const operationbancaire& op);//constructeur par copie
 

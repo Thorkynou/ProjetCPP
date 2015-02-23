@@ -1,3 +1,4 @@
+/*creation du fichier main_menu.cpp fichier realise par benedicte le 21 fevrier 2015*/
 
 #include"gestion_menu.h"
 
@@ -8,7 +9,7 @@ using namespace std;
 
 int main()
 {
-
+int indice;
 
 cout<<"*****************************************************\n";
 cout<<"*                                                   *\n";
@@ -28,7 +29,11 @@ time_t dateJour=time(NULL);
 date D;//date du jour
 Client C;//client lamba
 //comptecourant CC;
-vector <Client> Banque(5);//vector de banque avec 5 comptes
+vector <Pel> mesPel;
+vector<comptecourant>moncomptecourant;
+vector<CompteBloque>mesCB;
+vector<LivretEpargne>mesLE;
+vector <Client> Banque;//vector de banque avec 5 comptes
 //vector <Client>::iterator it;
 
 cout<<"*****************************************************\n";
@@ -51,7 +56,7 @@ cout<<"Bonjour , etes vous client dans notre banque?\n";
         if(choix==1)
         {
             cout<<"quel est votre nom?\n";
-            cin >> C;
+            //cin >> C;
 
             cout<<"Vous etes le client"<<C<<endl;
             C.Afficher(cout);//affichage des informations generales du client
@@ -112,8 +117,8 @@ cout<<"Bonjour , etes vous client dans notre banque?\n";
                                     GestionMenu::RepetitionAffichageCompte(C);
                                         for(int i=0; i<2; i++)
                                             {
-                                                Banque[i].Saisir(cin);
-                                                GestionMenu::AjoutCompte(Banque[i]);
+                                                Banque[i].Saisir(cin, indice);
+                                                GestionMenu::AjoutCompte(Banque[i], indice);
                                             }
                                         for(int i=0; i<2; i++)
                                             {
@@ -159,7 +164,7 @@ cout<<"Bonjour , etes vous client dans notre banque?\n";
                                                    }
                                         case 1: {C.AjoutPEL(N);
                                                 break;}
-                                        case 2: {C.AjoutEC(N);
+                                        case 2: {cout << "Impossible de transférer d'un compte courant a une autre forme de compte courant" << endl;
                                                 break;}
                                         case 3: {C.AjoutLE(N);
                                                 break;}
@@ -185,10 +190,11 @@ cout<<"Bonjour , etes vous client dans notre banque?\n";
 
         else
         {
+            indice++;
             //creer un nouveau client
             cout<<"vous etes un nouveau client\n";
             cout<<"Bienvenue a vous\n";
-            C.Saisir(cin);//saisir les informations
+            C.Saisir(cin, indice);//saisir les informations
             GestionMenu::AjoutCompte(C);
         }
 

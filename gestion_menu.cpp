@@ -1,7 +1,9 @@
+/*creation du fichier gestion_menu.cpp fichier realise par benedicte le 21 fevrier 2015*/
+
 #include "gestion_menu.h"
 
 
-void GestionMenu::AjoutCompte(Client &C)
+void GestionMenu::AjoutCompte(Client &C, int indice)
 {
 	int i = 0;
 	int valid;
@@ -14,7 +16,7 @@ void GestionMenu::AjoutCompte(Client &C)
                 switch(i)
                     {   case 0: return;
                                 break;
-                        case 1: {C.CreationPEL();
+                        case 1: {C.CreationPEL(indice);
                                 break;}
                         case 2: {C.CreationEC();
                                 break;}
@@ -414,6 +416,7 @@ void GestionMenu::OperationCompteCourant(comptecourant &CC)
 }
    void GestionMenu::OperationLivretEpargne(LivretEpargne & LE)
 {
+    double montant;
     int choix=0;
     int i=0;
     double ajout=0;
@@ -422,7 +425,7 @@ void GestionMenu::OperationCompteCourant(comptecourant &CC)
     double interets=0;
         do
             {   cout<<"***********************************************"<<endl;
-                cout<<"Souhaitez vous faire une operation sur ce PEL?"<<endl;
+                cout<<"Souhaitez vous faire une operation sur ce Livret d'Epargne?"<<endl;
                 cout<<endl;
                 cout<<"1) Afficher les donnees et le solde du Livret d'Epargne"<<endl;
                 cout<<"2) Ajouter de l'argent et calculer les interets associes"<<endl;
@@ -441,12 +444,14 @@ void GestionMenu::OperationCompteCourant(comptecourant &CC)
                         case 0: return;
                                 break;
 
-                        case 1: {   cout<<"voici les donnees associees a votre Livret d'Epargne"<<endl;//donnees, solde et date ouverture
+                        case 1: {   cout << "voici les donnees associees a votre Livret d'Epargne" << endl;//donnees, solde et date ouverture
                                     LE.Afficher();
                                     LE.AfficherIndice();
                                 break;}
 
-                        case 2: {   LE.Ajouter();
+                        case 2: {   cout << "Entrez le montant a virer";
+                                    cin >> montant;
+                                    LE.Ajouter(montant);
                                     LE.EcritureFichier();
                                 break;}
 

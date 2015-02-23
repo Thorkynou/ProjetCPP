@@ -1,7 +1,7 @@
+/*creation du fichier oprations.cpp fichier realise par benedicte le 20 fevrier 2015*/
+
 #include "operation.h"
 
-operationbancaire::operationbancaire()//constructeur par defaut
-    { }//cout<<"+++++++++++++Voici le constructeur par defaut de la classe operation\n "<<endl;
 
 operationbancaire::operationbancaire(const operationbancaire& op)
     {//cout<<"+++++++++++++Voici le constructeur par copie de la classe operation\n "<<endl;
