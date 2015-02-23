@@ -33,7 +33,7 @@ public:
 
     void AfficherPEL(ostream & out);
 
-    void CreerPel();
+    void CreerPel(int indice);
 
     bool Ajouter(double mtt);
     void ModifMontantMensuel();
