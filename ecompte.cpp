@@ -1,6 +1,6 @@
 #include "ecompte.h"
 
-ecompte::ecompte(time_t dc=time(NULL),string eml ,string nt ,double s,double tm,double t):date (dc)
+ecompte::ecompte(time_t dc,string eml ,string nt ,double s,double tm,double t):date (dc)
 {
 	dateCreation=dc;
 	email=eml;
@@ -8,7 +8,7 @@ ecompte::ecompte(time_t dc=time(NULL),string eml ,string nt ,double s,double tm,
 	solde=s;
 	taux3Mois=tm;
 	taux=t;
-	cout <<endl<<"*******************"<<endl<< "création ecompte"<<endl<<"*******************";
+	cout <<endl<<"*******************"<<endl<< "creation ecompte"<<endl<<"*******************";
 }
 ecompte::ecompte(const ecompte & E)
 {
@@ -69,9 +69,9 @@ void ecompte::AjouterSA(ecompte & E,double n)
 void ecompte::AfficherCompte()
 {
 	cout<<endl<<"___________________________________________"<<endl;
-	cout<<"*********Récapitualatif du compte *********"<<endl;
+	cout<<"*********Recapitualatif du compte *********"<<endl;
 	cout<<"adresse email :"<<email<<endl;
-	cout<<"numéro de téléphone :"<<numTel;
+	cout<<"numero de telephone :"<<numTel;
 	AfficherSolde(cout);
 	cout<<"___________________________________________"<<endl;
 }

@@ -30,7 +30,7 @@ private:
 
 public :
 	date d;
-	ecompte(time_t dc=(NULL),string eml = "vide" ,string nt = "vide" ,double s=50, double tm =4.5,double t =1.5);//constructeur par parametre par defaut
+	ecompte(time_t dc=time(NULL),string eml = "vide" ,string nt = "vide" ,double s=50, double tm =4.5,double t =1.5);//constructeur par parametre par defaut
 	ecompte(const ecompte & E);//constructeur par copie
 
 
