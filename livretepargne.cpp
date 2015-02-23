@@ -102,60 +102,29 @@ y=(12-date::mois)*2+x;
 
 interets=N*taux/100*y/24;
 
-cout<< "le montant des interets de cette somme s'eleveront à "<<interets<<"euros"<<endl;
+cout<< "le montant des interets de cette somme s'eleveront a "<<interets<<"euros"<<endl;
 
 
 
 }
 
 
-void LivretEpargne:: Ajouter()//ajouter de l'argent dans le livret épargne
+bool LivretEpargne:: Ajouter(double montant)//ajouter de l'argent dans le livret épargne
 {
 
 //declaration
-double montant;//represente le montant que le client souhaite ajouter au livret epargne
-double montanttotal=0;//si le client ajoute plusieurs fois de l'argent d'affilé
-int rep;
-
-//premiere partie, on demande au client combien il veut ajouter dans son livret
-cout << "BIENVENUE DANS LA FONCTION AJOUTER DE L'ARGENT DANS LE LIVRET EPARGNE"<<endl;
-do
-{
-    do
-    {
-        //date::Afficher();
-
-        cout << "Votre solde actuel est de "<< solde<<"euros"<<endl;
-        cout<<endl;
-        cout << "Combien voulez-vous rajouter d'argent dans le livret sachant que le plafond est fixé à:  "<< plafondDepot<< "euros"<<endl;
-        cin>>montant;
         if(solde+montant>plafondDepot)
         {
-        cout<<"Impossible d'ajouter ce montant car le plafond sera dépassé."<<endl;
+        cout<<"Impossible d'ajouter ce montant car le plafond sera depasse."<<endl;
+
+            return false;
         }
-    }
-    while(solde+montant>plafondDepot);
+        else
+        {
+        this->solde=this->solde+mtontant;
 
-
-
-    cout<<"Vous avez décidé de rajouter "<<montant<<"euros dans le livret épargne qui seront donc déduits du compte courant"<<endl;
-    solde=solde+montant;
-    montanttotal=montanttotal+montant;
-    cout<<"........................."<<endl;
-    cout<<endl;
-    cout << "OPERATION EFFECTUEE AVEC SUCCES!!"<<endl;
-    cout<< "Voulez-vous encore ajouter de l'argent dans votre livret?? 1-oui   0-non"<<endl;
-    cin>>rep;
-
-}
-while(rep==1);
-cout << "le montant total du virement s'élève à "<< montanttotal<<"euros"<<endl;
-
-//deuxieme parties, on modifie le solde du compte courant puisque le montant vient de celui-ci
-
-//troisieme ârties :calcul des interets perçus avec le rajout des cette somme
-
-CalculInterets(montanttotal);
+            return true;
+        }
 
 }
 
