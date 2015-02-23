@@ -24,50 +24,61 @@ using namespace std;
 class CompteBloque: public date
 {
 public:
-	double taux;
+	double taux; // Le taux du compte
 
-	double solde;
+	double solde; // Son solde
 
-	int indice;
+	int indice; // Son indice
 
-	double annees;
+	double annees; // Années passées (pour application du taux)
 
 
-
+	// Constructeur par paramètres
 	CompteBloque(time_t dateCB=time(NULL), int indice = 0, double taux = 0, double solde = 0, double annees = 0);
 
+	// Constructeur par copie
 	CompteBloque(const CompteBloque &CB);
 
+	// Destructeur
 	~CompteBloque(){cout << "Destru Compte Bloque";};
 
+	// Fonction de création de compte
 	void CreerCompte();
 
-	double CalculInterets();
-
+	// Fonction d'affichage
 	void Afficher(ostream & out);
 
+	// Fonction ajoutant 'n' au solde
 	void Ajouter(double n);
 
+	// Fonction retirant 'n' au solde (si RetraitPossible)
 	void Retirer(double n);
 
+	// Fonction d'écriture dans un fichier
 	void EcritureFichier();
 
+	// Fonction d'affichage de l'indice (pour test)
     void AfficherIndice()const;
 
+    // Fonction de recherche par indice
     void RechercheParIndice(vector<CompteBloque>&mesCB, int indice);
 
+    // Fonction d'affichage (surcharge de '<<')
     friend ostream &operator<<(ostream &out, CompteBloque &CB);
 
+    // Autorise le retrait
     bool RetraitPossible();
 
-    void AffichageTempsRestant();
-
+    // Fonction de conversion du temps restant
     void ConversionStoAJ(int nbSecondes,int &years,int &days);
 
+    // Fonction d'affichage du temps restant
     void TempsRestant();
 
+    // Calcul des interets
     double CalculTaux();
 
+    // Applique les interets
     void AppliquerTaux();
 };
 

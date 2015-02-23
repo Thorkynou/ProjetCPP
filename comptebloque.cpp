@@ -54,6 +54,15 @@ void CompteBloque::Ajouter(double n)
 	this->solde = this->solde + n;
 }
 
+void CompteBloque::Retirer(double n)
+{
+	if(RetraitPossible())
+		this->solde = this->solde-n;
+		cout << "Virement effectue" << endl;
+	else
+		cout << "Impossible, ça ne fait pas encore 4 ans" << endl;
+}
+
 void CompteBloque::EcritureFichier()
 {
 	ofstream monFichier;
@@ -140,24 +149,6 @@ bool CompteBloque::RetraitPossible()
 		return true;
 	else
 		return false;
-}
-
-void CompteBloque::AffichageTempsRestant()
-{
-	time_t dateDuJour=time(NULL);
-	time_t tempsRestant;
-	time_t dateDeblocageMin;
-	time_t nbAnneesMin=126227704; // 4 ans en time_t
-	int days;
-	int years;
-
-	dateDeblocageMin=this->dateJ+nbAnneesMin;
-	tempsRestant=dateDeblocageMin-dateDuJour;
-
-	ConversionStoAJ(tempsRestant,years,days);
-
-	cout<<"Vous pourrez retirer dans "<<years<<" annee(s) "<<days<<" jour(s)"<<endl<<"Date de deblocage ";
-	date::AfficherDate(dateDeblocageMin);
 }
 
 void CompteBloque::ConversionStoAJ(int nbSecondes,int &years,int &days)
