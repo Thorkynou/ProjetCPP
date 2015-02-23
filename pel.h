@@ -1,3 +1,9 @@
+
+/***************************************************/
+/****          Plan Epargne Logement            ****/
+/****              Marc Abeille                 ****/
+/***************************************************/
+
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -6,11 +12,6 @@
 #include <cstddef>
 #include <cstdlib>
 #include "date.h"
-
-/***************************************************/
-/****          Plan Epargne Logement            ****/
-/****              Marc Abeille                 ****/
-/***************************************************/
 
 using namespace std;
 
@@ -41,7 +42,7 @@ public:
     void EcritureFichier()const;
     void AfficherIndice()const;
     void RechercheParIndice(vector<Pel>&mesPel,int indice);
-    void CalculInteret();
+    void CalculInteret(double mttTotal, double &mttInterets,int nbAnnees);
 
     friend ostream &operator<<(ostream &out, Pel &P);
 
