@@ -284,6 +284,7 @@ void comptecourant::LectureFichier()
 /***************************************************/
 
 /*Conversion CSV en vector de class*/
+/*
 void ExtractionFichier(vector<comptecourant>&moncomptecourant)
 {
 comptecourant monComptecourant(0);
@@ -345,8 +346,9 @@ for (k=0;k<taille;k++)
         }
     }
 }
-
+*/
 /*Fonction de suppression et écriture d'un nouveau fichier apres modif de vector*/
+/*
 void ReecritureFichier(const vector<comptecourant>&moncomptecourant)
 {
 ofstream monFichier;
@@ -365,10 +367,11 @@ tempFichier.close();
 remove("moncomptecourant.txt");
 rename("tempmoncomptecourant.txt","moncomptecourant.txt");
 }
-
+*/
 /*Fonction de recherche par indice dans un vector*/
  //(fait par marc et modifie pour la classe compte courant par benedicte)
-void Pel::RechercheParIndice(vector<comptecourant>&moncomptecourant,int indice)
+/*
+void comptecourant::RechercheParIndice(vector<comptecourant>&moncomptecourant,int indice)
 {
 int taille=0;
 
@@ -380,4 +383,4 @@ for (int i=0;i<taille;i++)
         *this=moncomptecourant[i];
     }
 }
-
+*/

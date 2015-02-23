@@ -20,7 +20,7 @@ public:
     static void OperationCompteBloque(CompteBloque &CB);
     static void OperationPEL(Pel &PE);
     static void OperationEcompte(ecompte &EC);
-    static void OperationLivretEpargne(LivretEpargne & LE);
+    static void OperationLivretEpargne(LivretEpargne &LE);
 };
 
 #endif

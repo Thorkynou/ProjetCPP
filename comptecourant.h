@@ -44,7 +44,7 @@ class comptecourant:public date
 
         double Ajouter(double N);//ajout d'argent sur le compte
 
-        void Afficher();//void AfficherOperation();
+        virtual void Afficher();//void AfficherOperation();
 
         comptecourant & operator-(int N);//on aura solde2=solde1.operator-(100)              (solde2=solde1-100)
 
