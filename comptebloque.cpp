@@ -193,7 +193,7 @@ void ReecritureFichier(const vector<CompteBloque>&mesCB)
 
 	for(int i=0;i<taille;i++)
    	{
-    	tempFichier << mesCB[i].indice << ";" << mesCB[i].taux << ";" << mesCB[i].solde << ";" << mesCB[i].dateJ << ";" << MesCB[i].annees << ";" << endl;
+    	tempFichier << mesCB[i].indice << ";" << mesCB[i].taux << ";" << mesCB[i].solde << ";" << mesCB[i].dateJ << ";" << mesCB[i].annees << ";" << endl;
     }
 	tempFichier.close();
 
@@ -248,6 +248,6 @@ void CompteBloque::AppliquerTaux()
 	time_t now = time(NULL);
 	double diff;
 	diff = difftime(now - dateJ);
-	if((diff%365) >= (annees+1)
+	if((diff%365) >= (annees+1))
 		solde = solde + CalculTaux();
 }
