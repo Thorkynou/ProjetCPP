@@ -6,6 +6,9 @@ fichier realise par benedicte le 21 fevrier 2015 */
 #include <fstream>
 #include <vector>
 #include <map>
+#include <sstream>
+#include <cstddef>
+#include <cstdlib>
 using namespace std;
 
 #include "operation.h"
@@ -15,8 +18,7 @@ using namespace std;
 
 class comptecourant:public date
     {
-    private:
-
+    public:
         int numerodecompte;//numero du compte courant
         double solde;//solde du compte
         double decouvert;//variable autorisant un decouvert au client
@@ -24,7 +26,6 @@ class comptecourant:public date
         bool debiteur;//verification du solde<0 pour calculer les agios
         vector<operationbancaire>Tab_MesActions;//vector d'operation bancaire pour creer un tableau d'operations bancaires
 
-    public:
         double montantdebiteur;//calcule le montantdebietur a chaque fois que le bool debiteur est true on incremente apres a chaque passage
         double agios;//calcul des agios journaliers si on depasse le decouvert
         double sommeagios;//somme

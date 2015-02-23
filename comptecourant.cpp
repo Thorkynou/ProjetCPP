@@ -17,19 +17,19 @@ double montantdebiteur,double agios,double sommeagios,double nbagios,int indice)
     {
        // cout<<"+++++++++++++Voici le constructeur par parametres du compte courant"<<endl;
         this->numerodecompte=numerodecompte;
-        cout<<"Le numero de compte courant est le \t"<<numerodecompte<<"\n";
+       // cout<<"Le numero de compte courant est le \t"<<numerodecompte<<"\n";
 
         this->solde=solde;
-        cout<<"Le solde de ce compte courant est de \t"<<solde<<" euros\n";
+       // cout<<"Le solde de ce compte courant est de \t"<<solde<<" euros\n";
 
          this->decouvert=decouvert;
-        cout<<"Le decouvert autorise par la banque est de \t"<<decouvert<<" euros\n";
+       // cout<<"Le decouvert autorise par la banque est de \t"<<decouvert<<" euros\n";
 
          this->taux=taux;
-        cout<<"Ce compte courant a un taux d'interêt de \t"<<taux<<" % (c'est peu,mais c'est déjà ca)\n";
+       // cout<<"Ce compte courant a un taux d'interêt de \t"<<taux<<" % (c'est peu,mais c'est déjà ca)\n";
 
         this->debiteur=debiteur;
-        cout<<"Ce compte peut etre debiteur mais crediteur c'est mieux\n";
+      //  cout<<"Ce compte peut etre debiteur mais crediteur c'est mieux\n";
 
         this->montantdebiteur=montantdebiteur;
        // cout<<"Le montant debiteur de ce compte est de \t"<<montantdebiteur<<" euros\n";
@@ -284,7 +284,7 @@ void comptecourant::LectureFichier()
 /***************************************************/
 
 /*Conversion CSV en vector de class*/
-/*
+
 void ExtractionFichier(vector<comptecourant>&moncomptecourant)
 {
 comptecourant monComptecourant(0);
@@ -346,9 +346,9 @@ for (k=0;k<taille;k++)
         }
     }
 }
-*/
+
 /*Fonction de suppression et écriture d'un nouveau fichier apres modif de vector*/
-/*
+
 void ReecritureFichier(const vector<comptecourant>&moncomptecourant)
 {
 ofstream monFichier;
@@ -367,10 +367,10 @@ tempFichier.close();
 remove("moncomptecourant.txt");
 rename("tempmoncomptecourant.txt","moncomptecourant.txt");
 }
-*/
+
 /*Fonction de recherche par indice dans un vector*/
  //(fait par marc et modifie pour la classe compte courant par benedicte)
-/*
+
 void comptecourant::RechercheParIndice(vector<comptecourant>&moncomptecourant,int indice)
 {
 int taille=0;
@@ -383,4 +383,4 @@ for (int i=0;i<taille;i++)
         *this=moncomptecourant[i];
     }
 }
-*/
+
